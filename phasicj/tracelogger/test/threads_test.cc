@@ -4,7 +4,7 @@
 
 int main() {
   phasicj::tracelogger::test::invoker i {
-    "phasicj/tracelogger/test/java_test_progs/threads.jar",  // TODO(dwtj): I don't think that the lib prefix is portable.
+    "phasicj/tracelogger/test/java_test_progs/threads.jar",
     "threads/Threads",
   };
   i.invoke();
