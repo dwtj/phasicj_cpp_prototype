@@ -8,10 +8,6 @@ build --java_toolchain=@bazel_tools//tools/jdk:toolchain_java9
 # Give hints that test timeouts are an appropriate size/duration.
 test --test_verbose_timeout_warnings
 
-#build --compilation_mode=dbg
-#run   --compilation_mode=dbg
-#test  --compilation_mode=dbg
-
-build --cxxopt='-std=c++17'
-test  --cxxopt='-std=c++17'
-run   --cxxopt='-std=c++17'
+build --cxxopt='-std=c++11'
+test  --cxxopt='-std=c++11'
+run   --cxxopt='-std=c++11'

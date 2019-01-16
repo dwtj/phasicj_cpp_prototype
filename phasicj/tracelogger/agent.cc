@@ -2,12 +2,13 @@
 
 #include <iostream>
 
-#include "jni.h"
+#include "jni.h"  // NOLINT(build/include_subdir)
 
 #include "phasicj/tracelogger/agent.h"
 #include "phasicj/execution.pb.h"
 
-namespace phasicj::tracelogger {
+namespace phasicj {
+namespace tracelogger {
 
 jint Agent::OnAttach(JavaVM *vm, char *options, void *reserved) {
   // TODO(dwtj)
@@ -26,5 +27,6 @@ void Agent::OnUnload(JavaVM *vm) {
   std::cout << "OnUnload(...)" << std::endl;
 }
 
-}  // namespace phasicj::tracelogger
+}  // namespace tracelogger
+}  // namespace phasicj
 

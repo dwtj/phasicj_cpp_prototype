@@ -7,7 +7,9 @@
 
 #include "phasicj/tracelogger/test/invoker.h"
 
-namespace phasicj::tracelogger::test {
+namespace phasicj {
+namespace tracelogger {
+namespace test {
 
 using std::vector;
 using std::string;
@@ -15,7 +17,7 @@ using std::getenv;
 
 string GetPwd() {
   char* pwd = getenv("PWD");
-  assert (pwd != nullptr);
+  assert(pwd != nullptr);
   return string {pwd};
 }
 
@@ -36,4 +38,6 @@ void invoker::invoke() {
   invoker_.invoke();
 }
 
-}  // namespace phasicj::tracelogger::test
+}  // namespace test
+}  // namespace tracelogger
+}  // namespace phasicj

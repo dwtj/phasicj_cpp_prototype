@@ -3,9 +3,10 @@
 #ifndef PHASICJ_TRACELOGGER_AGENT_H_
 #define PHASICJ_TRACELOGGER_AGENT_H_
 
-#include "jni.h"
+#include "jni.h"  // NOLINT(build/include_subdir)
 
-namespace phasicj::tracelogger {
+namespace phasicj {
+namespace tracelogger {
 
 class Agent {
  public:
@@ -14,6 +15,7 @@ class Agent {
   void OnUnload(JavaVM *vm);
 };
 
-}  // namespace phasicj::tracelogger
+}  // namespace tracelogger
+}  // namespace phasicj
 
-#endif //PHASICJ_TRACELOGGER_AGENT_H_
+#endif  // PHASICJ_TRACELOGGER_AGENT_H_

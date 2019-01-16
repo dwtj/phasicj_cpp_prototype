@@ -3,13 +3,9 @@
 #ifndef PHASICJ_TRACELOGGER_AGENT_STATIC_H_
 #define PHASICJ_TRACELOGGER_AGENT_STATIC_H_
 
-#include "jni.h"  // NOLINT
+#include "jni.h"  // NOLINT(build/include_subdir)
 
 #include "phasicj/tracelogger/agent.h"
-
-namespace phasicj::tracelogger {
-extern "C" Agent AGENT;
-}
 
 extern "C"
 JNIEXPORT

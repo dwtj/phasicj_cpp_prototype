@@ -6,18 +6,20 @@
 #include <type_traits>
 #include <iostream>
 
-#include "jni.h"
+#include "jni.h"  // NOLINT(build/include_subdir)
 
 #include "phasicj/tracelogger/agent.h"
 #include "phasicj/tracelogger/agent_static.h"
 
-namespace phasicj::tracelogger::agent_static {
+namespace phasicj {
+namespace tracelogger {
+namespace agent_static {
 
-// [See](https://google.github.io/styleguide/cppguide.html#Static_and_Global_Variables)
-static_assert(std::is_trivially_destructible<Agent>::value);
-Agent AGENT;
+static Agent AGENT;
 
-}
+}  // namespace agent_static
+}  // namespace tracelogger
+}  // namespace phasicj
 
 extern "C"
 JNIEXPORT

@@ -7,32 +7,33 @@
 
 #include "boost/numeric/conversion/cast.hpp"
 
-#include "jni.h"  // NOLINT
+#include "jni.h"  // NOLINT(build/include_subdir)
 
 #include "phasicj/util/jdk/invoker.h"
 
 constexpr jint JNI_VERSION = JNI_VERSION_9;
 static_assert(JNI_VERSION, "JNI version 9 or greater required.");
 
-namespace phasicj::util::jdk {
+namespace phasicj {
+namespace util {
+namespace jdk {
 
 using std::string;
 using std::strncpy;
-using std::string_literals::operator""s;
 using std::vector;
 
-void InitializeVmArgsFrom(JavaVMInitArgs &jvm_args,
+void InitializeVmArgsFrom(JavaVMInitArgs* jvm_args,
                           const vector<string> &opts) {
-  jvm_args.version = JNI_VERSION;
-  jvm_args.ignoreUnrecognized = JNI_FALSE;
-  jvm_args.nOptions = boost::numeric_cast<jint>(opts.size());
-  jvm_args.options = new JavaVMOption[jvm_args.nOptions];
-  for (int i = 0; i < jvm_args.nOptions; ++i) {
+  jvm_args->version = JNI_VERSION;
+  jvm_args->ignoreUnrecognized = JNI_FALSE;
+  jvm_args->nOptions = boost::numeric_cast<jint>(opts.size());
+  jvm_args->options = new JavaVMOption[jvm_args->nOptions];
+  for (int i = 0; i < jvm_args->nOptions; ++i) {
     auto src {opts[i].c_str()};
     auto dest_size {strlen(src) + 1};
     auto dest {new char[dest_size]};
     strncpy(dest, src, dest_size);
-    jvm_args.options[i] = {
+    jvm_args->options[i] = {
         .optionString = dest,
         .extraInfo = nullptr,
     };
@@ -40,18 +41,18 @@ void InitializeVmArgsFrom(JavaVMInitArgs &jvm_args,
 }
 
 Invoker::Invoker(const string &cp, const string &main_cls) :
-    Invoker(vector<string>{"-Djava.class.path"s + cp}, main_cls) { }
+    Invoker(vector<string>{string {"-Djava.class.path"} + cp}, main_cls) { }
 
 Invoker::Invoker(const vector<string> &opts, const string &main_cls) :
     main_cls_{main_cls} {
-  InitializeVmArgsFrom(jvm_args_, opts);
+  InitializeVmArgsFrom(&jvm_args_, opts);
 }
 
 Invoker::Invoker(const string &cp, const string &main_cls,
                  const vector<string> &other_opts) : main_cls_ {main_cls} {
   vector<string> opts{other_opts};
   opts.push_back("-Djava.class.path=" + cp);
-  InitializeVmArgsFrom(jvm_args_, opts);
+  InitializeVmArgsFrom(&jvm_args_, opts);
 }
 
 Invoker::~Invoker() {
@@ -100,4 +101,6 @@ void Invoker::invoke() {
   assert(err == 0);
 }
 
-}  // namespace phasicj::util::jdk
+}  // namespace jdk
+}  // namespace util
+}  // namespace phasicj
