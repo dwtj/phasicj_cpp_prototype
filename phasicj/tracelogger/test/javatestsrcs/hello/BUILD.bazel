@@ -1,5 +1,0 @@
-java_library(
-    name = "hello",
-    srcs = ["Hello.java"],
-    visibility = ["//phasicj/tracelogger/test/javatestsrcs:__subpackages__"],
-)
