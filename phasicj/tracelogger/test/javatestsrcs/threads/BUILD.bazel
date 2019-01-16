@@ -1,0 +1,7 @@
+# Copyright 2019 David Johnston
+
+java_library(
+    name = "threads",
+    srcs = ["Threads.java"],
+    visibility = ["//phasicj/tracelogger/test/javatestsrcs:__subpackages__"],
+)

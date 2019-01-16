@@ -1,0 +1,26 @@
+# Copyright 2019 David Johnston
+
+package(
+    default_testonly = True,
+)
+
+cc_test(
+    name = "trivial_agent_test",
+    size = "small",
+    srcs = ["trivial_agent_test.cc"],
+    deps = [
+        "//phasicj/tracelogger:pjtracelogger",
+        "//phasicj/tracelogger:pjtracelogger_static",
+        "@gtest//:gtest_main",
+    ],
+)
+
+cc_library(
+    name = "invoker",
+    srcs = ["invoker.cc"],
+    hdrs = ["invoker.h"],
+    visibility = ["__subpackages__"],
+    deps = [
+        "//phasicj/util/jdk:invoker",
+    ],
+)

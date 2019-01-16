@@ -1,0 +1,70 @@
+licenses(["restricted"])  # GPLv2, portions of GPLv2 with "Classpath" exception
+
+CONDITION_DARWIN = "@bazel_tools//src/conditions:darwin"
+CONDITION_LINUX = "@bazel_tools//src/conditions:linux_x86_64"
+
+# Wraps a libjvm shared library provided by the JDK
+# TODO(dwtj): Consider refactoring this as a `cc_import` rule.
+cc_library(
+    name = "jvm",
+    visibility = ["//visibility:public"],
+    srcs = select({
+        CONDITION_DARWIN: ["@remotejdk_macos//:lib/server/libjvm.dylib"],
+        CONDITION_LINUX:  ["@remotejdk_linux//:lib/server/libjvm.so"],
+        # TODO(dwtj): Add support for other platforms.
+    }),
+    deps = [":jni_headers"],
+)
+
+# Wrapper library for all JVMTI header files.
+cc_library(
+    name = "jvmti_headers",
+    visibility = ["//visibility:public"],
+    hdrs = select({
+        CONDITION_DARWIN: [
+            "@remotejdk_macos//:include/jvmti.h",
+            "@remotejdk_macos//:include/jvmticmlr.h",
+        ],
+        CONDITION_LINUX: [
+            "@remotejdk_linux//:include/jvmti.h",
+            "@remotejdk_linux//:include/jvmticmlr.h",
+        ],
+        # TODO(dwtj): Add support for other platforms.
+    }),
+    strip_include_prefix = select({
+        CONDITION_DARWIN: "//external/remotejdk_macos/include",
+        CONDITION_LINUX:  "//external/remotejdk_linux/include",
+    }),
+)
+
+# Wrapper library for all JNI header files.
+cc_library(
+    name = "jni_headers",
+    visibility = ["//visibility:public"],
+    hdrs = select({
+        CONDITION_DARWIN: ["@remotejdk_macos//:include/jni.h"],
+        CONDITION_LINUX:  ["@remotejdk_linux//:include/jni.h"],
+        # TODO(dwtj): Add support for other platforms.
+    }),
+    strip_include_prefix = select({
+        CONDITION_DARWIN: "//external/remotejdk_macos/include",
+        CONDITION_LINUX:  "//external/remotejdk_linux/include",
+        # TODO(dwtj): Add support for other platforms.
+    }),
+    deps = [":jni_md_headers"],
+)
+
+# Wrapper library for machine-dependent JNI header files.
+cc_library(
+    name = "jni_md_headers",
+    hdrs = select({
+        CONDITION_DARWIN: ["@remotejdk_macos//:include/darwin/jni_md.h"],
+        CONDITION_LINUX:  ["@remotejdk_linux//:include/linux/jni_md.h"],
+        # TODO(dwtj): Add support for other platforms.
+    }),
+    strip_include_prefix = select({
+        CONDITION_DARWIN: "//external/remotejdk_macos/include/darwin",
+        CONDITION_LINUX:  "//external/remotejdk_linux/include/linux",
+        # TODO(dwtj): Add support for other platforms.
+    })
+)

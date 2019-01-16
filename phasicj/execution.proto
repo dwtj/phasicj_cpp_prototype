@@ -1,0 +1,12 @@
+// Copyright 2019 David Johnston
+
+syntax = "proto3";
+
+package phasicj;
+
+option java_package = "org.phasicj";
+
+// TODO: Everything!
+message Trace {
+    string debug = 1;
+}

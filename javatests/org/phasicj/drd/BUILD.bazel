@@ -1,0 +1,12 @@
+# Use java_test after bazel officially support junit5
+load("//:bazel/junit5.bzl", "java_junit5_test")
+
+java_junit5_test(
+    name = "test_junit5_is_working",
+    srcs = glob(["Test*.java"]),
+    test_class = "org.phasicj.drd.TestNothing",
+    deps = [
+        "//java/org/phasicj/drd:drd"
+    ],
+    size = "small",
+)

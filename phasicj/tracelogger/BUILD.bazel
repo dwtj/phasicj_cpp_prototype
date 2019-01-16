@@ -1,0 +1,31 @@
+# Copyright 2019 David Johnston
+
+cc_library(
+    name = "agent",
+    srcs = ["agent.cc"],
+    hdrs = ["agent.h"],
+    deps = [
+        "//phasicj:execution_cc_proto",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "pjtracelogger_static",
+    srcs = ["agent_static.cc"],
+    hdrs = ["agent_static.h"],
+    linkstatic = True,
+    visibility = ["//visibility:public"],
+    deps = [":agent"],
+    alwayslink = True,
+)
+
+cc_library(
+    name = "pjtracelogger",
+    srcs = ["agent_dynamic.cc"],
+    linkstatic = False,
+    visibility = ["//visibility:public"],
+    deps = ["pjtracelogger_static"],
+    alwayslink = True,
+)

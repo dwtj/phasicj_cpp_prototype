@@ -1,0 +1,10 @@
+package org.phasicj.drd;
+
+import org.phasicj.Execution.Trace;
+
+public class DataRaceDetector
+{
+    public static void main(String[] args) {
+
+    }
+}

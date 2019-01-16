@@ -1,0 +1,19 @@
+package(
+    default_visibility = [
+        "//javatests/org/phasicj:__subpackages__",
+    ],
+)
+
+java_library(
+    name = "drd",
+    srcs = glob(["*.java"]),
+    deps = [
+        "//phasicj:execution_java_proto",
+    ],
+)
+
+java_binary(
+    name = "DataRaceDetector",
+    main_class = "org.phasicj.drd.DataRaceDetector",
+    runtime_deps = [":drd"],
+)

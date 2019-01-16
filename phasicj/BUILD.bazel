@@ -1,0 +1,19 @@
+# Copyright 2019 David Johnston
+
+proto_library(
+    name = "execution_proto",
+    srcs = glob(["*.proto"]),
+    visibility = ["//visibility:public"],
+)
+
+java_proto_library(
+    name = "execution_java_proto",
+    deps = [":execution_proto"],
+    visibility = ["//visibility:public"],
+)
+
+cc_proto_library(
+    name = "execution_cc_proto",
+    deps = [":execution_proto"],
+    visibility = ["//visibility:public"],
+)

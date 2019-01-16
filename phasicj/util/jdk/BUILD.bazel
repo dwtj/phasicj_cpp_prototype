@@ -1,0 +1,16 @@
+cc_library(
+    name = "invoker",
+    srcs = ["invoker.cc"],
+    hdrs = ["invoker.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//third_party/jdk:jvm",
+        "@boost//:config",
+        "@boost//:cstdint",
+        "@boost//:detail",
+        "@boost//:numeric",
+        "@boost//:throw_exception",
+        "@boost//:type",
+        "@boost//:type_traits",
+    ],
+)
