@@ -1,5 +1,10 @@
+# Bazel Build Directories
 bazel-PhasicJ
 bazel-bin
 bazel-genfiles
 bazel-out
 bazel-testlogs
+
+# Build Artifacts
+*.so
+*.jar
