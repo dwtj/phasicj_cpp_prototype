@@ -1,8 +1,6 @@
 // Copyright 2019 David Johnston
 
-#include <jvmti.h>
 #include "gtest/gtest.h"
-
 #include "jvmti.h"
 
 #include "phasicj/tracelogger/agent.h"

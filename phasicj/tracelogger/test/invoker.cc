@@ -1,7 +1,9 @@
 // Copyright 2019 David Johnston
 
+#include <cassert>
 #include <string>
 #include <vector>
+#include <cstdlib>
 
 #include "phasicj/tracelogger/test/invoker.h"
 
@@ -9,20 +11,29 @@ namespace phasicj::tracelogger::test {
 
 using std::vector;
 using std::string;
+using std::getenv;
 
-static const vector<string> DEFAULT_JVM_OPTIONS {
+string GetPwd() {
+  char* pwd = getenv("PWD");
+  assert (pwd != nullptr);
+  return string {pwd};
+}
+
+vector<string> BuildDefaultJvmOptions() {
+  return vector<string> {
+    "-agentpath:" + GetPwd() + "/phasicj/tracelogger/libpjtracelogger.so",
     "-verbose",
-    "-agentlib:pjtracelogger",
     "-enableassertions",
     "-enablesystemassertions",
     "-Xcheck:jni",
-};
+  };
+}
 
 invoker::invoker(string cp, string main_cls) :
-      invoker_ {cp, main_cls, DEFAULT_JVM_OPTIONS} { };
+    invoker_ {cp, main_cls, BuildDefaultJvmOptions()} { };
 
 void invoker::invoke() {
-    invoker_.invoke();
+  invoker_.invoke();
 }
 
 }  // namespace phasicj::tracelogger::test

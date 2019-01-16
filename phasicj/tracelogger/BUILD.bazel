@@ -12,7 +12,7 @@ cc_library(
 )
 
 cc_library(
-    name = "pjtracelogger_static",
+    name = "agent_static",
     srcs = ["agent_static.cc"],
     hdrs = ["agent_static.h"],
     linkstatic = True,
@@ -22,10 +22,15 @@ cc_library(
 )
 
 cc_library(
-    name = "pjtracelogger",
+    name = "agent_dynamic",
     srcs = ["agent_dynamic.cc"],
-    linkstatic = False,
     visibility = ["//visibility:public"],
-    deps = ["pjtracelogger_static"],
-    alwayslink = True,
+    deps = [":agent"],
+)
+
+cc_binary(
+    name = "libpjtracelogger.so",
+    linkshared = True,
+    visibility = ["//visibility:public"],
+    deps = ["agent_dynamic"],
 )

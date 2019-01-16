@@ -9,8 +9,8 @@ cc_test(
     size = "small",
     srcs = ["trivial_agent_test.cc"],
     deps = [
-        "//phasicj/tracelogger:pjtracelogger",
-        "//phasicj/tracelogger:pjtracelogger_static",
+        "//phasicj/tracelogger:agent_dynamic",
+        "//phasicj/tracelogger:agent_static",
         "@gtest//:gtest_main",
     ],
 )

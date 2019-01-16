@@ -2,13 +2,9 @@ def tracelogger_test(name, srcs, javadeps):
     native.cc_test(
         name = name,
         srcs = srcs,
-        data = javadeps,
-        # data = javadeps + [
-        #     "//phasicj/tracelogger:pjtracelogger",
-        # ],
+        data = javadeps + ["//phasicj/tracelogger:libpjtracelogger.so"],
         deps = [
-            "//phasicj/tracelogger:pjtracelogger",
-            "//phasicj/tracelogger/test:invoker"
+            "//phasicj/tracelogger/test:invoker",
         ],
     )
 
@@ -18,7 +14,7 @@ def tracelogger_static_test(name, srcs, javadeps):
         srcs = srcs,
         data = javadeps,
         deps = [
-            "//phasicj/tracelogger:pjtracelogger_static",
+            "//phasicj/tracelogger:agent_static",
             "//phasicj/tracelogger/test:invoker",
         ],
         linkstatic = True,
