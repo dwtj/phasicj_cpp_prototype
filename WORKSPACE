@@ -42,9 +42,10 @@ junit_platform_java_repositories(
 
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "d7a221b3d4fb4f05b7473795ccea9e05dab3b8721f6286a95fffbffc2d926f8b",
-    strip_prefix = "protobuf-3.6.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.6.1.zip"],
+    sha256 = "9510dd2afc29e7245e9e884336f848c8a6600a14ae726adb6befdb4f786f0be2",
+    strip_prefix = "protobuf-3.6.1.3",
+    urls = ["https://github.com/protocolbuffers/protobuf/archive/v3.6.1.3.zip"],
+    
 )
 
 # CONFIGURE Boost Libraries ##################################################
