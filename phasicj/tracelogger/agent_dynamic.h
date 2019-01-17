@@ -1,5 +1,8 @@
 // Copyright 2019 David Johnston
 
+// The agent's interface to be used when the agent is statically linked into the
+// JVM. Names are suffixed.
+
 #ifndef PHASICJ_TRACELOGGER_AGENT_DYNAMIC_H_
 #define PHASICJ_TRACELOGGER_AGENT_DYNAMIC_H_
 

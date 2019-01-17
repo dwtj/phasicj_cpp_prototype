@@ -1,7 +1,7 @@
 // Copyright 2019 David Johnston
 
-// Defines callback shims from a statically linked agent to the tracelogger
-// agent implementation.
+// Defines callback shims from a statically linked agent to a tracelogger
+// agent instance accessed via a namespaced global variable.
 
 #include <iostream>
 #include <type_traits>
