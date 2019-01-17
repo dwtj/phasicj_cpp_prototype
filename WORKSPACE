@@ -38,7 +38,7 @@ junit_platform_java_repositories(
     version = JUNIT_PLATFORM_VERSION,
 )
 
-# CONFIGURE PROTOBUF #########################################################
+# CONFIGURE PROTOBUF ##########################################################
 
 http_archive(
     name = "com_google_protobuf",
@@ -48,7 +48,7 @@ http_archive(
     
 )
 
-# CONFIGURE Boost Libraries ##################################################
+# CONFIGURE Boost Libraries ###################################################
 
 git_repository(
     name = "com_github_nelhage_rules_boost",
