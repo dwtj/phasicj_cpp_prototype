@@ -23,6 +23,8 @@ string GetPwd() {
 
 vector<string> BuildDefaultJvmOptions() {
   return vector<string>{
+      // TODO(dwtj): Make platform-dependent choice between a `.so` and `.dylib`
+      // TODO(dwtj): Or try to make `-agentlib` work on Ubuntu.
       "-agentpath:" + GetPwd() + "/phasicj/tracelogger/libpjtracelogger.so",
       "-verbose",
       "-enableassertions",

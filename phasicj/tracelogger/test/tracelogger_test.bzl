@@ -1,15 +1,15 @@
-def tracelogger_test(name, srcs, javadeps, size="small"):
+def tracelogger_test(name, srcs, javadeps, size = "small"):
     native.cc_test(
         name = name,
         srcs = srcs,
-        data = javadeps + ["//phasicj/tracelogger:libpjtracelogger.so"],
+        data = javadeps + ["//phasicj/tracelogger:libpjtracelogger"],
         deps = [
             "//phasicj/tracelogger/test:invoker",
         ],
         size = size,
     )
 
-def tracelogger_static_test(name, srcs, javadeps, size="small"):
+def tracelogger_static_test(name, srcs, javadeps, size = "small"):
     native.cc_test(
         name = name,
         srcs = srcs,

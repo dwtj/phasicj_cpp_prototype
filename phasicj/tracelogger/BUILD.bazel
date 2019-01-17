@@ -1,5 +1,9 @@
 # Copyright 2019 David Johnston
 
+package(
+    default_visibility = ["//visibility:public"],
+)
+
 cc_library(
     name = "agent",
     srcs = ["agent.cc"],
@@ -16,21 +20,43 @@ cc_library(
     srcs = ["agent_static.cc"],
     hdrs = ["agent_static.h"],
     linkstatic = True,
-    visibility = ["//visibility:public"],
     deps = [":agent"],
-    alwayslink = True,
 )
 
 cc_library(
     name = "agent_dynamic",
     srcs = ["agent_dynamic.cc"],
-    visibility = ["//visibility:public"],
+    hdrs = ["agent_dynamic.h"],
     deps = [":agent"],
+
+    # This library defines callbacks meant to be dynamically linked into a JVM.
+    alwayslink = True,
+)
+
+# TODO(dwtj): I want to be able to build the agent as a standalone dynamic
+# library deliverable, but its name needs to vary depending upon the target
+# platform. It seems that I can't use a select expression in the name of a
+# `cc_binary`, so I'm instead making multiple binaries. But this is misleading:
+# for example, a `dylib` file is built during a linux build, but it is really
+# a `so` file.
+#
+# So, what's the right way to do this.
+alias(
+    name = "libpjtracelogger",
+    actual = select({
+        "@bazel_tools//src/conditions:darwin": "libpjtracelogger.dylib",
+        "@bazel_tools//src/conditions:linux_x86_64": "libpjtracelogger.so",
+    }),
+)
+
+cc_binary(
+    name = "libpjtracelogger.dylib",
+    linkshared = True,
+    deps = ["agent_dynamic"],
 )
 
 cc_binary(
     name = "libpjtracelogger.so",
     linkshared = True,
-    visibility = ["//visibility:public"],
     deps = ["agent_dynamic"],
 )
