@@ -7,16 +7,13 @@
 
 #include "phasicj/tracelogger/agent.h"
 
-extern "C"
-JNIEXPORT
-jint Agent_OnLoad_pjtracelogger(JavaVM *vm, char *options, void *reserved);
+extern "C" JNIEXPORT jint Agent_OnLoad_pjtracelogger(JavaVM *vm, char *options,
+                                                     void *reserved);
 
-extern "C"
-JNIEXPORT
-jint Agent_OnAttach_pjtracelogger(JavaVM *vm, char *options, void *reserved);
+extern "C" JNIEXPORT jint Agent_OnAttach_pjtracelogger(JavaVM *vm,
+                                                       char *options,
+                                                       void *reserved);
 
-extern "C"
-JNIEXPORT
-void Agent_OnUnload_pjtracelogger(JavaVM *vm);
+extern "C" JNIEXPORT void Agent_OnUnload_pjtracelogger(JavaVM *vm);
 
 #endif  // PHASICJ_TRACELOGGER_AGENT_STATIC_H_

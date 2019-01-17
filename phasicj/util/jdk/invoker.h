@@ -13,7 +13,8 @@ namespace util {
 namespace jdk {
 
 // Configures and performs an invocation of a JVM instance. Essentially, it
-// wraps the use of the [JNI Invocation API](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/invocation.html).
+// wraps the use of the [JNI Invocation
+// API](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/invocation.html).
 class Invoker {
  private:
   const std::string main_cls_;
@@ -29,7 +30,7 @@ class Invoker {
 
   Invoker(const Invoker& i) = delete;  // TODO(dwtj)
 
-  Invoker(Invoker&& i) = delete;       // TODO(dwtj)
+  Invoker(Invoker&& i) = delete;  // TODO(dwtj)
 
   ~Invoker();
 

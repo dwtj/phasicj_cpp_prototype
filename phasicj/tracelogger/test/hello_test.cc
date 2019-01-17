@@ -7,9 +7,9 @@
 #include "phasicj/tracelogger/test/invoker.h"
 
 int main() {
-  phasicj::tracelogger::test::invoker i {
-    "phasicj/tracelogger/test/java_test_progs/hello.jar",
-    "hello/Hello",
+  phasicj::tracelogger::test::invoker i{
+      "phasicj/tracelogger/test/java_test_progs/hello.jar",
+      "hello/Hello",
   };
   i.invoke();
   return 0;

@@ -3,8 +3,8 @@
 // Defines callback shims from a statically linked agent to the tracelogger
 // agent implementation.
 
-#include <type_traits>
 #include <iostream>
+#include <type_traits>
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
@@ -21,25 +21,22 @@ static Agent AGENT;
 }  // namespace tracelogger
 }  // namespace phasicj
 
-extern "C"
-JNIEXPORT
-jint Agent_OnLoad_pjtracelogger(JavaVM *vm, char *options, void *reserved) {
-  jint ret {phasicj::tracelogger::agent_static::AGENT.OnAttach(vm, options,
-                                                               reserved)};
+extern "C" JNIEXPORT jint Agent_OnLoad_pjtracelogger(JavaVM *vm, char *options,
+                                                     void *reserved) {
+  jint ret{phasicj::tracelogger::agent_static::AGENT.OnAttach(vm, options,
+                                                              reserved)};
   return ret;
 }
 
-extern "C"
-JNIEXPORT
-jint Agent_OnAttach_pjtracelogger(JavaVM* vm, char* options, void* reserved) {
-  jint ret {phasicj::tracelogger::agent_static::AGENT.OnAttach(vm, options,
-                                                               reserved)};
+extern "C" JNIEXPORT jint Agent_OnAttach_pjtracelogger(JavaVM *vm,
+                                                       char *options,
+                                                       void *reserved) {
+  jint ret{phasicj::tracelogger::agent_static::AGENT.OnAttach(vm, options,
+                                                              reserved)};
   return ret;
 }
 
-extern "C"
-JNIEXPORT
-void Agent_OnUnload_pjtracelogger(JavaVM *vm) {
+extern "C" JNIEXPORT void Agent_OnUnload_pjtracelogger(JavaVM *vm) {
   phasicj::tracelogger::agent_static::AGENT.OnUnload(vm);
   return;
 }

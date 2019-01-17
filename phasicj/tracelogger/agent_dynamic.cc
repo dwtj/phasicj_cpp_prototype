@@ -15,26 +15,22 @@ namespace agent_dynamic {
 
 static Agent AGENT;
 
-} // namespace agent_dynamic
-} // namespace tracelogger
-} // namespace agent_static
+}  // namespace agent_dynamic
+}  // namespace tracelogger
+}  // namespace phasicj
 
-extern "C"
-JNIEXPORT
-jint Agent_OnLoad(JavaVM *vm, char *options, void *reserved) {
+extern "C" JNIEXPORT jint Agent_OnLoad(JavaVM *vm, char *options,
+                                       void *reserved) {
   return phasicj::tracelogger::agent_dynamic::AGENT.OnLoad(vm, options,
                                                            reserved);
 }
 
-extern "C"
-JNIEXPORT
-jint Agent_OnAttach(JavaVM *vm, char *options, void *reserved) {
+extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
+                                         void *reserved) {
   return phasicj::tracelogger::agent_dynamic::AGENT.OnAttach(vm, options,
                                                              reserved);
 }
 
-extern "C"
-JNIEXPORT
-void Agent_OnUnload(JavaVM *vm) {
+extern "C" JNIEXPORT void Agent_OnUnload(JavaVM *vm) {
   return phasicj::tracelogger::agent_dynamic::AGENT.OnUnload(vm);
 }

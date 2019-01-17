@@ -4,8 +4,8 @@
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
-#include "phasicj/tracelogger/agent.h"
 #include "phasicj/execution.pb.h"
+#include "phasicj/tracelogger/agent.h"
 
 namespace phasicj {
 namespace tracelogger {
@@ -29,4 +29,3 @@ void Agent::OnUnload(JavaVM *vm) {
 
 }  // namespace tracelogger
 }  // namespace phasicj
-
