@@ -8,36 +8,36 @@
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
+#include "phasicj/util/jni/descriptors.h"
+
 namespace phasicj {
 namespace util {
-namespace jdk {
+namespace jni {
+
+using phasicj::util::jni::class_descriptor;
 
 // Configures and performs an invocation of a JVM instance. Essentially, it
 // wraps the use of the [JNI Invocation
 // API](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/invocation.html).
-class Invoker {
+class JvmInvoker {
  private:
-  const std::string main_cls_;
+  const class_descriptor main_cls_;
   JavaVMInitArgs jvm_args_;  // TODO(dwtj): How can I make this `const`?
 
  public:
-  Invoker(const std::vector<std::string>& opts, const std::string& main_cls);
+  JvmInvoker(const class_descriptor& main_cls,
+             const std::vector<std::string>& opts);
 
-  Invoker(const std::string& cp, const std::string& main_cls);
+  JvmInvoker(const JvmInvoker& i) = delete;
 
-  Invoker(const std::string& cp, const std::string& main_cls,
-          const std::vector<std::string>& other_opts);
+  JvmInvoker(JvmInvoker&& i) = delete;
 
-  Invoker(const Invoker& i) = delete;  // TODO(dwtj)
-
-  Invoker(Invoker&& i) = delete;  // TODO(dwtj)
-
-  ~Invoker();
+  ~JvmInvoker();
 
   void invoke();
 };
 
-}  // namespace jdk
+}  // namespace jni
 }  // namespace util
 }  // namespace phasicj
 

@@ -42,7 +42,7 @@ cc_library(
 #
 # So, what's the right way to do this.
 alias(
-    name = "libpjtracelogger",
+    name = "pjtracelogger",
     actual = select({
         "@bazel_tools//src/conditions:darwin": "libpjtracelogger.dylib",
         "@bazel_tools//src/conditions:linux_x86_64": "libpjtracelogger.so",

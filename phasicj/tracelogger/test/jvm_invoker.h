@@ -5,7 +5,7 @@
 
 #include <string>
 
-#include "phasicj/util/jdk/invoker.h"
+#include "phasicj/util/jni/jvm_invoker.h"
 
 namespace phasicj {
 namespace tracelogger {
@@ -13,12 +13,12 @@ namespace test {
 
 using std::string;
 
-class invoker {
+class JvmInvoker {
  private:
-  phasicj::util::jdk::Invoker invoker_;
+  phasicj::util::jni::JvmInvoker invoker_;
 
  public:
-  invoker(string cp, string main_cls);
+  JvmInvoker(const string& cp, const string& main_cls);
   void invoke();
 };
 
