@@ -1,26 +1,27 @@
 os:
   - linux
 
-dist:
-  - xenial
-
-compiler:
-  - gcc
-  - clang
+dist: xenial
 
 language:
-  - java
   - cpp
+  - java
+
+compiler:
+  - clang
+  - gcc
 
 addons:
   apt:
     sources:
       - sourceline: deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
         key_url: https://bazel.build/bazel-release.pub.gpg
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install bazel
+      - llvm-toolchain-xenial-7  # Source for clang
+      - ubuntu-toolchain-r-test  # Source for gcc
+    packages:
+      - bazel
+      - clang-7
+      - g++-8
 
 script:
   - bazel build //...
