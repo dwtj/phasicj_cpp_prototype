@@ -15,15 +15,11 @@
 constexpr jint JNI_VERSION = JNI_VERSION_9;
 static_assert(JNI_VERSION, "JNI version 9 or greater required.");
 
-namespace phasicj {
-namespace util {
-namespace jni {
+namespace phasicj::util::jni {
 
 using std::string;
 using std::strncpy;
 using std::vector;
-
-using phasicj::util::jni::class_descriptor;
 
 JvmInvoker::JvmInvoker(const class_descriptor &main_cls,
                        const vector<string> &opts)
@@ -91,6 +87,4 @@ void JvmInvoker::invoke() {
   assert(err == 0);
 }
 
-}  // namespace jni
-}  // namespace util
-}  // namespace phasicj
+}  // namespace phasicj::util::jni
