@@ -57,6 +57,7 @@ void JvmInvoker::invoke() {
   JNIEnv *env = nullptr;
 
   err = JNI_CreateJavaVM(&jvm, reinterpret_cast<void **>(&env), &jvm_args_);
+  assert(env != nullptr);
   assert(env->ExceptionCheck() == JNI_FALSE);
   assert(err == 0);
 

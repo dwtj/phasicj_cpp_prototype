@@ -24,7 +24,7 @@ using std::optional;
 // Warning(dwtj): If `REQUIRED_CAPABILITIES` is changed, so should the checks
 // in `ProvidesRequiredCapabilities()`.
 // TODO(dwtj): How can we avoid this field name repetition?
-const jvmtiCapabilities REQUIRED_CAPABILITIES = {
+constexpr jvmtiCapabilities REQUIRED_CAPABILITIES = {
     .can_tag_objects = 0,
     .can_generate_field_modification_events = 1,
     .can_generate_field_access_events = 1,

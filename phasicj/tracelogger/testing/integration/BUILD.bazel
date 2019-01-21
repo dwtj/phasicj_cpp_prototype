@@ -15,23 +15,10 @@ cc_library(
     ],
 )
 
-load(":testing.bzl", "jvm_tracelogger_integration_test")
+load(":integration.bzl", "integration_test")
 
-jvm_tracelogger_integration_test(
-    name = "hello_test",
-    srcs = ["hello_test.cc"],
-    javadeps = ["//phasicj/tracelogger/testing/integration/java_test_progs:hello"],
-)
+integration_test(name = "hello")
 
-# TODO(dwtj): Statically linked agent tests work on macOS, but not yet on Ubuntu
-#jvm_tracelogger_static_integration_test(
-#    name = "hello_test_with_statically_linked_agent",
-#    srcs = ["hello_test.cc"],
-#    javadeps = ["//phasicj/tracelogger/testing/integration/java_test_progs:hello"],
-#)
+integration_test(name = "threads")
 
-jvm_tracelogger_integration_test(
-    name = "threads_test",
-    srcs = ["threads_test.cc"],
-    javadeps = ["//phasicj/tracelogger/testing/integration/java_test_progs:threads"],
-)
+integration_test(name = "volatile_variable")

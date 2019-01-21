@@ -37,7 +37,7 @@ path GetAbsoluteAgentPath() {
 vector<string> JvmOptions(const vector<string>& opt) {
   vector<string> new_opts{
       "-agentpath:" + GetAbsoluteAgentPath().native(),
-      "-verbose",
+      //"-verbose",
       "-enableassertions",
       "-enablesystemassertions",
       "-Xcheck:jni",
