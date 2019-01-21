@@ -3,14 +3,16 @@
 // Defines callback shims from a dynamically linked agent to a tracelogger
 // agent instance accessed via a namespaced global variable.
 
-#include <type_traits>
+#include <optional>
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
 #include "phasicj/tracelogger/agent.h"
 
+using std::optional;
+
 namespace phasicj::tracelogger::agent_dynamic {
-static Agent* AGENT = nullptr;
+static optional<Agent> AGENT;
 }  // namespace phasicj::tracelogger::agent_dynamic
 
 using phasicj::tracelogger::Agent;
@@ -20,8 +22,8 @@ using phasicj::tracelogger::agent_dynamic::AGENT;
 //   https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#onload
 extern "C" JNIEXPORT jint Agent_OnLoad(JavaVM *vm, char *options,
                                        void *reserved) {
-  AGENT = Agent::MaybeNewFromOnLoadEvent(vm, options, reserved);
-  return AGENT == nullptr ? JNI_ERR : JNI_OK;
+  auto AGENT = Agent::NewFromOnLoadEvent(vm, options, reserved);
+  return AGENT ? JNI_OK : JNI_ERR;
 }
 
 extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
@@ -30,4 +32,4 @@ extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
   return JNI_ERR;
 }
 
-extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) { delete AGENT; }
+extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) { AGENT.reset(); }

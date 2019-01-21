@@ -9,6 +9,8 @@
 // JVM/agent contract are available in [the JVMTI
 // documentation](https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html).
 
+#include <optional>
+
 #include "jni.h"  // NOLINT(build/include_subdir)
 #include "jvmti.h"  // NOLINT(build/include_subdir)
 
@@ -16,6 +18,8 @@
 #include "phasicj/tracelogger/agent.h"
 
 namespace phasicj::tracelogger {
+
+using std::optional;
 
 // Warning(dwtj): If `REQUIRED_CAPABILITIES` is changed, so should the checks
 // in `ProvidesRequiredCapabilities()`.
@@ -35,27 +39,33 @@ bool Agent::ProvidesRequiredCapabilities(jvmtiEnv& env) {
 
 // Note(dwtj): `options` is non-null, i.e. it is at least a 0-length string.
 // Note(dwtj): As of `JVMTI_VERSION_11`, `reserved` is still unused.
-Agent* Agent::MaybeNewFromOnLoadEvent(JavaVM* vm, char* options,
-                                      void* reserved) {
+optional<Agent> Agent::NewFromOnLoadEvent(JavaVM* vm, char* options,
+                                          void* reserved) {
   // TODO(dwtj): If there are any unexpected options, log a warning.
   jvmtiEnv* jvmti_env = nullptr;
   jint err = vm->GetEnv(reinterpret_cast<void**>(&jvmti_env), JVMTI_VERSION_9);
 
   if (err != JNI_OK) {
-    return nullptr;
+    return {};
   }
   if (jvmti_env == nullptr) {
-    return nullptr;
+    return {};
   }
   if (!ProvidesRequiredCapabilities(*jvmti_env)) {
-    return nullptr;
+    return {};
   }
 
-  return new Agent{jvmti_env};
+  return Agent{jvmti_env};
 }
 
 Agent::Agent(jvmtiEnv* env) : jvmti_env_(env) {
   jvmti_env_->AddCapabilities(&REQUIRED_CAPABILITIES);
 }
+
+Agent::Agent(Agent&& other) noexcept : jvmti_env_(other.jvmti_env_) {
+  other.jvmti_env_ = nullptr;
+}
+
+Agent::~Agent() noexcept { delete jvmti_env_; }
 
 }  // namespace phasicj::tracelogger
