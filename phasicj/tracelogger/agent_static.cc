@@ -11,15 +11,11 @@
 #include "phasicj/tracelogger/agent.h"
 #include "phasicj/tracelogger/agent_static.h"
 
-namespace phasicj {
-namespace tracelogger {
-namespace agent_static {
+namespace phasicj::tracelogger::agent_static {
 
 static Agent AGENT;
 
-}  // namespace agent_static
-}  // namespace tracelogger
-}  // namespace phasicj
+}  // namespace phasicj::tracelogger::agent_static
 
 extern "C" JNIEXPORT jint Agent_OnLoad_pjtracelogger(JavaVM *vm, char *options,
                                                      void *reserved) {

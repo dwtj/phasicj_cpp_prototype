@@ -9,9 +9,7 @@
 
 #include "phasicj/tracelogger/test/jvm_invoker.h"
 
-namespace phasicj {
-namespace tracelogger {
-namespace test {
+namespace phasicj::tracelogger::test {
 
 using std::getenv;
 using std::string;
@@ -56,6 +54,4 @@ JvmInvoker::JvmInvoker(const string& cp, const class_descriptor& main_cls)
 
 void JvmInvoker::invoke() { invoker_.invoke(); }
 
-}  // namespace test
-}  // namespace tracelogger
-}  // namespace phasicj
+}  // namespace phasicj::tracelogger::test

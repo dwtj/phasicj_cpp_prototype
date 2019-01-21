@@ -5,8 +5,7 @@
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
-namespace phasicj {
-namespace tracelogger {
+namespace phasicj::tracelogger {
 
 class Agent {
  public:
@@ -15,7 +14,6 @@ class Agent {
   void OnUnload(JavaVM *vm);
 };
 
-}  // namespace tracelogger
-}  // namespace phasicj
+}  // namespace phasicj::tracelogger
 
 #endif  // PHASICJ_TRACELOGGER_AGENT_H_

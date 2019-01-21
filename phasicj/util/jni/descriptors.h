@@ -5,9 +5,7 @@
 
 #include <string>
 
-namespace phasicj {
-namespace util {
-namespace jni {
+namespace phasicj::util::jni {
 
 using std::string;
 
@@ -22,8 +20,6 @@ using field_descriptor = string;
 // See Liang (1999) 12.3.4
 using method_descriptor = string;
 
-}  // namespace jni
-}  // namespace util
-}  // namespace phasicj
+}  // namespace phasicj::util::jni
 
 #endif  // PHASICJ_UTIL_JNI_DESCRIPTORS_H_

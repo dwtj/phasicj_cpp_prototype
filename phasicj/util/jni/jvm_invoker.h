@@ -10,9 +10,7 @@
 
 #include "phasicj/util/jni/descriptors.h"
 
-namespace phasicj {
-namespace util {
-namespace jni {
+namespace phasicj::util::jni {
 
 using phasicj::util::jni::class_descriptor;
 
@@ -37,8 +35,6 @@ class JvmInvoker {
   void invoke();
 };
 
-}  // namespace jni
-}  // namespace util
-}  // namespace phasicj
+}  // namespace phasicj::util::jni
 
 #endif  // PHASICJ_UTIL_JDK_INVOKER_H_

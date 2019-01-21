@@ -16,8 +16,7 @@
 #include "phasicj/execution.pb.h"
 #include "phasicj/tracelogger/agent.h"
 
-namespace phasicj {
-namespace tracelogger {
+namespace phasicj::tracelogger {
 
 jint Agent::OnAttach(JavaVM *vm, char *options, void *reserved) {
   // TODO(dwtj)
@@ -36,5 +35,4 @@ void Agent::OnUnload(JavaVM *vm) {
   std::cout << "OnUnload(...)" << std::endl;
 }
 
-}  // namespace tracelogger
-}  // namespace phasicj
+}  // namespace phasicj::tracelogger
