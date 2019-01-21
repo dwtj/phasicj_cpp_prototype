@@ -4,17 +4,6 @@ package(
     default_testonly = True,
 )
 
-cc_test(
-    name = "trivial_agent_test",
-    size = "small",
-    srcs = ["trivial_agent_test.cc"],
-    deps = [
-        "//phasicj/tracelogger:agent_dynamic",
-        "//phasicj/tracelogger:agent_static",
-        "@gtest//:gtest_main",
-    ],
-)
-
 cc_library(
     name = "jvm_invoker",
     srcs = ["jvm_invoker.cc"],
