@@ -22,6 +22,11 @@ addons:
       - bazel
       - clang-7
       - g++-8
+      - gcc-8
+
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-8" CC="gcc-8"; fi
+  - ${CXX} --version
 
 script:
   - bazel build //...
