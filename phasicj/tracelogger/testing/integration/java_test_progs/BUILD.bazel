@@ -1,5 +1,5 @@
 package(
-    default_visibility = ["//phasicj/tracelogger/test:__subpackages__"],
+    default_visibility = ["//phasicj/tracelogger/testing:__subpackages__"],
 )
 
 java_binary(

@@ -7,9 +7,9 @@
 
 #include "boost/filesystem.hpp"
 
-#include "phasicj/tracelogger/test/jvm_invoker.h"
+#include "phasicj/tracelogger/testing/integration/jvm_invoker.h"
 
-namespace phasicj::tracelogger::test {
+namespace phasicj::tracelogger::testing::integration {
 
 using std::getenv;
 using std::string;
@@ -54,4 +54,4 @@ JvmInvoker::JvmInvoker(const string& cp, const class_descriptor& main_cls)
 
 void JvmInvoker::invoke() { invoker_.invoke(); }
 
-}  // namespace phasicj::tracelogger::test
+}  // namespace phasicj::tracelogger::testing::integration
