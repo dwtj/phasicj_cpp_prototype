@@ -1,11 +1,13 @@
 cc_library(
     name = "jvm_invoker",
     srcs = ["jvm_invoker.cc"],
-    hdrs = ["jvm_invoker.h"],
+    hdrs = [
+        "jvm_invoker.h",
+    ],
     visibility = ["//visibility:public"],
     deps = [
         ":jni_descriptors",
-        "//third_party/jdk:jvm",
+        "//third_party/jdk:jni_headers",
         "@boost//:config",
         "@boost//:cstdint",
         "@boost//:detail",
