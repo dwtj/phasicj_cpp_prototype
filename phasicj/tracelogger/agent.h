@@ -20,7 +20,7 @@ class Agent {
   explicit Agent(jvmtiEnv* env);
   Agent(const Agent& other) = delete;
   Agent(Agent&& other) noexcept;
-  ~Agent();
+  ~Agent() noexcept;
 
  private:
   jvmtiEnv* jvmti_env_;

@@ -66,6 +66,8 @@ Agent::Agent(Agent&& other) noexcept : jvmti_env_(other.jvmti_env_) {
   other.jvmti_env_ = nullptr;
 }
 
-Agent::~Agent() noexcept { delete jvmti_env_; }
+Agent::~Agent() noexcept {
+  delete jvmti_env_;
+}
 
 }  // namespace phasicj::tracelogger
