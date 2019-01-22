@@ -4,7 +4,7 @@ package(
     default_visibility = ["//visibility:public"],
 )
 
-MACOS = "@bazel_tools//src/conditions:darwin_x86_64"
+MACOS = "@bazel_tools//src/conditions:darwin"
 LINUX = "@bazel_tools//src/conditions:linux_x86_64"
 
 cc_import(

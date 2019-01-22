@@ -1,4 +1,4 @@
-MACOS = "@bazel_tools//src/conditions:darwin_x86_64"
+MACOS = "@bazel_tools//src/conditions:darwin"
 LINUX = "@bazel_tools//src/conditions:linux_x86_64"
 
 def integration_test(name):
