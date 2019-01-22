@@ -12,8 +12,8 @@
 #include "phasicj/util/jni/descriptors.h"
 #include "phasicj/util/jni/jvm_invoker.h"
 
-constexpr jint JNI_VERSION = JNI_VERSION_9;
-static_assert(JNI_VERSION, "JNI version 9 or greater required.");
+constexpr jint JNI_VERSION = JNI_VERSION_1_8;
+static_assert(JNI_VERSION, "JNI version 1.8 or greater required.");
 
 namespace phasicj::util::jni {
 
