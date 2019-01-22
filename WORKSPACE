@@ -69,7 +69,7 @@ http_archive(
     sha256 = "35e8f9b18f6c7b627dba13a4c6f45e6266552ccd7156043d92391443db0d60d6",
     strip_prefix = "jdk8u202-b08/Contents/Home",
     urls = ["https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_mac_hotspot_8u202b08.tar.gz"],
-    build_file = "//:bazel/adoptopenjdk.BUILD",
+    build_file = "//:bazel/net_adoptopenjdk_jdk8_macos_hotspot.BUILD",
 )
 
 http_archive(
@@ -79,7 +79,7 @@ http_archive(
     sha256 = "399e7635be2176cd52b0992806b91a41b71d6429fb43cde1ba27835f0ce63e97",
     strip_prefix = "jdk8u202-b01/Contents/Home",
     urls = ["https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u-2019-01-21-09-29/OpenJDK8U-jdk_x64_mac_openj9_2019-01-21-09-29.tar.gz"],
-    build_file = "//:bazel/adoptopenjdk.BUILD",
+    build_file = "//:bazel/net_adoptopenjdk_jdk8_macos_j9.BUILD",
 )
 
 http_archive(
