@@ -85,7 +85,7 @@ http_archive(
 http_archive(
     # jdk8u202-b08
     name = "net_adoptopenjdk_jdk8_linux_hotspot",
-    sha256 = "e608bb4ea9c09da796a7cb8acc130bad1290f13d4e6e98082cc0e852c7207108",
+    sha256 = "f5a1c9836beb3ca933ec3b1d39568ecbb68bd7e7ca6a9989a21ff16a74d910ab",
     strip_prefix = "jdk8u202-b08",
     urls = ["https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u202b08.tar.gz"],
     build_file = "//:bazel/net_adoptopenjdk_jdk8_linux_hotspot.BUILD",
