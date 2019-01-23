@@ -3,4 +3,8 @@ def java_test_program(package_name):
         name = package_name,
         srcs = native.glob([package_name + "/**/*.java"]),
         main_class = package_name + ".Main",
+        javacopts = [
+            "-source 8",
+            "-target 8",
+        ],
     )
