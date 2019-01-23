@@ -92,12 +92,11 @@ http_archive(
 )
 
 http_archive(
-    # TODO(dwtj): Update to jdk8u202-b08 if/when available.
-    # jdk8u192-b12_openj9-0.11.0
+    # jdk8u202-b08
     name = "net_adoptopenjdk_jdk8_linux_j9",
-    sha256 = "fd7035c60ad3060fccf7ab67c15b722302a1863ebddd3141dc3dd98bd0b25a68",
-    strip_prefix = "jdk8u192-b12_openj9-0.11.0",
-    urls = ["https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u192-b12_openj9-0.11.0/OpenJDK8U-jdk_x64_linux_openj9_8u192b12_openj9-0.11.0.tar.gz"],
+    sha256 = "86adb6f5cb85950687ca2e568e2e284eedd25a633f68c8780a19017c16712ac9",
+    strip_prefix = "jdk8u202-b08",
+    urls = ["https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_linux_openj9_8u202b08.tar.gz"],
     build_file = "//:bazel/net_adoptopenjdk_jdk8_linux_j9.BUILD",
 )
 
