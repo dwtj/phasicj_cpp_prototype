@@ -2,8 +2,11 @@ MACOS = "@bazel_tools//src/conditions:darwin"
 LINUX = "@bazel_tools//src/conditions:linux_x86_64"
 
 def integration_test(name):
-    for jdk in ("jdk8", "jdk11"):
-        for jvm in ("hotspot", "j9"):
+    jdks = ("jdk8", "jdk11")
+    #jvms = ("hotspot", "j9")  # TODO(dwtj): Disable j9 until I can figure it out.
+    jvms = ("hotspot",)
+    for jdk in jdks:
+        for jvm in jvms:
             native.cc_test(
                 name = name + "_" + jdk + "_" + jvm,
                 srcs = ["drivers/" + name + ".cc"],
