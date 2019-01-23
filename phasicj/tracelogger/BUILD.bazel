@@ -1,4 +1,4 @@
-# Copyright 2019 David Johnston
+#Copyright 2019 David Johnston
 
 package(
     default_visibility = ["//visibility:public"],
@@ -6,8 +6,14 @@ package(
 
 cc_library(
     name = "agent",
-    srcs = ["agent.cc"],
-    hdrs = ["agent.h"],
+    srcs = [
+        "agent.cc",
+        "agent_callbacks.cc",
+    ],
+    hdrs = [
+        "agent.h",
+        "agent_callbacks.h",
+    ],
     deps = [
         "//phasicj:execution_cc_proto",
         "//third_party/jdk:jni_headers",
@@ -29,18 +35,18 @@ cc_library(
     hdrs = ["agent_dynamic.h"],
     deps = [":agent"],
 
-    # This library defines callbacks meant to be dynamically linked into a JVM.
+    #This library defines callbacks meant to be dynamically linked into a JVM.
     alwayslink = True,
 )
 
-# TODO(dwtj): I want to be able to build the agent as a standalone dynamic
-# library deliverable, but its name needs to vary depending upon the target
-# platform. It seems that I can't use a select expression in the name of a
+#TODO(dwtj) : I want to be able to build the agent as a standalone dynamic
+#library deliverable, but its name needs to vary depending upon the target
+#platform.It seems that I can't use a select expression in the name of a
 # `cc_binary`, so I'm instead making multiple binaries. But this is misleading:
-# for example, a `dylib` file is built during a linux build, but it is really
-# a `so` file.
+#for example, a `dylib` file is built during a linux build, but it is really
+#a `so` file.
 #
-# So, what's the right way to do this.
+#So, what's the right way to do this.
 alias(
     name = "pjtracelogger",
     actual = select({

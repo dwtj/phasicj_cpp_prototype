@@ -3,27 +3,40 @@
 // Defines callback shims from a dynamically linked agent to a tracelogger
 // agent instance accessed via a namespaced global variable.
 
-#include <optional>
+#include <iostream>
+#include <stdexcept>
+#include <string>
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
 #include "phasicj/tracelogger/agent.h"
 
-using std::optional;
-
-namespace phasicj::tracelogger::agent_dynamic {
-static optional<Agent> AGENT;
-}  // namespace phasicj::tracelogger::agent_dynamic
+using std::cerr;
+using std::endl;
+using std::runtime_error;
+using std::string;
 
 using phasicj::tracelogger::Agent;
+
+namespace phasicj::tracelogger::agent_dynamic {
+Agent* AGENT{nullptr};
+}  // namespace phasicj::tracelogger::agent_dynamic
+
 using phasicj::tracelogger::agent_dynamic::AGENT;
 
-// Note(dwtj): If this returns an error code, the JVM will terminate. See:
-//   https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#onload
-extern "C" JNIEXPORT jint Agent_OnLoad(JavaVM *vm, char *options,
-                                       void *reserved) {
-  auto AGENT = Agent::NewFromOnLoadEvent(vm, options, reserved);
-  return AGENT ? JNI_OK : JNI_ERR;
+// https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#onload
+extern "C" JNIEXPORT jint Agent_OnLoad(JavaVM* jvm,
+                                       char* options,
+                                       void* reserved) {
+  string opts{(options == nullptr) ? "" : options};
+  try {
+    AGENT = new Agent{*jvm, opts};
+    return JNI_OK;
+  } catch (runtime_error& ex) {
+    // NB(dwtj): The JVM will be killed.
+    cerr << "Failed to start PhasicJ TraceLogger Agent: " << ex.what() << endl;
+    return JNI_EVERSION;
+  }
 }
 
 extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
@@ -32,4 +45,4 @@ extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
   return JNI_ERR;
 }
 
-extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) { AGENT.reset(); }
+extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) { delete AGENT; }
