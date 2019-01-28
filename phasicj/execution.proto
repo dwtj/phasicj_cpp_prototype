@@ -2,6 +2,8 @@
 
 syntax = "proto3";
 
+import "phasicj/vectorclock.proto";
+
 package phasicj;
 
 option java_package = "org.phasicj";
@@ -32,7 +34,7 @@ message Event {
         Monitor monitor = 1;
     }
 
-    Timestamp timestamp = 1;
+    VectorClock timestamp = 1;
 
     oneof event {
         Read read = 2;
@@ -42,10 +44,6 @@ message Event {
         MonitorAcquire monitor_acquire = 6;
         MonitorRelease monitor_release = 7;
     }
-}
-
-message Timestamp {
-    map<uint64, uint64> elements = 1;
 }
 
 message MemoryLocation {

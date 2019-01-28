@@ -1,13 +1,8 @@
 // Copyright 2019 David Johnston
 
-// This class implements the actual agent logic. The class does not follow
-// conventional RAII discipline. Instances of it are expected to have static
-// storage duration. Resources which it manages are primarily provided by the
-// JVM and managed during callbacks from the JVM to an agent instance.
+// TODO: Rewrite doc.
 //
-// More information about these various callbacks and the details of the
-// JVM/agent contract are available in [the JVMTI
-// documentation](https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html).
+// [1](https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html)
 
 #include <stdexcept>
 #include <string>
@@ -15,36 +10,43 @@
 #include "jni.h"    // NOLINT(build/include_subdir)
 #include "jvmti.h"  // NOLINT(build/include_subdir)
 
+#include "boost/log/trivial.hpp"
+
 #include "phasicj/execution.pb.h"
 #include "phasicj/tracelogger/agent.h"
-#include "phasicj/tracelogger/agent_callbacks.h"
+#include "phasicj/tracelogger/jvmticonf/capabilities.h"
+#include "phasicj/tracelogger/jvmtievents/jvmti_callbacks.h"
 
 namespace phasicj::tracelogger {
 
-using std::optional;
-using std::runtime_error;
-using std::string;
+using ::std::make_unique;
+using ::std::optional;
+using ::std::runtime_error;
+using ::std::string;
 
-// Warning(dwtj): If `INITIAL_REQUIRED_CAPABILITIES` is changed, so should the
-// checks in `ProvidesRequiredCapabilities()`.
-// TODO(dwtj): How can we avoid this field name repetition?
-constexpr jvmtiCapabilities INITIAL_REQUIRED_CAPABILITIES = {
-    .can_tag_objects = 0,
-    .can_generate_field_modification_events = 1,
-    .can_generate_field_access_events = 1,
-};
+using ::phasicj::tracelogger::jvmticonf::INITIAL_AGENT_CALLBACKS;
+using ::phasicj::tracelogger::jvmticonf::INITIAL_EVENT_NOTIFICATION_CONFIGS;
+using ::phasicj::tracelogger::jvmticonf::INITIAL_REQUIRED_CAPABILITIES;
+using ::phasicj::tracelogger::jvmticonf::ProvidesRequiredCapabilities;
 
-bool Agent::ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env) {
-  jvmtiCapabilities c;
-  jvmti_env.GetPotentialCapabilities(&c);
-  return c.can_generate_field_modification_events &&
-         c.can_generate_field_access_events;
+optional<Agent*> Agent::NewFromOnLoad(JavaVM* jvm,
+                                      char* options,
+                                      void* reserved) {
+  string opts{(options == nullptr) ? "" : options};
+  try {
+    return new Agent{*jvm, opts};
+  } catch (runtime_error& ex) {
+    BOOST_LOG_TRIVIAL(error)
+        << "Failed to make an agent from an OnLoad event. " << ex.what();
+    return {};
+  }
 }
 
 Agent::Agent(JavaVM& jvm, const string& options) {
   // https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#jvmtiEnvAccess
-  jint err =
-      jvm.GetEnv(reinterpret_cast<void**>(&jvmti_env_), JVMTI_VERSION_1_2);
+  auto JVMTI_VERSION = JVMTI_VERSION_1_2;
+
+  jint err = jvm.GetEnv(reinterpret_cast<void**>(&jvmti_env_), JVMTI_VERSION);
   if (err != JNI_OK) {
     throw runtime_error{
         "Could not obtain a compatible JVMTI environment from this JVM."};
@@ -72,7 +74,7 @@ Agent::Agent(JavaVM& jvm, const string& options) {
     throw runtime_error{"Failed to set one or more event callbacks."};
   }
 
-  for (auto& config : INITIAL_AGENT_EVENT_NOTIFICATION_CONFIGS) {
+  for (auto& config : INITIAL_EVENT_NOTIFICATION_CONFIGS) {
     err = jvmti_env_->SetEventNotificationMode(
         config.mode, config.event_type, config.thread);
     if (err != JVMTI_ERROR_NONE) {
@@ -81,35 +83,9 @@ Agent::Agent(JavaVM& jvm, const string& options) {
   }
 }
 
-Agent::Agent(Agent&& other) noexcept = default;
-
 Agent::~Agent() noexcept {
   jvmti_env_->DisposeEnvironment();
   jvmti_env_ = nullptr;
 };
-
-void Agent::FieldAccess(jvmtiEnv* jvmti_env,
-                        JNIEnv* jni_env,
-                        jthread thread,
-                        jmethodID method,
-                        jlocation location,
-                        jclass field_klass,
-                        jobject object,
-                        jfieldID field) {
-  // TODO(dwtj): Everything.
-}
-
-void Agent::FieldModification(jvmtiEnv* jvmti_env,
-                              JNIEnv* jni_env,
-                              jthread thread,
-                              jmethodID method,
-                              jlocation location,
-                              jclass field_klass,
-                              jobject object,
-                              jfieldID field,
-                              char signature_type,
-                              jvalue new_value) {
-  // TODO(dwtj): Everything.
-}
 
 }  // namespace phasicj::tracelogger

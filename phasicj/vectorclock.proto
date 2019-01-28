@@ -1,0 +1,11 @@
+// Copyright 2019 David Johnston
+
+syntax = "proto3";
+
+package phasicj;
+
+option java_package = "org.phasicj";
+
+message VectorClock {
+    map<uint64,uint64> counters = 1;
+}

@@ -3,6 +3,7 @@ LINUX = "@bazel_tools//src/conditions:linux_x86_64"
 
 def integration_test(name):
     jdks = ("jdk8", "jdk11")
+
     #jvms = ("hotspot", "j9")  # TODO(dwtj): Disable j9 until I can figure it out.
     jvms = ("hotspot",)
     for jdk in jdks:

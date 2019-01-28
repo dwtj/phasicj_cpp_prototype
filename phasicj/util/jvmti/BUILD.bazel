@@ -1,0 +1,13 @@
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "misc",
+    srcs = ["misc.cc"],
+    hdrs = ["misc.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)

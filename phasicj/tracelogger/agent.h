@@ -17,7 +17,9 @@ class Agent {
   jvmtiEnv* jvmti_env_;
 
  public:
-  static bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env);
+  static std::optional<Agent*> NewFromOnLoad(JavaVM* jvm,
+                                             char* options,
+                                             void* reserved);
 
   Agent() = delete;
 
@@ -26,29 +28,9 @@ class Agent {
 
   Agent(const Agent& other) = delete;
 
-  Agent(Agent&& other) noexcept;
+  Agent(Agent&& other) noexcept = delete;
 
   ~Agent() noexcept;
-
-  void FieldAccess(jvmtiEnv* jvmti_env,
-                   JNIEnv* jni_env,
-                   jthread thread,
-                   jmethodID method,
-                   jlocation location,
-                   jclass field_klass,
-                   jobject object,
-                   jfieldID field);
-
-  void FieldModification(jvmtiEnv* jvmti_env,
-                         JNIEnv* jni_env,
-                         jthread thread,
-                         jmethodID method,
-                         jlocation location,
-                         jclass field_klass,
-                         jobject object,
-                         jfieldID field,
-                         char signature_type,
-                         jvalue new_value);
 };
 
 }  // namespace phasicj::tracelogger

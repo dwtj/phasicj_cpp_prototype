@@ -7,19 +7,22 @@
 #include <stdexcept>
 #include <string>
 
+#include "boost/log/trivial.hpp"
 #include "jni.h"  // NOLINT(build/include_subdir)
+
+#include "phasicj/vectorclock.pb.h";
 
 #include "phasicj/tracelogger/agent.h"
 
-using std::cerr;
 using std::endl;
 using std::runtime_error;
 using std::string;
+using std::unique_ptr;
 
 using phasicj::tracelogger::Agent;
 
 namespace phasicj::tracelogger::agent_dynamic {
-Agent* AGENT{nullptr};
+Agent* AGENT;
 }  // namespace phasicj::tracelogger::agent_dynamic
 
 using phasicj::tracelogger::agent_dynamic::AGENT;
@@ -28,21 +31,33 @@ using phasicj::tracelogger::agent_dynamic::AGENT;
 extern "C" JNIEXPORT jint Agent_OnLoad(JavaVM* jvm,
                                        char* options,
                                        void* reserved) {
-  string opts{(options == nullptr) ? "" : options};
-  try {
-    AGENT = new Agent{*jvm, opts};
-    return JNI_OK;
-  } catch (runtime_error& ex) {
-    // NB(dwtj): The JVM will be killed.
-    cerr << "Failed to start PhasicJ TraceLogger Agent: " << ex.what() << endl;
-    return JNI_EVERSION;
+  BOOST_LOG_TRIVIAL(info) << "JVM called Agent_OnLoad().";
+  BOOST_LOG_TRIVIAL(info) << "Instantiating a new agent instance.";
+  auto agent = Agent::NewFromOnLoad(jvm, options, reserved);
+  if (!agent) {
+    BOOST_LOG_TRIVIAL(info) << "Failed to instantiate a compatible agent.";
+    return JNI_EVERSION;  // NB(dwtj): JVM will be killed.
   }
+
+  AGENT = agent.value();
+
+  BOOST_LOG_TRIVIAL(info) << "Verifying Protobuf version.";
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+  BOOST_LOG_TRIVIAL(info) << "Protobuf version verified.";
+
+  return JNI_OK;
 }
 
 extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
                                          void *reserved) {
-  // Note(dwtj): This agent is not yet designed to be started in the live phase.
-  return JNI_ERR;
+  BOOST_LOG_TRIVIAL(info) << "JVM called Agent_OnAttach().";
+  return JNI_ERR;  // Initialization with `OnAttach()` not yet supported.
 }
 
-extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) { delete AGENT; }
+extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) {
+  BOOST_LOG_TRIVIAL(info) << "JVM called Agent_OnUnload().";
+  delete AGENT;
+
+  BOOST_LOG_TRIVIAL(info) << "Stutting down protobuf library.";
+  google::protobuf::ShutdownProtobufLibrary();
+}
