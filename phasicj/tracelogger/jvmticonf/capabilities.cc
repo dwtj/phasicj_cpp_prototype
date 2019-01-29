@@ -7,6 +7,8 @@
 
 namespace phasicj::tracelogger::jvmticonf {
 
+
+
 bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env) {
   jvmtiCapabilities c;
   jvmti_env.GetPotentialCapabilities(&c);

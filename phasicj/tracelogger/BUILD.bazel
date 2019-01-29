@@ -6,14 +6,11 @@ package(
 
 cc_library(
     name = "agent",
-    srcs = [
-        "agent.cc",
-    ],
-    hdrs = [
-        "agent.h",
-    ],
+    srcs = ["agent.cc"],
+    hdrs = ["agent.h"],
     deps = [
         "//phasicj:execution_cc_proto",
+        "//phasicj/tracelogger/jvmticonf:capabilities",
         "//phasicj/tracelogger/jvmtievents:global_handler",
         "//phasicj/tracelogger/jvmtievents:jvmti_callbacks",
         "//phasicj/tracelogger/jvmtievents:local_handler",
@@ -42,7 +39,7 @@ cc_library(
         "@boost//:log",
     ],
 
-    #This library defines callbacks meant to be dynamically linked into a JVM.
+    # This library defines callbacks meant to be dynamically linked into a JVM.
     alwayslink = True,
 )
 
@@ -72,11 +69,13 @@ alias(
 cc_binary(
     name = "libpjtracelogger.dylib",
     linkshared = True,
+    linkstatic = True,
     deps = ["agent_dynamic"],
 )
 
 cc_binary(
     name = "libpjtracelogger.so",
     linkshared = True,
+    linkstatic = True,
     deps = ["agent_dynamic"],
 )

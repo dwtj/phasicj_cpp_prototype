@@ -10,10 +10,6 @@
 
 namespace phasicj::util::jvmti {
 
-std::optional<bool> IsFieldVolatile(jvmtiEnv* jvmti_env,
-                                    const jclass field_klass,
-                                    const jfieldID field);
-
 std::optional<jlong> GetThreadId(JNIEnv& jni_env, jthread thread);
 
 }  // namespace phasicj::util::jvmti

@@ -6,13 +6,11 @@
 
 #include "phasicj/tracelogger/jvmtievents/global_handler.h"
 #include "phasicj/tracelogger/jvmtievents/local_handler.h"
-#include "phasicj/util/jvmti/misc.h"
+#include "phasicj/util/jvmti/threads.h"
 
 namespace phasicj::tracelogger::jvmtievents {
 
 using ::std::runtime_error;
-
-using ::phasicj::util::jvmti::IsFieldVolatile;
 
 void GlobalHandler::ThreadStart(jvmtiEnv* jvmti_env,
                                 JNIEnv* jni_env,

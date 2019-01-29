@@ -3,9 +3,19 @@ package(
 )
 
 cc_library(
-    name = "misc",
-    srcs = ["misc.cc"],
-    hdrs = ["misc.h"],
+    name = "fields",
+    srcs = ["fields.cc"],
+    hdrs = ["fields.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "threads",
+    srcs = ["threads.cc"],
+    hdrs = ["threads.h"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",

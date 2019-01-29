@@ -9,6 +9,7 @@ cc_library(
     deps = [
         ":global_handler",
         ":local_handler",
+        "//phasicj/util/jvmti:fields",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
     ],
@@ -32,9 +33,10 @@ cc_library(
     hdrs = ["local_handler.h"],
     deps = [
         "//phasicj:vectorclock_cc_proto",
-        "//phasicj/util/jvmti:misc",
+        "//phasicj/util/jvmti:threads",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
+        "//phasicj/tracelogger:vector_clock",
         "@boost//:config",
         "@boost//:detail",
         "@boost//:log",

@@ -8,7 +8,7 @@
 
 #include "phasicj/tracelogger/jvmtievents/global_handler.h"
 #include "phasicj/tracelogger/jvmtievents/local_handler.h"
-#include "phasicj/util/jvmti/misc.h"
+#include "phasicj/util/jvmti/fields.h"
 
 #include "phasicj/tracelogger/jvmtievents/jvmti_callbacks.h"
 
@@ -64,7 +64,7 @@ void JNICALL FieldModification(jvmtiEnv* jvmti_env,
   // If this field is volatile, synchronization is needed; so forward the event
   // to the global handler. Otherwise, forward it to the local handler.
   // TODO(dwtj): Consider using a thread-local cache for this decision.
-  if (IsFieldVolatile(jvmti_env, field_klass, field)) {
+  if (IsFieldVolatile(*jvmti_env, field_klass, field)) {
     GlobalHandler::Embedded(*jvmti_env)
         .VolatileFieldModification(jvmti_env,
                                    jni_env,

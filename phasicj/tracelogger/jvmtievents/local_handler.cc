@@ -10,9 +10,8 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/jvmtievents/global_handler.h"
 #include "phasicj/tracelogger/jvmtievents/local_handler.h"
-#include "phasicj/util/jvmti/misc.h"
+#include "phasicj/util/jvmti/threads.h"
 
 using ::std::ostream;
 using ::std::runtime_error;
@@ -54,6 +53,10 @@ void LocalHandler::FieldModification(jvmtiEnv* jvmti_env,
                                      jvalue new_value) {
   VectorClockTick();
   // TODO: Log this event.
+}
+
+void LocalHandler::VectorClockTick() {
+  vector_clock_.Tick(thread_id_);
 }
 
 void LocalHandler::EmbedNew(jvmtiEnv& jvmti_env,

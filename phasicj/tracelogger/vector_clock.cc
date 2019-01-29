@@ -19,6 +19,8 @@ void VectorClock::Synchronize(VectorClock& that) {
 
 bool VectorClock::SerializeTo(std::ostream& out) {
   pb_counters_.clear_counters();
+  // TODO: Everything!
+  return false;
 }
 
 // Iterate over all elements of `src`. For each, try to find an element with

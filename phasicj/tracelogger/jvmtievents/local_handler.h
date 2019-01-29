@@ -35,7 +35,7 @@
 
 #include <map>
 
-#include "phasicj/vectorclock.pb.h"
+#include "phasicj/tracelogger/vector_clock.h"
 
 #include "jni.h"
 #include "jvmti.h"

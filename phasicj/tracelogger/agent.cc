@@ -24,8 +24,8 @@ using ::std::optional;
 using ::std::runtime_error;
 using ::std::string;
 
-using ::phasicj::tracelogger::jvmticonf::INITIAL_AGENT_CALLBACKS;
-using ::phasicj::tracelogger::jvmticonf::INITIAL_EVENT_NOTIFICATION_CONFIGS;
+using ::phasicj::tracelogger::jvmtievents::INITIAL_AGENT_CALLBACKS;
+using ::phasicj::tracelogger::jvmtievents::INITIAL_EVENT_NOTIFICATION_CONFIGS;
 using ::phasicj::tracelogger::jvmticonf::INITIAL_REQUIRED_CAPABILITIES;
 using ::phasicj::tracelogger::jvmticonf::ProvidesRequiredCapabilities;
 

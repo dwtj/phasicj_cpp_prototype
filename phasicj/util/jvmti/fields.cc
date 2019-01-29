@@ -1,9 +1,13 @@
+//
+// Created by dwtj on 1/28/19.
+//
+
 #include <optional>
 
-#include "jni.h"
 #include "jvmti.h"
+#include "jni.h"
 
-#include "phasicj/util/jvmti/misc.h"
+#include "phasicj/util/jvmti/fields.h"
 
 namespace phasicj::util::jvmti {
 
@@ -35,33 +39,4 @@ optional<bool> IsFieldVolatile(jvmtiEnv& jvmti_env,
   }
 }
 
-std::optional<jlong> GetThreadId(JNIEnv& jni_env, const jthread thread) {
-  if (thread == nullptr) {
-    // TODO: Error log this.
-    return {};
-  }
-  jclass thread_klass = jni_env.GetObjectClass(thread);
-  if (jni_env.ExceptionCheck() == JNI_FALSE) {
-    // TODO: Error log this.
-    jni_env.ExceptionClear();
-    return {};
-  }
-
-  jmethodID method_id = jni_env.GetMethodID(thread_klass, "getId", "()J");
-  if (jni_env.ExceptionCheck() == JNI_FALSE) {
-    // TODO: Error log this.
-    jni_env.ExceptionClear();
-    return {};
-  }
-
-  jlong thread_id = jni_env.CallLongMethod(thread, method_id);
-  if (jni_env.ExceptionCheck() == JNI_FALSE) {
-    // TODO: Error log this.
-    jni_env.ExceptionClear();
-    return {};
-  }
-
-  return {thread_id};
-}
-
-}  // namespace phasicj::util::jvmti
+}  // namespace phasij::util::jvmti
