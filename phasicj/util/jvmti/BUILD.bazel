@@ -19,5 +19,6 @@ cc_library(
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
+        "@boost//:log",
     ],
 )
