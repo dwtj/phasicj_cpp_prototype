@@ -25,7 +25,7 @@ std::optional<jlong> GetThreadId(JNIEnv& jni_env, const jthread thread) {
       jni_env.ExceptionClear();
       return true;
     }
-
+    return false;
   };
 
   jclass thread_klass = jni_env.GetObjectClass(thread);
