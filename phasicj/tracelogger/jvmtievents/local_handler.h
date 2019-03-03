@@ -33,6 +33,7 @@
 #ifndef PHASICJ_TRACELOGGER_JVMTIEVENTS_LOCAL_HANDER_H_
 #define PHASICJ_TRACELOGGER_JVMTIEVENTS_LOCAL_HANDER_H_
 
+#include <cstdint>
 #include <map>
 
 #include "phasicj/tracelogger/vector_clock.h"
@@ -90,9 +91,9 @@ class LocalHandler {
   static LocalHandler& Embedded(jvmtiEnv& jvmti_env);
 
  private:
-  ::google::protobuf::uint64 thread_id_;
-  ::google::protobuf::uint64 counter_;
-  std::map<::google::protobuf::uint64, ::google::protobuf::uint64> counters_;
+  int64_t thread_id_;
+  int64_t counter_;
+  std::map<int64_t, int64_t> counters_;
   VectorClock vector_clock_;
 };
 

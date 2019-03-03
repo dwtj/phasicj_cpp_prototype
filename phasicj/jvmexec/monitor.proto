@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package phasicj.jvmexec;
+
+option java_package = "org.phasicj.jvmexec";
+
+message Monitor {
+    string instance = 1;
+}

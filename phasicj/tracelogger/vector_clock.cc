@@ -1,26 +1,19 @@
 // Copyright 2019 David Johnston
 
+#include <cstdint>
 #include <ostream>
 
 #include "phasicj/tracelogger/vector_clock.h"
 
 namespace phasicj::tracelogger {
 
-VectorClock::VectorClock() : counters_(), pb_counters_() {}
+VectorClock::VectorClock() : counters_() {}
 
-void VectorClock::Tick(::google::protobuf::uint64 thread_id) {
-  ++counters_[thread_id];
-}
+void VectorClock::Tick(int64_t thread_id) { ++counters_[thread_id]; }
 
 void VectorClock::Synchronize(VectorClock& that) {
   SynchronizeOneWay(*this, that);
   SynchronizeOneWay(that, *this);
-}
-
-bool VectorClock::SerializeTo(std::ostream& out) {
-  pb_counters_.clear_counters();
-  // TODO: Everything!
-  return false;
 }
 
 // Iterate over all elements of `src`. For each, try to find an element with

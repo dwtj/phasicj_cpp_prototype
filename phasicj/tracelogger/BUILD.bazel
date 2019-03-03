@@ -9,7 +9,6 @@ cc_library(
     srcs = ["agent.cc"],
     hdrs = ["agent.h"],
     deps = [
-        "//phasicj:execution_cc_proto",
         "//phasicj/tracelogger/jvmticonf:capabilities",
         "//phasicj/tracelogger/jvmtievents:global_handler",
         "//phasicj/tracelogger/jvmtievents:jvmti_callbacks",
@@ -27,6 +26,7 @@ cc_library(
     deps = [
         ":agent",
         "@boost//:log",
+        "@com_google_protobuf//:protobuf",
     ],
 )
 
@@ -37,6 +37,7 @@ cc_library(
     deps = [
         ":agent",
         "@boost//:log",
+        "@com_google_protobuf//:protobuf",
     ],
 
     # This library defines callbacks meant to be dynamically linked into a JVM.
@@ -44,10 +45,18 @@ cc_library(
 )
 
 cc_library(
+    name = "trace_log",
+    srcs = ["trace_log.cc"],
+    hdrs = ["trace_log.h"],
+    deps = [
+        "//phasicj/jvmexec:event_cc_proto",
+    ],
+)
+
+cc_library(
     name = "vector_clock",
     srcs = ["vector_clock.cc"],
     hdrs = ["vector_clock.h"],
-    deps = ["//phasicj:vectorclock_cc_proto"],
 )
 
 # TODO(dwtj) : I want to be able to build the agent as a standalone dynamic

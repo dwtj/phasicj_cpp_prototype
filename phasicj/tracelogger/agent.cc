@@ -12,7 +12,6 @@
 
 #include "boost/log/trivial.hpp"
 
-#include "phasicj/execution.pb.h"
 #include "phasicj/tracelogger/agent.h"
 #include "phasicj/tracelogger/jvmticonf/capabilities.h"
 #include "phasicj/tracelogger/jvmtievents/jvmti_callbacks.h"

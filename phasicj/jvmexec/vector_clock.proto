@@ -2,9 +2,9 @@
 
 syntax = "proto3";
 
-package phasicj;
+package phasicj.jvmexec;
 
-option java_package = "org.phasicj";
+option java_package = "org.phasicj.jvmexec";
 
 message VectorClock {
     map<uint64,uint64> counters = 1;

@@ -7,9 +7,6 @@ package(
 java_library(
     name = "drd",
     srcs = glob(["*.java"]),
-    deps = [
-        "//phasicj:execution_java_proto",
-    ],
 )
 
 java_binary(

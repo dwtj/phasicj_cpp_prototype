@@ -5,24 +5,21 @@
 #ifndef PHASICJ_TRACELOGGER_VECTOR_CLOCK_H_
 #define PHASICJ_TRACELOGGER_VECTOR_CLOCK_H_
 
+#include <cstdint>
 #include <map>
 #include <ostream>
-
-#include "phasicj/vectorclock.pb.h"
 
 namespace phasicj::tracelogger {
 
 class VectorClock {
  public:
   VectorClock();
-  void Tick(::google::protobuf::uint64 thread_id);
+  void Tick(int64_t thread_id);
   void Synchronize(VectorClock& other);
-  bool SerializeTo(std::ostream& out);
 
  private:
   static void SynchronizeOneWay(const VectorClock& src, VectorClock& to);
-  std::map<::google::protobuf::uint64, ::google::protobuf::uint64> counters_;
-  ::phasicj::VectorClock pb_counters_;
+  std::map<int64_t, int64_t> counters_;
 };
 
 }  // namespace phasicj::tracelogger

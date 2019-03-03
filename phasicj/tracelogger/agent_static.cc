@@ -11,7 +11,7 @@
 
 #include "boost/log/trivial.hpp"
 
-#include "phasicj/vectorclock.pb.h"
+#include "google/protobuf/stubs/common.h"
 
 #include "phasicj/tracelogger/agent.h"
 #include "phasicj/tracelogger/agent_static.h"

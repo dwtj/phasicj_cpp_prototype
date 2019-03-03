@@ -1,5 +1,6 @@
 // Copyright 2019 David Johnston
 
+#include <cstdint>
 #include <ostream>
 #include <stdexcept>
 #include <string>
@@ -18,13 +19,12 @@ using ::std::runtime_error;
 using ::std::string;
 
 using ::boost::numeric_cast;
-using ::google::protobuf::uint64;
 using ::phasicj::util::jvmti::GetThreadId;
 
 namespace phasicj::tracelogger::jvmtievents {
 
 LocalHandler::LocalHandler(jlong thread_id)
-    : thread_id_(numeric_cast<uint64>(thread_id)),
+    : thread_id_(numeric_cast<int64_t>(thread_id)),
       counter_(0),
       counters_(),
       vector_clock_() {}

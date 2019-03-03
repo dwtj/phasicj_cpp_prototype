@@ -2,18 +2,15 @@
 
 syntax = "proto3";
 
-import "phasicj/vectorclock.proto";
+import "phasicj/jvmexec/memory_location.proto";
+import "phasicj/jvmexec/monitor.proto";
+import "phasicj/jvmexec/vector_clock.proto";
 
-package phasicj;
+package phasicj.jvmexec;
 
-option java_package = "org.phasicj";
+option java_package = "org.phasicj.jvmexec";
 
-message Trace {
-    uint64 thread_id = 1;
-    repeated Event events = 2;
-}
-
-message Event {
+message MemoryEvent {
 
     message Read {
         MemoryLocation location = 1;
@@ -46,19 +43,4 @@ message Event {
     }
 }
 
-message MemoryLocation {
-    message StaticVariable {
-        string classloader = 1;
-        string class = 2;
-        string name = 3;
-    }
-    message InstanceVariable {
-        string classloader = 1;
-        string instance = 2;
-        string name = 3;
-    }
-}
 
-message Monitor {
-    string instance = 1;
-}

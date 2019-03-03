@@ -10,7 +10,7 @@
 #include "boost/log/trivial.hpp"
 #include "jni.h"  // NOLINT(build/include_subdir)
 
-#include "phasicj/vectorclock.pb.h"
+#include "google/protobuf/stubs/common.h"
 
 #include "phasicj/tracelogger/agent.h"
 

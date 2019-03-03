@@ -32,7 +32,6 @@ cc_library(
     srcs = ["local_handler.cc"],
     hdrs = ["local_handler.h"],
     deps = [
-        "//phasicj:vectorclock_cc_proto",
         "//phasicj/tracelogger:vector_clock",
         "//phasicj/util/jvmti:threads",
         "//third_party/jdk:jni_headers",
