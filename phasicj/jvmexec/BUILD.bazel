@@ -6,7 +6,7 @@ package(
 
 proto_library(
     name = "event_proto",
-    srcs = ["event.proto"],
+    srcs = ["memory_event.proto"],
     deps = [
         ":memory_location_proto",
         ":monitor_proto",

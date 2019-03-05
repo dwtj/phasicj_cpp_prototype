@@ -22,6 +22,7 @@ def integration_test(name):
                     MACOS: ["@net_adoptopenjdk_" + jdk + "_macos_" + jvm + "//:libjvm"],
                     LINUX: ["@net_adoptopenjdk_" + jdk + "_linux_" + jvm + "//:libjvm"],
                 }),
-                linkopts = ["-ldl"],
+                linkopts = ["-ldl"],  # Support programmatic dynamic linkage
+                # (i.e. make `dlopen()` and friends work).
                 timeout = "short",
             )

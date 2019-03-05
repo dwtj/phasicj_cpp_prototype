@@ -122,6 +122,9 @@ void LocalHandler::DeleteEmbedded(jvmtiEnv& jvmti_env) {
 
   LocalHandler* handler{};
   jvmtiError err{};
+  // TODO: WIP
+  // Thread is getting uninitialized garbage.
+  // Counter is big integer.
   err = jvmti_env.GetThreadLocalStorage(CURRENT_THREAD,
                                         reinterpret_cast<void**>(&handler));
   switch (err) {

@@ -5,7 +5,7 @@
 
 #include "google/protobuf/util/delimited_message_util.h"
 
-#include "phasicj/jvmexec/event.pb.h"
+#include "phasicj/jvmexec/memory_event.pb.h"
 #include "phasicj/tracelogger/trace_log.h"
 
 namespace phasicj::tracelogger {
@@ -21,8 +21,9 @@ TraceLog::TraceLog(path out) : out_{out, std::ios::binary | std::ios::trunc} {
   out_.exceptions(std::ios_base::badbit | std::ios_base::failbit);
 }
 
-TraceLog& TraceLog::operator<<(const phasicj::jvmexec::Event& ev) {
-  SerializeDelimitedToOstream(ev, &out_);
-}
+//TraceLog& TraceLog::operator<<(const phasicj::jvmexec::MemoryEvent& ev) {
+  //SerializeDelimitedToOstream(ev, &out_);
+  //return ev;
+//}
 
 }  // namespace phasicj::tracelogger

@@ -7,7 +7,7 @@
 #include <fstream>
 #include <ostream>
 
-#include "phasicj/jvmexec/event.pb.h"
+#include "phasicj/jvmexec/memory_event.pb.h"
 
 namespace phasicj::tracelogger {
 
@@ -15,7 +15,7 @@ class TraceLog {
  public:
   TraceLog(std::filesystem::path logpath);
 
-  TraceLog& operator<<(const phasicj::jvmexec::Event& ev);
+  //TraceLog& operator<<(const phasicj::jvmexec::MemoryEvent& ev);
 
  private:
   std::ofstream out_;
