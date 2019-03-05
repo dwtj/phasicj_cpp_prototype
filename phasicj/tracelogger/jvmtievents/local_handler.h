@@ -24,7 +24,7 @@
 // `LocalHandler` instance "embedded" in this JVMTI environment and pass along
 // the event.
 //
-// The `LocalHandler` class defines a number of static helper methods, to
+// The `LocalHandler` class defines a number of static helper methods to
 // allocate, initialize, lookup, and destroy `LocalHandler` instances embedded
 // in a JVMTI environment.
 //
