@@ -58,6 +58,6 @@ extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) {
   BOOST_LOG_TRIVIAL(info) << "JVM called Agent_OnUnload().";
   delete AGENT;
 
-  BOOST_LOG_TRIVIAL(info) << "Stutting down protobuf library.";
+  BOOST_LOG_TRIVIAL(info) << "Shutting down protobuf library.";
   google::protobuf::ShutdownProtobufLibrary();
 }

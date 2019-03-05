@@ -98,7 +98,7 @@ void LocalHandler::EmbedNew(jvmtiEnv& jvmti_env,
   // Try to allocate, initialize, and store a new `LocalHandler`.
   handler = new LocalHandler(thread_id.value());
   err = jvmti_env.SetThreadLocalStorage(thread,
-                                        reinterpret_cast<void*>(&handler));
+                                        reinterpret_cast<void*>(handler));
   switch (err) {
     case JVMTI_ERROR_NONE:
       // The new handler was stored successfully.
@@ -122,9 +122,6 @@ void LocalHandler::DeleteEmbedded(jvmtiEnv& jvmti_env) {
 
   LocalHandler* handler{};
   jvmtiError err{};
-  // TODO: WIP
-  // Thread is getting uninitialized garbage.
-  // Counter is big integer.
   err = jvmti_env.GetThreadLocalStorage(CURRENT_THREAD,
                                         reinterpret_cast<void**>(&handler));
   switch (err) {

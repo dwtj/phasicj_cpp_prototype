@@ -1,14 +1,3 @@
-# Use remote version of Java 9 for building Java source:
-build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_java9
-build --java_toolchain=@bazel_tools//tools/jdk:toolchain_java9
-
-# Use remote version of Java 10 for executing Java programs:
-build --host_javabase=@bazel_tools//tools/jdk:remote_jdk10
-build --javabase=@bazel_tools//tools/jdk:remote_jdk10
-
-# Give hints that test timeouts are an appropriate size/duration.
-test --test_verbose_timeout_warnings
-
 build --cxxopt='-std=c++17'
 test  --cxxopt='-std=c++17'
 run   --cxxopt='-std=c++17'
