@@ -3,7 +3,7 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/jvmticonf/capabilities.h"
+#include "phasicj/tracelogger/jvmtievents/capabilities.h"
 
 namespace phasicj::tracelogger::jvmticonf {
 
@@ -21,4 +21,4 @@ bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env) {
          c.can_generate_object_free_events;
 }
 
-}  // namespace phasicj::tracelogger::jvmticonf
+}  // namespace phasicj::tracelogger::jvmticonfig

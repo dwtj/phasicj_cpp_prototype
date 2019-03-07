@@ -1,7 +1,7 @@
 // Copyright 2019 David Johnston
 
-// The agent's interface to be used when the agent is statically linked into the
-// JVM. Names are suffixed.
+// Callbacks which start/stop the tracelogger JVMTI agent when it is dynamically
+// linked into the JVM.
 
 #ifndef PHASICJ_TRACELOGGER_AGENT_DYNAMIC_H_
 #define PHASICJ_TRACELOGGER_AGENT_DYNAMIC_H_

@@ -12,7 +12,7 @@ def integration_test(name):
                 name = name + "_" + jdk + "_" + jvm,
                 srcs = ["drivers/" + name + ".cc"],
                 data = [
-                    "//phasicj/tracelogger:pjtracelogger",
+                    "//phasicj/tracelogger/jvmtiagent:pjtracelogger",
                     "//phasicj/tracelogger/testing/integration/java_test_programs:" + name,
                 ],
                 deps = [

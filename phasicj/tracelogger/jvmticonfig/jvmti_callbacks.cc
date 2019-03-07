@@ -95,4 +95,8 @@ void JNICALL VMObjectAlloc(jvmtiEnv* jvmti_env,
       .VMObjectAlloc(jvmti_env, jni_env, thread, object, object_klass, size);
 }
 
-}  // namespace phasicj::tracelogger::jvmtievents
+void JNICALL VMDeath(jvmtiEnv* jvmti_env, JNIEnv* jni_env) {
+  GlobalHandler::DeleteEmbedded(*jvmti_env);
+}
+
+}  // namespace phasicj::tracelogger::jvmticonfig

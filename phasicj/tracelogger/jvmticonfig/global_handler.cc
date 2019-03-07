@@ -179,4 +179,4 @@ GlobalHandler& GlobalHandler::Embedded(jvmtiEnv& jvmti_env) {
   return *handler;
 }
 
-}  // namespace phasicj::tracelogger::jvmtievents
+}  // namespace phasicj::tracelogger::jvmticonfig

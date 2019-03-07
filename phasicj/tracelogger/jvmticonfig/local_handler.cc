@@ -52,7 +52,8 @@ void LocalHandler::FieldModification(jvmtiEnv* jvmti_env,
                                      char signature_type,
                                      jvalue new_value) {
   VectorClockTick();
-  // TODO: Log this event.
+  // TODO(dwtj): Synchronize vector clocks if necessary.
+
 }
 
 void LocalHandler::VectorClockTick() {
@@ -181,4 +182,4 @@ LocalHandler& LocalHandler::Embedded(jvmtiEnv& jvmti_env) {
   return *handler;
 }
 
-}  // namespace phasicj::tracelogger::jvmtievents
+}  // namespace phasicj::tracelogger::jvmticonfig

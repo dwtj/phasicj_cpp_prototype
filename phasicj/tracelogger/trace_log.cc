@@ -21,9 +21,9 @@ TraceLog::TraceLog(path out) : out_{out, std::ios::binary | std::ios::trunc} {
   out_.exceptions(std::ios_base::badbit | std::ios_base::failbit);
 }
 
-//TraceLog& TraceLog::operator<<(const phasicj::jvmexec::MemoryEvent& ev) {
-  //SerializeDelimitedToOstream(ev, &out_);
-  //return ev;
-//}
+const TraceLog& TraceLog::operator<<(const phasicj::jvmexec::MemoryEvent& ev) {
+  SerializeDelimitedToOstream(ev, &out_);
+  return *this;
+}
 
 }  // namespace phasicj::tracelogger

@@ -6,7 +6,7 @@
 #include "jni.h"
 #include "jvmti.h"
 
-namespace phasicj::tracelogger::jvmticonf {
+namespace phasicj::tracelogger::jvmticonfig {
 
 bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env);
 
@@ -60,6 +60,6 @@ inline constexpr jvmtiCapabilities INITIAL_REQUIRED_CAPABILITIES = {
     .can_generate_sampled_object_alloc_events = 0,
 };
 
-}  // namespace phasicj::tracelogger::jvmticonf
+}  // namespace phasicj::tracelogger::jvmticonfig
 
-#endif  // PHASICJ_TRACELOGGER_JVMTICONF_CAPABILITIES_H_
+#endif  // PHASICJ_TRACELOGGER_JVMTICONFIG_H_

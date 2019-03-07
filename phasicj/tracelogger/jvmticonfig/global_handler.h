@@ -92,6 +92,6 @@ class GlobalHandler {
   static GlobalHandler& Embedded(jvmtiEnv& jvmti_env);
 };
 
-}  // namespace phasicj::tracelogger::jvmtievents
+}  // namespace phasicj::tracelogger::jvmticonfig
 
 #endif  // PHASICJ_TRACELOGGER_JVMTIEVENTS_GLOBAL_HANDLER_H_

@@ -63,6 +63,11 @@ inline constexpr EventNotificationConfig INITIAL_EVENT_NOTIFICATION_CONFIGS[]{
         .event_type = JVMTI_EVENT_VM_OBJECT_ALLOC,
         .thread = nullptr,
     },
+    {
+        .mode = JVMTI_ENABLE,
+        .event_type = JVMTI_EVENT_VM_DEATH,
+        .thread = nullptr,
+    },
 };
 
 void JNICALL ThreadStart(jvmtiEnv* jvmti_env, JNIEnv* jni_env, jthread thread);
@@ -103,9 +108,11 @@ void JNICALL VMObjectAlloc(jvmtiEnv* jvmti_env,
                            jclass object_klass,
                            jlong size);
 
+void JNICALL VMDeath(jvmtiEnv* jvmti_env, JNIEnv* jni_env);
+
 inline constexpr jvmtiEventCallbacks INITIAL_AGENT_CALLBACKS{
     .VMInit = nullptr,
-    .VMDeath = nullptr,
+    .VMDeath = VMDeath,
     .ThreadStart = ThreadStart,
     .ThreadEnd = ThreadEnd,
     .ClassFileLoadHook = nullptr,
@@ -143,6 +150,6 @@ inline constexpr jvmtiEventCallbacks INITIAL_AGENT_CALLBACKS{
     .SampledObjectAlloc = nullptr,
 };
 
-}  // namespace phasicj::tracelogger::jvmtievents
+}  // namespace phasicj::tracelogger::jvmticonfig
 
 #endif  // PHASICJ_TRACELOGGER_JVMTICONF_CALLBACKS_H_

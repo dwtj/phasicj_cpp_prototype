@@ -1,9 +1,4 @@
 // Copyright 2019 David Johnston
-
-// TODO: Rewrite doc.
-//
-// [1](https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html)
-
 #include <stdexcept>
 #include <string>
 
@@ -12,37 +7,26 @@
 
 #include "boost/log/trivial.hpp"
 
-#include "phasicj/tracelogger/agent.h"
+#include "phasicj/tracelogger/agent/agent.h"
 #include "phasicj/tracelogger/jvmticonf/capabilities.h"
 #include "phasicj/tracelogger/jvmtievents/jvmti_callbacks.h"
 
-namespace phasicj::tracelogger {
+#include "//phasicj/tracelogger/jvmticonf/initialize_environment.h"
+
+namespace phasicj::tracelogger::jvmticonfig {
 
 using ::std::make_unique;
 using ::std::optional;
 using ::std::runtime_error;
 using ::std::string;
 
-using ::phasicj::tracelogger::jvmtievents::INITIAL_AGENT_CALLBACKS;
-using ::phasicj::tracelogger::jvmtievents::INITIAL_EVENT_NOTIFICATION_CONFIGS;
-using ::phasicj::tracelogger::jvmticonf::INITIAL_REQUIRED_CAPABILITIES;
-using ::phasicj::tracelogger::jvmticonf::ProvidesRequiredCapabilities;
+using ::phasicj::tracelogger::jvmticonfig::INITIAL_AGENT_CALLBACKS;
+using ::phasicj::tracelogger::jvmticonfig::INITIAL_EVENT_NOTIFICATION_CONFIGS;
+using ::phasicj::tracelogger::jvmticonfig::INITIAL_REQUIRED_CAPABILITIES;
+using ::phasicj::tracelogger::jvmticonfig::ProvidesRequiredCapabilities;
 
-optional<Agent*> Agent::NewFromOnLoad(JavaVM* jvm,
-                                      char* options,
-                                      void* reserved) {
-  string opts{(options == nullptr) ? "" : options};
-  try {
-    return new Agent{*jvm, opts};
-  } catch (runtime_error& ex) {
-    BOOST_LOG_TRIVIAL(error)
-        << "Failed to make an agent from an OnLoad event. " << ex.what();
-    return {};
-  }
-}
-
-Agent::Agent(JavaVM& jvm, const string& options) {
-  // https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#jvmtiEnvAccess
+void init(JVMTIEnv* jvmti_env) {
+    // https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#jvmtiEnvAccess
   auto JVMTI_VERSION = JVMTI_VERSION_1_2;
 
   jint err = jvm.GetEnv(reinterpret_cast<void**>(&jvmti_env_), JVMTI_VERSION);
@@ -64,7 +48,7 @@ Agent::Agent(JavaVM& jvm, const string& options) {
   err = jvmti_env_->SetEnvironmentLocalStorage(reinterpret_cast<void*>(this));
   if (err != JVMTI_ERROR_NONE) {
     throw runtime_error{
-        "Failed to add this agent as JVMTI environment-local storage."};
+        "Failed to add this jvmtiagent as JVMTI environment-local storage."};
   }
 
   err = jvmti_env_->SetEventCallbacks(&INITIAL_AGENT_CALLBACKS,
@@ -81,10 +65,3 @@ Agent::Agent(JavaVM& jvm, const string& options) {
     }
   }
 }
-
-Agent::~Agent() noexcept {
-  jvmti_env_->DisposeEnvironment();
-  jvmti_env_ = nullptr;
-};
-
-}  // namespace phasicj::tracelogger

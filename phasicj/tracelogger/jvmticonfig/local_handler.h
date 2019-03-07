@@ -97,6 +97,6 @@ class LocalHandler {
   VectorClock vector_clock_;
 };
 
-}  // namespace phasicj::tracelogger::jvmtievents
+}  // namespace phasicj::tracelogger::jvmticonfig
 
 #endif  // PHASICJ_TRACELOGGER_JVMTIEVENTS_LOCAL_HANDER_H_

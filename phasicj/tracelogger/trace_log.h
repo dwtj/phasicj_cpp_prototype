@@ -15,7 +15,8 @@ class TraceLog {
  public:
   TraceLog(std::filesystem::path logpath);
 
-  //TraceLog& operator<<(const phasicj::jvmexec::MemoryEvent& ev);
+
+  const TraceLog& operator<<(const phasicj::jvmexec::MemoryEvent& ev);
 
  private:
   std::ofstream out_;

@@ -1,47 +1,30 @@
 # Copyright 2019 David Johnston
 
 package(
-    default_visibility = ["//visibility:public"],
+    default_visibility = ["//phasicj/tracelogger:__subpackages__"],
 )
 
 cc_library(
-    name = "agent",
-    srcs = ["agent.cc"],
-    hdrs = ["agent.h"],
+    name = "tag_manager",
+    srcs = ["tag_manager.cc"],
+    hdrs = ["tag_manager.h"],
+)
+
+cc_library(
+    name = "trace",
+    srcs = ["trace.cc"],
+    hdrs = ["trace.h"],
     deps = [
-        "//phasicj/tracelogger/jvmticonf:capabilities",
-        "//phasicj/tracelogger/jvmtievents:global_handler",
-        "//phasicj/tracelogger/jvmtievents:jvmti_callbacks",
-        "//phasicj/tracelogger/jvmtievents:local_handler",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
+        ":trace_log",
+        ":vector_clock",
     ],
 )
 
 cc_library(
-    name = "agent_static",
-    srcs = ["agent_static.cc"],
-    hdrs = ["agent_static.h"],
-    linkstatic = True,
-    deps = [
-        ":agent",
-        "@boost//:log",
-        "@com_google_protobuf//:protobuf",
-    ],
-)
-
-cc_library(
-    name = "agent_dynamic",
-    srcs = ["agent_dynamic.cc"],
-    hdrs = ["agent_dynamic.h"],
-    deps = [
-        ":agent",
-        "@boost//:log",
-        "@com_google_protobuf//:protobuf",
-    ],
-
-    # This library defines callbacks meant to be dynamically linked into a JVM.
-    alwayslink = True,
+    name = "trace_manager",
+    srcs = ["trace_manager.cc"],
+    hdrs = ["trace_manager.h"],
+    deps = [":trace"],
 )
 
 cc_library(
@@ -49,7 +32,7 @@ cc_library(
     srcs = ["trace_log.cc"],
     hdrs = ["trace_log.h"],
     deps = [
-        "//phasicj/jvmexec:event_cc_proto",
+        "//phasicj/jvmexec:memory_event_cc_proto",
     ],
 )
 
@@ -59,32 +42,9 @@ cc_library(
     hdrs = ["vector_clock.h"],
 )
 
-# TODO(dwtj) : I want to be able to build the agent as a standalone dynamic
-# library deliverable, but its name needs to vary depending upon the target
-# platform.It seems that I can't use a select expression in the name of a
-# `cc_binary`, so I'm instead making multiple binaries. But this is misleading:
-# for example, a `dylib` file is built during a linux build, but it is really
-# a `so` file.
-#
-# So, what's the right way to do this.
-alias(
-    name = "pjtracelogger",
-    actual = select({
-        "@bazel_tools//src/conditions:darwin": "libpjtracelogger.dylib",
-        "@bazel_tools//src/conditions:linux_x86_64": "libpjtracelogger.so",
-    }),
-)
-
-cc_binary(
-    name = "libpjtracelogger.dylib",
-    linkshared = True,
-    linkstatic = True,
-    deps = ["agent_dynamic"],
-)
-
-cc_binary(
-    name = "libpjtracelogger.so",
-    linkshared = True,
-    linkstatic = True,
-    deps = ["agent_dynamic"],
+cc_library(
+    name = "vector_clock_store",
+    srcs = ["vector_clock_store.cc"],
+    hdrs = ["vector_clock_store.h"],
+    deps = [":vector_clock"],
 )
