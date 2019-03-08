@@ -1,5 +1,3 @@
-//
-// Created by dwtj on 3/6/19.
-//
+// Copyright 2019 David Johnston
 
-#include "tag_manager.h"
+#include "phasicj/tracelogger/tag_manager.h"

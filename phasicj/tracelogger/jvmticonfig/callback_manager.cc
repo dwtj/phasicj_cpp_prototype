@@ -1,5 +1,3 @@
-//
-// Created by dwtj on 3/6/19.
-//
+// Copyright 2019 David Johnston
 
-#include "callback_manager.h"
+#include "phasicj/tracelogger/jvmticonfig/callback_manager.h"

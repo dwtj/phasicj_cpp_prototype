@@ -11,7 +11,7 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/jvmtievents/local_handler.h"
+#include "phasicj/tracelogger/jvmticonfig/local_handler.h"
 #include "phasicj/util/jvmti/threads.h"
 
 using ::std::ostream;
@@ -21,7 +21,7 @@ using ::std::string;
 using ::boost::numeric_cast;
 using ::phasicj::util::jvmti::GetThreadId;
 
-namespace phasicj::tracelogger::jvmtievents {
+namespace phasicj::tracelogger::jvmticonfig {
 
 LocalHandler::LocalHandler(jlong thread_id)
     : thread_id_(numeric_cast<int64_t>(thread_id)),

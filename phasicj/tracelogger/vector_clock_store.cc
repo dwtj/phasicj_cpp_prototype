@@ -1,5 +1,7 @@
-//
-// Created by dwtj on 3/6/19.
-//
+// Copyright 2019 David Johnston
 
-#include "vector_clock_store.h"
+#include "phasicj/tracelogger/vector_clock_store.h"
+
+namespace phasicj::tracelogger {
+
+}  // namespace phasicj::tracelogger

@@ -5,8 +5,6 @@
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
-#include "phasicj/tracelogger/agent.h"
-
 extern "C" JNIEXPORT jint Agent_OnLoad_pjtracelogger(JavaVM *vm, char *options,
                                                      void *reserved);
 

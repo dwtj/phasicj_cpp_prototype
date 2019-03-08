@@ -1,12 +1,10 @@
-//
-// Created by dwtj on 3/6/19.
-//
+// Copyright 2019 David Johnston
 
-#ifndef PHASICJ_TAG_MANAGER_H
-#define PHASICJ_TAG_MANAGER_H
+#ifndef PHASICJ_TRACELOGGER_TAG_MANAGER_H_
+#define PHASICJ_TRACELOGGER_TAG_MANAGER_H_
 
 class tag_manager {
 
 };
 
-#endif //PHASICJ_TAG_MANAGER_H
+#endif  // PHASICJ_TRACELOGGER_TAG_MANAGER_H_

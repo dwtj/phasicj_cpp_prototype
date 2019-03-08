@@ -4,11 +4,11 @@
 
 #include "boost/log/trivial.hpp"
 
-#include "phasicj/tracelogger/jvmtievents/global_handler.h"
-#include "phasicj/tracelogger/jvmtievents/local_handler.h"
+#include "phasicj/tracelogger/jvmticonfig/global_handler.h"
+#include "phasicj/tracelogger/jvmticonfig/local_handler.h"
 #include "phasicj/util/jvmti/threads.h"
 
-namespace phasicj::tracelogger::jvmtievents {
+namespace phasicj::tracelogger::jvmticonfig {
 
 using ::std::runtime_error;
 

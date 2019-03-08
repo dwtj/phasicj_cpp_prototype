@@ -7,9 +7,9 @@
 
 namespace phasicj::tracelogger::jvmtiagent {
 
-  jint Agent_OnLoad(JavaVM* jvm, char* options, void* reserved);
-  jint Agent_OnAttach(JavaVM *vm, char *options, void *reserved);
-  void Agent_OnUnload(JavaVM* vm);
+  jint OnLoad(JavaVM* jvm, char* options, void* reserved);
+  jint OnAttach(JavaVM *vm, char *options, void *reserved);
+  void OnUnload(JavaVM* vm);
 
 }  // namespace phasicj::tracelogger::jvmtiagent {
 

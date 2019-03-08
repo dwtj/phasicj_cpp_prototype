@@ -12,19 +12,20 @@
 #include "boost/log/trivial.hpp"
 
 #include "phasicj/tracelogger/jvmtiagent/statically_linked.h"
+#include "phasicj/tracelogger/jvmtiagent/lifetime_event_callbacks.h"
 
 extern "C" JNIEXPORT jint Agent_OnLoad_pjtracelogger(JavaVM* jvm,
                                                      char* options,
                                                      void* reserved) {
-  ::phasicj::tracelogger::jvmtiagent::OnLoad(jvm, options, reserved);
+  return ::phasicj::tracelogger::jvmtiagent::OnLoad(jvm, options, reserved);
 }
 
-extern "C" JNIEXPORT jint Agent_OnAttach_pjtracelogger(JavaVM* vm,
+extern "C" JNIEXPORT jint Agent_OnAttach_pjtracelogger(JavaVM* jvm,
                                                        char* options,
                                                        void* reserved) {
-  ::phasicj::tracelogger::jvmtiagent::OnAttach(jvm, options, reserved);
+  return ::phasicj::tracelogger::jvmtiagent::OnAttach(jvm, options, reserved);
 }
 
-extern "C" JNIEXPORT void Agent_OnUnload_pjtracelogger(JavaVM* vm) {
-  ::phasicj::tracelogger::jvmtiagent::OnUnload(jvm, options, reserved);
+extern "C" JNIEXPORT void Agent_OnUnload_pjtracelogger(JavaVM* jvm) {
+  ::phasicj::tracelogger::jvmtiagent::OnUnload(jvm);
 }

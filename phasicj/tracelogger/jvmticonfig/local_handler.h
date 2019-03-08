@@ -30,8 +30,8 @@
 //
 // [1](https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#GetThreadLocalStorage)
 
-#ifndef PHASICJ_TRACELOGGER_JVMTIEVENTS_LOCAL_HANDER_H_
-#define PHASICJ_TRACELOGGER_JVMTIEVENTS_LOCAL_HANDER_H_
+#ifndef PHASICJ_TRACELOGGER_JVMTICONFIG_LOCAL_HANDER_H_
+#define PHASICJ_TRACELOGGER_JVMTICONFIG_LOCAL_HANDER_H_
 
 #include <cstdint>
 #include <map>
@@ -41,7 +41,7 @@
 #include "jni.h"
 #include "jvmti.h"
 
-namespace phasicj::tracelogger::jvmtievents {
+namespace phasicj::tracelogger::jvmticonfig {
 
 class LocalHandler {
  public:
@@ -99,4 +99,4 @@ class LocalHandler {
 
 }  // namespace phasicj::tracelogger::jvmticonfig
 
-#endif  // PHASICJ_TRACELOGGER_JVMTIEVENTS_LOCAL_HANDER_H_
+#endif  // PHASICJ_TRACELOGGER_JVMTICONFIG_LOCAL_HANDER_H_

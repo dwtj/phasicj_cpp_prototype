@@ -29,13 +29,13 @@
 //
 // [1](https://docs.oracle.com/en/java/javase/11/docs/specs/jvmti.html#GetEnvironmentLocalStorage)
 
-#ifndef PHASICJ_TRACELOGGER_JVMTIEVENTS_GLOBAL_HANDLER_H_
-#define PHASICJ_TRACELOGGER_JVMTIEVENTS_GLOBAL_HANDLER_H_
+#ifndef PHASICJ_TRACELOGGER_JVMTICONFIG_GLOBAL_HANDLER_H_
+#define PHASICJ_TRACELOGGER_JVMTICONFIG_GLOBAL_HANDLER_H_
 
 #include "jni.h"
 #include "jvmti.h"
 
-namespace phasicj::tracelogger::jvmtievents {
+namespace phasicj::tracelogger::jvmticonfig {
 
 class GlobalHandler {
  public:
@@ -94,4 +94,4 @@ class GlobalHandler {
 
 }  // namespace phasicj::tracelogger::jvmticonfig
 
-#endif  // PHASICJ_TRACELOGGER_JVMTIEVENTS_GLOBAL_HANDLER_H_
+#endif  // PHASICJ_TRACELOGGER_JVMTICONFIG_GLOBAL_HANDLER_H_

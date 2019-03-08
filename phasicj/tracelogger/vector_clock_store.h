@@ -1,12 +1,10 @@
-//
-// Created by dwtj on 3/6/19.
-//
+// Copyright 2019 David Johnston
 
-#ifndef PHASICJ_VECTOR_CLOCK_STORE_H
-#define PHASICJ_VECTOR_CLOCK_STORE_H
+#ifndef PHASICJ_TRACELOGGER_VECTOR_CLOCK_STORE_H_
+#define PHASICJ_TRACELOGGER_VECTOR_CLOCK_STORE_H_
 
 class vector_clock_store {
 
 };
 
-#endif //PHASICJ_VECTOR_CLOCK_STORE_H
+#endif //PHASICJ_TRACELOGGER_VECTOR_CLOCK_STORE_H_

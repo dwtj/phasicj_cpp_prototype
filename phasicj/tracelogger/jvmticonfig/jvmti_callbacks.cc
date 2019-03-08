@@ -6,13 +6,13 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/jvmtievents/global_handler.h"
-#include "phasicj/tracelogger/jvmtievents/local_handler.h"
+#include "phasicj/tracelogger/jvmticonfig/global_handler.h"
+#include "phasicj/tracelogger/jvmticonfig/local_handler.h"
 #include "phasicj/util/jvmti/fields.h"
 
-#include "phasicj/tracelogger/jvmtievents/jvmti_callbacks.h"
+#include "phasicj/tracelogger/jvmticonfig/jvmti_callbacks.h"
 
-namespace phasicj::tracelogger::jvmtievents {
+namespace phasicj::tracelogger::jvmticonfig {
 
 using ::phasicj::util::jvmti::IsFieldVolatile;
 

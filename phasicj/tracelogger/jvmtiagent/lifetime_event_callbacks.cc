@@ -22,11 +22,13 @@ namespace phasicj::tracelogger::jvmtiagent {
   jint OnLoad(JavaVM* jvm, char* options, void* reserved) {
     BOOST_LOG_TRIVIAL(info) << "JVM called Agent_OnLoad().";
     BOOST_LOG_TRIVIAL(info) << "Instantiating a new JVMTI agent instance...";
-    auto agent = Agent::NewFromOnLoad(jvm, options, reserved);
-    if (!agent) {
-    BOOST_LOG_TRIVIAL(info) << "Failed to instantiate an agent.";
-    return JNI_EVERSION;  // NB(dwtj): JVM will be killed.
-    }
+    // TODO(dwtj): Everything
+    // WIP(dwtj): Removing Agent
+//    auto agent = Agent::NewFromOnLoad(jvm, options, reserved);
+//    if (!agent) {
+//    BOOST_LOG_TRIVIAL(info) << "Failed to instantiate an agent.";
+//    return JNI_EVERSION;  // NB(dwtj): JVM will be killed.
+//    }
 
     BOOST_LOG_TRIVIAL(info) << "Verifying Protobuf version...";
     GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -46,4 +48,4 @@ namespace phasicj::tracelogger::jvmtiagent {
     google::protobuf::ShutdownProtobufLibrary();
   }
 
-}  // namespace phasicj::tracelogger::jvmtiagent {
+}  // namespace phasicj::tracelogger::jvmtiagent

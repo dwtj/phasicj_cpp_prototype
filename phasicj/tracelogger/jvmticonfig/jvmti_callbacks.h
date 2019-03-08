@@ -19,7 +19,7 @@
 #include "jni.h"
 #include "jvmti.h"
 
-namespace phasicj::tracelogger::jvmtievents {
+namespace phasicj::tracelogger::jvmticonfig {
 
 struct EventNotificationConfig {
   jvmtiEventMode mode;
@@ -152,4 +152,4 @@ inline constexpr jvmtiEventCallbacks INITIAL_AGENT_CALLBACKS{
 
 }  // namespace phasicj::tracelogger::jvmticonfig
 
-#endif  // PHASICJ_TRACELOGGER_JVMTICONF_CALLBACKS_H_
+#endif  // PHASICJ_TRACELOGGER_JVMTICONFIG_CALLBACKS_H_

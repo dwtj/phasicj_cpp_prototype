@@ -62,4 +62,4 @@ inline constexpr jvmtiCapabilities INITIAL_REQUIRED_CAPABILITIES = {
 
 }  // namespace phasicj::tracelogger::jvmticonfig
 
-#endif  // PHASICJ_TRACELOGGER_JVMTICONFIG_H_
+#endif  // PHASICJ_TRACELOGGER_JVMTICONFIG_CAPABILITIES_H_

@@ -9,7 +9,10 @@ cc_library(
 
     # This library defines callbacks meant to be statically linked into a JVM.
     linkstatic = True,
-    deps = [":lifetime_event_callbacks"],
+    deps = [
+        ":lifetime_event_callbacks",
+        "//third_party/jdk:jni_headers",
+    ],
 )
 
 cc_library(
@@ -17,6 +20,7 @@ cc_library(
     srcs = ["lifetime_event_callbacks.cc"],
     hdrs = ["lifetime_event_callbacks.h"],
     deps = [
+        "//third_party/jdk:jni_headers",
         "@boost//:log",
         "@com_google_protobuf//:protobuf",
     ],
@@ -26,7 +30,10 @@ cc_library(
     name = "dynamically_linked",
     srcs = ["dynamically_linked.cc"],
     hdrs = ["dynamically_linked.h"],
-    deps = [":lifetime_event_callbacks"],
+    deps = [
+        ":lifetime_event_callbacks",
+        "//third_party/jdk:jni_headers",
+    ],
 
     # This library defines callbacks meant to be dynamically linked into a JVM.
     alwayslink = True,

@@ -23,5 +23,5 @@ extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
 }
 
 extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) {
-  return ::phasicj::tracelogger::jvmtiagent::OnUnload(vm);
+  ::phasicj::tracelogger::jvmtiagent::OnUnload(vm);
 }

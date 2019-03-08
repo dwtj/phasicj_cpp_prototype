@@ -3,11 +3,9 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/jvmtievents/capabilities.h"
+#include "phasicj/tracelogger/jvmticonfig/capabilities.h"
 
-namespace phasicj::tracelogger::jvmticonf {
-
-
+namespace phasicj::tracelogger::jvmticonfig {
 
 bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env) {
   jvmtiCapabilities c;

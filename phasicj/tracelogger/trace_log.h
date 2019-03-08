@@ -1,7 +1,7 @@
 // Copyright 2019 David Johnston
 
-#ifndef PHASICJ_TRACELOGGER_TRACELOG_H_
-#define PHASICJ_TRACELOGGER_TRACELOG_H_
+#ifndef PHASICJ_TRACELOGGER_TRACE_LOG_H_
+#define PHASICJ_TRACELOGGER_TRACE_LOG_H_
 
 #include <filesystem>
 #include <fstream>
@@ -15,7 +15,6 @@ class TraceLog {
  public:
   TraceLog(std::filesystem::path logpath);
 
-
   const TraceLog& operator<<(const phasicj::jvmexec::MemoryEvent& ev);
 
  private:
@@ -24,4 +23,4 @@ class TraceLog {
 
 }  // namespace phasicj::tracelogger
 
-#endif  // PHASICJ_TRACELOGGER_TRACELOG_H_
+#endif  // PHASICJ_TRACELOGGER_TRACE_LOG_H_
