@@ -1,5 +1,8 @@
 // Copyright 2019 David Johnston
 
+// Callbacks which start/stop the tracelogger JVMTI agent when it is statically
+// linked into the JVM.
+
 #ifndef PHASICJ_TRACELOGGER_AGENT_STATIC_H_
 #define PHASICJ_TRACELOGGER_AGENT_STATIC_H_
 

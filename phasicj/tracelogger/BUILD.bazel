@@ -1,50 +1,32 @@
 # Copyright 2019 David Johnston
 
-package(
-    default_visibility = ["//phasicj/tracelogger:__subpackages__"],
+# TODO(dwtj) : I want to be able to build the agent as a standalone dynamic
+# library deliverable, but its name needs to vary depending upon the target
+# platform.It seems that I can't use a select expression in the name of a
+# `cc_binary`, so I'm instead making multiple binaries. But this is misleading:
+# for example, a `dylib` file is built during a linux build, but it is really
+# a `so` file.
+#
+# So, what's the right way to do this.
+alias(
+    name = "pjtracelogger",
+    actual = select({
+        "@bazel_tools//src/conditions:darwin": "libpjtracelogger.dylib",
+        "@bazel_tools//src/conditions:linux_x86_64": "libpjtracelogger.so",
+    }),
+    visibility = ["//visibility:public"],
 )
 
-cc_library(
-    name = "tag_manager",
-    srcs = ["tag_manager.cc"],
-    hdrs = ["tag_manager.h"],
+cc_binary(
+    name = "libpjtracelogger.dylib",
+    linkshared = True,
+    linkstatic = True,
+    deps = ["//phasicj/tracelogger/linkage:dynamic"],
 )
 
-cc_library(
-    name = "trace",
-    srcs = ["trace.cc"],
-    hdrs = ["trace.h"],
-    deps = [
-        ":trace_log",
-        ":vector_clock",
-    ],
-)
-
-cc_library(
-    name = "trace_manager",
-    srcs = ["trace_manager.cc"],
-    hdrs = ["trace_manager.h"],
-    deps = [":trace"],
-)
-
-cc_library(
-    name = "trace_log",
-    srcs = ["trace_log.cc"],
-    hdrs = ["trace_log.h"],
-    deps = [
-        "//phasicj/jvmexec:memory_event_cc_proto",
-    ],
-)
-
-cc_library(
-    name = "vector_clock",
-    srcs = ["vector_clock.cc"],
-    hdrs = ["vector_clock.h"],
-)
-
-cc_library(
-    name = "vector_clock_store",
-    srcs = ["vector_clock_store.cc"],
-    hdrs = ["vector_clock_store.h"],
-    deps = [":vector_clock"],
+cc_binary(
+    name = "libpjtracelogger.so",
+    linkshared = True,
+    linkstatic = True,
+    deps = ["//phasicj/tracelogger/linkage:dynamic"],
 )

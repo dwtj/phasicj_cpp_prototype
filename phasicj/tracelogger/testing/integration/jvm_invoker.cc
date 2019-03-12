@@ -2,10 +2,9 @@
 
 #include <cassert>
 #include <cstdlib>
+#include <filesystem>
 #include <string>
 #include <vector>
-
-#include "boost/filesystem.hpp"
 
 #include "phasicj/tracelogger/testing/integration/jvm_invoker.h"
 
@@ -14,11 +13,10 @@ namespace phasicj::tracelogger::testing::integration {
 using std::getenv;
 using std::string;
 using std::vector;
-
-using boost::filesystem::canonical;
-using boost::filesystem::exists;
-using boost::filesystem::is_regular_file;
-using boost::filesystem::path;
+using std::filesystem::canonical;
+using std::filesystem::exists;
+using std::filesystem::is_regular_file;
+using std::filesystem::path;
 
 using phasicj::util::jni::class_descriptor;
 
@@ -37,7 +35,6 @@ path GetAbsoluteAgentPath() {
 vector<string> JvmOptions(const vector<string>& opt) {
   vector<string> new_opts{
       "-agentpath:" + GetAbsoluteAgentPath().native(),
-      "-verbose",
       "-enableassertions",
       "-enablesystemassertions",
       "-Xcheck:jni",

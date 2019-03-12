@@ -1,8 +1,5 @@
 // Copyright 2019 David Johnston
 
-// Callbacks which start/stop the tracelogger JVMTI agent when it is statically
-// linked into the JVM.
-
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -11,21 +8,26 @@
 
 #include "boost/log/trivial.hpp"
 
-#include "phasicj/tracelogger/jvmtiagent/statically_linked.h"
-#include "phasicj/tracelogger/jvmtiagent/lifetime_event_callbacks.h"
+#include "phasicj/tracelogger/core/agent.h"
 
 extern "C" JNIEXPORT jint Agent_OnLoad_pjtracelogger(JavaVM* jvm,
                                                      char* options,
                                                      void* reserved) {
-  return ::phasicj::tracelogger::jvmtiagent::OnLoad(jvm, options, reserved);
+  BOOST_LOG_TRIVIAL(info)
+    << "JVM starting agent via `Agent_OnLoad_pjtracelogger()`";
+  return ::phasicj::tracelogger::core::Agent::OnLoad(*jvm, options);
 }
 
 extern "C" JNIEXPORT jint Agent_OnAttach_pjtracelogger(JavaVM* jvm,
                                                        char* options,
                                                        void* reserved) {
-  return ::phasicj::tracelogger::jvmtiagent::OnAttach(jvm, options, reserved);
+  BOOST_LOG_TRIVIAL(info)
+      << "JVM starting agent via Agent_OnLoad_pjtracelogger";
+  return ::phasicj::tracelogger::core::Agent::OnAttach(*jvm, options);
 }
 
 extern "C" JNIEXPORT void Agent_OnUnload_pjtracelogger(JavaVM* jvm) {
-  ::phasicj::tracelogger::jvmtiagent::OnUnload(jvm);
+  BOOST_LOG_TRIVIAL(info)
+      << "JVM stopping agent via Agent_OnLoad_pjtracelogger";
+  ::phasicj::tracelogger::core::Agent::OnUnload(*jvm);
 }

@@ -3,74 +3,11 @@ package(
 )
 
 cc_library(
-    name = "callback_manager",
-    srcs = ["callback_manager.cc"],
-    hdrs = ["callback_manager.h"],
-)
-
-cc_library(
     name = "capabilities",
     srcs = ["capabilities.cc"],
     hdrs = ["capabilities.h"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
-    ],
-)
-
-cc_library(
-    name = "jvmti_callbacks",
-    srcs = ["jvmti_callbacks.cc"],
-    hdrs = ["jvmti_callbacks.h"],
-    deps = [
-        ":global_handler",
-        ":local_handler",
-        "//phasicj/util/jvmti:fields",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-    ],
-)
-
-cc_library(
-    name = "global_handler",
-    srcs = ["global_handler.cc"],
-    hdrs = ["global_handler.h"],
-    deps = [
-        ":local_handler",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-        "@boost//:log",
-    ],
-)
-
-cc_library(
-    name = "initialize_envionment",
-    srcs = ["initialize_environment.cc"],
-    hdrs = ["initialize_environment.h"],
-    deps = [
-        ":callback_manager",
-        ":capabilities",
-        ":global_handler",
-        ":jvmti_callbacks",
-        ":local_handler",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-    ],
-)
-
-cc_library(
-    name = "local_handler",
-    srcs = ["local_handler.cc"],
-    hdrs = ["local_handler.h"],
-    deps = [
-        "//phasicj/tracelogger:vector_clock",
-        "//phasicj/util/jvmti:threads",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-        "@boost//:config",
-        "@boost//:detail",
-        "@boost//:log",
-        "@boost//:numeric",
-        "@boost//:type",
     ],
 )

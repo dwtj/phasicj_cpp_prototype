@@ -4,24 +4,22 @@
 #include <stdexcept>
 #include <string>
 
-#include "boost/log/trivial.hpp"
 #include "jni.h"  // NOLINT(build/include_subdir)
 
-#include "google/protobuf/stubs/common.h"
-
-#include "phasicj/tracelogger/jvmtiagent/lifetime_event_callbacks.h"
+#include "phasicj/tracelogger/core/agent.h"
+#include "phasicj/tracelogger/linkage/dynamic.h"
 
 extern "C" JNIEXPORT jint Agent_OnLoad(JavaVM* jvm,
                                        char* options,
                                        void* reserved) {
-  return ::phasicj::tracelogger::jvmtiagent::OnLoad(jvm, options, reserved);
+  return ::phasicj::tracelogger::core::Agent::OnLoad(*jvm, options);
 }
 
 extern "C" JNIEXPORT jint Agent_OnAttach(JavaVM *vm, char *options,
                                          void *reserved) {
-  return ::phasicj::tracelogger::jvmtiagent::OnAttach(vm, options, reserved);
+  return ::phasicj::tracelogger::core::Agent::OnAttach(*vm, options);
 }
 
 extern "C" JNIEXPORT void Agent_OnUnload(JavaVM* vm) {
-  ::phasicj::tracelogger::jvmtiagent::OnUnload(vm);
+  ::phasicj::tracelogger::core::Agent::OnUnload(*vm);
 }

@@ -1,0 +1,31 @@
+# Copyright 2019 David Johnston
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "static",
+    srcs = ["static.cc"],
+    hdrs = ["static.h"],
+    linkstatic = True,
+    deps = [
+        "//phasicj/tracelogger/core:agent",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+        "@boost//:log",
+    ],
+)
+
+cc_library(
+    name = "dynamic",
+    srcs = ["dynamic.cc"],
+    hdrs = ["dynamic.h"],
+    deps = [
+        "//phasicj/tracelogger/core:agent",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+        "@boost//:log",
+    ],
+    alwayslink = True,
+)

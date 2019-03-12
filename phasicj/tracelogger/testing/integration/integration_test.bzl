@@ -12,7 +12,7 @@ def integration_test(name):
                 name = name + "_" + jdk + "_" + jvm,
                 srcs = ["drivers/" + name + ".cc"],
                 data = [
-                    "//phasicj/tracelogger/jvmtiagent:pjtracelogger",
+                    "//phasicj/tracelogger:pjtracelogger",
                     "//phasicj/tracelogger/testing/integration/java_test_programs:" + name,
                 ],
                 deps = [
@@ -22,7 +22,9 @@ def integration_test(name):
                     MACOS: ["@net_adoptopenjdk_" + jdk + "_macos_" + jvm + "//:libjvm"],
                     LINUX: ["@net_adoptopenjdk_" + jdk + "_linux_" + jvm + "//:libjvm"],
                 }),
-                linkopts = ["-ldl"],  # Support programmatic dynamic linkage
+                linkopts = [
+                    "-ldl",  # Support programmatic dynamic linkage
+                ],
                 # (i.e. make `dlopen()` and friends work).
                 timeout = "short",
             )

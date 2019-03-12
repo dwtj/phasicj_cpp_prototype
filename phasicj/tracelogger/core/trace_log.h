@@ -9,7 +9,7 @@
 
 #include "phasicj/jvmexec/memory_event.pb.h"
 
-namespace phasicj::tracelogger {
+namespace phasicj::tracelogger::core {
 
 class TraceLog {
  public:
@@ -21,6 +21,6 @@ class TraceLog {
   std::ofstream out_;
 };
 
-}  // namespace phasicj::tracelogger
+}  // namespace phasicj::tracelogger::core
 
 #endif  // PHASICJ_TRACELOGGER_TRACE_LOG_H_
