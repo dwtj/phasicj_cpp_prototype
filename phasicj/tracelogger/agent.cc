@@ -9,7 +9,7 @@
 #include "phasicj/tracelogger/core/trace_logger.h"
 #include "phasicj/tracelogger/agent.h"
 
-namespace phasicj::tracelogger {
+namespace phasicj::tracelogger::agent {
 
 using ::phasicj::tracelogger::core::TraceLogger;
 using ::std::runtime_error;
@@ -38,4 +38,4 @@ void OnUnload(JavaVM& jvm) {
   google::protobuf::ShutdownProtobufLibrary();
 }
 
-}  // namespace phasicj::tracelogger
+}  // namespace phasicj::tracelogger::agent
