@@ -3,21 +3,9 @@ package(
 )
 
 cc_library(
-    name = "agent",
-    srcs = ["agent.cc"],
-    hdrs = ["agent.h"],
-    deps = [
-        "//phasicj/tracelogger/jvmtievents:manager",
-        "//phasicj/tracelogger/jvmtievents:receiver",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-    ],
-)
-
-cc_library(
-    name = "tag_manager",
-    srcs = ["tag_manager.cc"],
-    hdrs = ["tag_manager.h"],
+    name = "instance_manager",
+    srcs = ["instance_manager.cc"],
+    hdrs = ["instance_manager.h"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
@@ -51,9 +39,10 @@ cc_library(
     srcs = ["trace_logger.cc"],
     hdrs = ["trace_logger.h"],
     deps = [
-        ":tag_manager",
+        ":instance_manager",
         ":trace_manager",
         ":vector_clock_manager",
+        "//phasicj/tracelogger/jvmtievents:manager",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
     ],

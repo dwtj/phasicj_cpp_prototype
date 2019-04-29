@@ -5,24 +5,11 @@ package(
 )
 
 cc_library(
-    name = "receiver",
-    srcs = ["receiver.cc"],
-    hdrs = ["receiver.h"],
-    deps = [
-        ":manager",
-        "//phasicj/tracelogger/core:trace_logger",
-        "//phasicj/util/jvmti:fields",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-    ],
-)
-
-cc_library(
     name = "callbacks",
     srcs = ["callbacks.cc"],
     hdrs = ["callbacks.h"],
     deps = [
-        "//phasicj/tracelogger/core:agent",
+        "//phasicj/tracelogger:agent",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
     ],

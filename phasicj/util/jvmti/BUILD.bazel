@@ -3,6 +3,26 @@ package(
 )
 
 cc_library(
+    name = "thread_local_storage",
+    srcs = ["thread_local_storage.cc"],
+    hdrs = ["thread_local_storage.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "environment_local_storage",
+    srcs = ["environment_local_storage.cc"],
+    hdrs = ["environment_local_storage.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
     name = "fields",
     srcs = ["fields.cc"],
     hdrs = ["fields.h"],

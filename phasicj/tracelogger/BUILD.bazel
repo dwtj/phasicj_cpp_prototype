@@ -1,5 +1,20 @@
 # Copyright 2019 David Johnston
 
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "agent",
+    srcs = ["agent.cc"],
+    hdrs = ["agent.h"],
+    deps = [
+        "//phasicj/tracelogger/core:trace_logger",
+        "//third_party/jdk:jni_headers",
+        "@boost//:log",
+    ],
+)
+
 # TODO(dwtj) : I want to be able to build the agent as a standalone dynamic
 # library deliverable, but its name needs to vary depending upon the target
 # platform.It seems that I can't use a select expression in the name of a
