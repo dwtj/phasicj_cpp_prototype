@@ -4,7 +4,7 @@
 
 #include "jni.h"  // NOLINT(build/include_subdir)
 
-#include "phasicj/tracelogger/agent.h"
+#include "phasicj/tracelogger/agent/agent.h"
 
 using ::phasicj::tracelogger::agent::OnLoad;
 using ::phasicj::tracelogger::agent::OnAttach;

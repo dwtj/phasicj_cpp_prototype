@@ -6,9 +6,9 @@
 #include <string>
 #include <vector>
 
-#include "phasicj/tracelogger/testing/integration/jvm_invoker.h"
+#include "phasicj/tracelogger/agent/testing/integration/jvm_invoker.h"
 
-namespace phasicj::tracelogger::testing::integration {
+namespace phasicj::tracelogger::agent::testing::integration {
 
 using std::getenv;
 using std::string;

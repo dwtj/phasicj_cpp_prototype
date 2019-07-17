@@ -1,0 +1,11 @@
+load("//phasicj/tracelogger/agent/testing/integration:integration.bzl", "simple_integration_test_matrix")
+
+simple_integration_test_matrix(
+    cc_test_deps = [
+        "//phasicj/tracelogger/agent/testing/integration:jvm_invoker",
+        "@gtest",
+    ],
+    cc_test_srcs = ["smoke_test.cc"],
+    java_package = "threads",
+    name_prefix = "threads_smoke_test",
+)

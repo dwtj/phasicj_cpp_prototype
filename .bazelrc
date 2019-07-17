@@ -1,3 +1,8 @@
-build --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
-test  --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
-run   --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
+# TODO(dwtj): Remove `--experimental_google_legacy_api` once issue is resolved:
+#  https://github.com/bazelbuild/intellij/issues/976
+
+
+build --experimental_google_legacy_api --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
+test  --experimental_google_legacy_api --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
+run   --experimental_google_legacy_api --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
+

@@ -40,9 +40,9 @@ cc_library(
     hdrs = ["trace_logger.h"],
     deps = [
         ":instance_manager",
+        ":jvmti_event_manager",
         ":trace_manager",
         ":vector_clock_manager",
-        "//phasicj/tracelogger/jvmtievents:manager",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
     ],
@@ -76,5 +76,26 @@ cc_library(
         "@boost//:log",
         "@boost//:numeric",
         "@boost//:type",
+    ],
+)
+
+cc_library(
+    name = "jvmti_event_manager",
+    srcs = ["jvmti_event_manager.cc"],
+    hdrs = ["jvmti_event_manager.h"],
+    deps = [
+        ":capabilities",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "capabilities",
+    srcs = ["capabilities.cc"],
+    hdrs = ["capabilities.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
     ],
 )

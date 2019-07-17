@@ -1,10 +1,10 @@
 #include "gtest/gtest.h"
 
-#include "phasicj/tracelogger/testing/integration/jvm_invoker.h"
+#include "phasicj/tracelogger/agent/testing/integration/jvm_invoker.h"
 
-using phasicj::tracelogger::testing::integration::JvmInvoker;
+using phasicj::tracelogger::agent::testing::integration::JvmInvoker;
 
-TEST(hello, run) {
+TEST(hello_smoke_test, run) {
   JvmInvoker invoker{
       "phasicj/tracelogger/testing/integration/java_test_programs/hello.jar",
       "hello/Main",

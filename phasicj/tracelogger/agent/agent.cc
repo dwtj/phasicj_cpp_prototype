@@ -7,12 +7,27 @@
 #include "jni.h"
 
 #include "phasicj/tracelogger/core/trace_logger.h"
-#include "phasicj/tracelogger/agent.h"
+#include "phasicj/tracelogger/agent/agent.h"
 
 namespace phasicj::tracelogger::agent {
 
 using ::phasicj::tracelogger::core::TraceLogger;
 using ::std::runtime_error;
+
+/*
+  if (!ProvidesRequiredCapabilities(*jvmti_env)) {
+    throw runtime_error{
+        // TODO(dwtj): Improve explanation.
+        "JVMTI environment does not provide one or more required capabilities."
+    };
+  }
+
+  jint err = jvmti_env->AddCapabilities(&INITIAL_REQUIRED_CAPABILITIES);
+  if (err != JVMTI_ERROR_NONE) {
+    // TODO(dwtj): Improve explanation.
+    throw runtime_error{"Failed to add one or more required capabilities."};
+  }
+  */
 
 // TODO(dwtj): Consider using the `options` string.
 jint OnLoad(JavaVM& jvm, char* options) {

@@ -1,5 +1,3 @@
-# Copyright 2019 David Johnston
-
 package(
     default_testonly = True,
 )
@@ -13,11 +11,3 @@ cc_library(
         "//phasicj/util/jni:jvm_invoker",
     ],
 )
-
-load(":integration_test.bzl", "integration_test")
-
-integration_test(name = "hello")
-
-integration_test(name = "threads")
-
-integration_test(name = "volatile_variable")

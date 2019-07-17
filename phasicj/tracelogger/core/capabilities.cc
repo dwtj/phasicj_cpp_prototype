@@ -3,7 +3,7 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/jvmticonfig/capabilities.h"
+#include "phasicj/tracelogger/core/capabilities.h"
 
 namespace phasicj::tracelogger::jvmticonfig {
 

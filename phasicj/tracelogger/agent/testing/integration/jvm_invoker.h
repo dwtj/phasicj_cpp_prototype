@@ -7,7 +7,7 @@
 
 #include "phasicj/util/jni/jvm_invoker.h"
 
-namespace phasicj::tracelogger::testing::integration {
+namespace phasicj::tracelogger::agent::testing::integration {
 
 using std::string;
 

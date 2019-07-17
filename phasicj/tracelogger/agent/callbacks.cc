@@ -3,7 +3,7 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/agent.h"
+#include "phasicj/tracelogger/agent/agent.h"
 
 using ::phasicj::tracelogger::agent::OnAttach;
 using ::phasicj::tracelogger::agent::OnLoad;

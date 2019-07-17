@@ -31,7 +31,7 @@
 #include "phasicj/tracelogger/core/vector_clock_manager.h"
 #include "phasicj/tracelogger/core/instance_manager.h"
 #include "phasicj/tracelogger/core/trace_manager.h"
-#include "phasicj/tracelogger/jvmtievents/manager.h"
+#include "phasicj/tracelogger/core/jvmti_event_manager.h"
 
 namespace phasicj::tracelogger::core {
 

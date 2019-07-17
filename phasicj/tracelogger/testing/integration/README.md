@@ -1,2 +1,0 @@
-The `invoker` library implements [The JNI Invocation API](https://docs.oracle.com/en/java/javase/11/docs/specs/jni/invocation.html)
-to provide a wrapper for testing the PhasicJ TraceLogger JVM native agent.
