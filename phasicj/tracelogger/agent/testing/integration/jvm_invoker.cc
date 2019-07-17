@@ -23,8 +23,9 @@ using phasicj::util::jni::class_descriptor;
 path GetAbsoluteAgentPath() {
   // Tests should work on either macOS (which uses `.dylib` files) or Linux
   // (which uses `.so` files). Use whichever extension is found.
-  path so{"phasicj/tracelogger/libpjtracelogger.so"};
-  path dylib{"phasicj/tracelogger/libpjtracelogger.dylib"};
+
+  path so{"phasicj/tracelogger/agent/libpjtracelogger.so"};
+  path dylib{"phasicj/tracelogger/agent/libpjtracelogger.dylib"};
   assert(exists(so) != exists(dylib));  // Logical XOR trick.
 
   path agentpath{(exists(so) ? so : dylib)};

@@ -12,7 +12,7 @@ def simple_integration_test_matrix(
         cc_test_srcs,
         cc_test_deps,
         java_package):
-    java_test_name = java_package + "_javatest"
+    java_test_name = java_package + "_java_test"
     native.java_binary(
         name = java_test_name,
         srcs = native.glob([java_package + "/**/*.java"]),

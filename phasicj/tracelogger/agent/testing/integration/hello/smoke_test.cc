@@ -6,8 +6,13 @@ using phasicj::tracelogger::agent::testing::integration::JvmInvoker;
 
 TEST(hello_smoke_test, run) {
   JvmInvoker invoker{
-      "phasicj/tracelogger/testing/integration/java_test_programs/hello.jar",
+      "phasicj/tracelogger/agent/testing/integration/hello/hello_java_test.jar",
       "hello/Main",
   };
   invoker.invoke();
+}
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }

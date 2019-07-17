@@ -6,8 +6,13 @@ using phasicj::tracelogger::agent::testing::integration::JvmInvoker;
 
 TEST(threads_smoke_test, run) {
   JvmInvoker invoker{
-      "phasicj/tracelogger/testing/integration/java_test_programs/threads.jar",
+      "phasicj/tracelogger/agent/testing/integration/threads/threads_java_test.jar",
       "threads/Main",
   };
   invoker.invoke();
+}
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
