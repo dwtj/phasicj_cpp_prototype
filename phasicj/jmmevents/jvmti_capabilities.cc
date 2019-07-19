@@ -1,11 +1,11 @@
 // Copyright 2019 David Johnston
 
-#include "jni.h"
-#include "jvmti.h"
+#include "jni.h"  // NOLINT
+#include "jvmti.h"  // NOLINT
 
-#include "phasicj/tracelogger/core/capabilities.h"
+#include "phasicj/jmmevents/jvmti_capabilities.h"
 
-namespace phasicj::tracelogger::jvmticonfig {
+namespace phasicj::jmmevents {
 
 bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env) {
   jvmtiCapabilities c;
@@ -19,4 +19,4 @@ bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env) {
          c.can_generate_object_free_events;
 }
 
-}  // namespace phasicj::tracelogger::jvmticonfig
+}  // namespace phasicj::jmmevents

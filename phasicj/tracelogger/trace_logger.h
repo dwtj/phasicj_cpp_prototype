@@ -28,19 +28,17 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/core/vector_clock_manager.h"
-#include "phasicj/tracelogger/core/instance_manager.h"
-#include "phasicj/tracelogger/core/trace_manager.h"
-#include "phasicj/tracelogger/core/jvmti_event_manager.h"
+#include "phasicj/tracelogger/vector_clock_manager.h"
+#include "phasicj/tracelogger/instance_manager.h"
+#include "phasicj/tracelogger/trace_manager.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
-using phasicj::tracelogger::jvmtievents::JvmtiEventManager;
+using ::phasicj::jmmevents::JmmActionListener;
 
-class TraceLogger {
+class TraceLogger : JMMActionListener {
  private:
   jvmtiEnv* jvmti_env_;
-  JvmtiEventManager jvmti_event_manager_;
   InstanceManager instance_manager_;
   VectorClockManager vector_clock_manager_;
   TraceManager trace_manager_;
@@ -100,6 +98,6 @@ class TraceLogger {
                         jfieldID field);
 };
 
-}  // namespace phasicj::tracelogger::core
+}  // namespace phasicj::tracelogger
 
-#endif  // PHASICJ_TRACELOGGER_CORE_TRACE_LOGGER_H_
+#endif  // PHASICJ_TRACELOGGER_TRACE_LOGGER_H_

@@ -2,10 +2,10 @@
 
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/core/instance_manager.h"
+#include "phasicj/tracelogger/instance_manager.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
 InstanceManager::InstanceManager(jvmtiEnv* jvmti_env) : jvmti_env_{jvmti_env} {}
 
-}  // namespace phasicj::tracelogger::core
+}  // namespace phasicj::tracelogger

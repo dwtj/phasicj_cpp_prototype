@@ -6,9 +6,9 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/core/trace_logger.h"
+#include "phasicj/tracelogger/trace_logger.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
 using ::std::runtime_error;
 using ::std::filesystem::current_path;
@@ -30,22 +30,6 @@ TraceLogger::TraceLogger(jvmtiEnv* jvmti_env) :
 path TraceLogger::DefaultTraceLogDir() {
   return current_path();
 }
-
-jvmtiEnv* TraceLogger::NewJvmtiEnv(JavaVM& jvm) {
-  jvmtiEnv *jvmti_env = nullptr;
-
-  jint err = jvm.GetEnv(reinterpret_cast<void **>(&jvmti_env),
-                        MINIMUM_REQUIRED_JVMTI_VERSION);
-  if (err != JNI_OK) {
-    throw runtime_error {
-      // TODO(dwtj): Improve explanation.
-      "Could not obtain a compatible JVMTI environment from this JVM."
-    };
-  }
-
-  return jvmti_env;
-}
-
 
 void TraceLogger::ThreadStart(jvmtiEnv* jvmti_env, JNIEnv* jni_env, jthread thread) {
   // TODO(dwtj)
@@ -105,4 +89,4 @@ void TraceLogger::NonVolatileWrite(jvmtiEnv& jvmti_env,
   // TODO(dwtj)
 }
 
-}  // namespace phasicj::tracelogger::jvmticonfig
+}  // namespace phasicj::tracelogger

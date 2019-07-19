@@ -38,21 +38,10 @@ cc_library(
     srcs = ["agent.cc"],
     hdrs = ["agent.h"],
     deps = [
-        "//phasicj/tracelogger/core:trace_logger",
+        "//phasicj/tracelogger:trace_logger_manager",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
         "@boost//:log",
-    ],
-)
-
-cc_library(
-    name = "callbacks",
-    srcs = ["callbacks.cc"],
-    hdrs = ["callbacks.h"],
-    deps = [
-        ":agent",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
     ],
 )
 

@@ -1,0 +1,40 @@
+cc_library(
+    name = "jmm_action_listener",
+    hdrs = ["jmm_action_listener.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "jvmti_event_adapter",
+    srcs = ["jvmti_event_adapter.cc"],
+    hdrs = ["jvmti_event_adapter.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":jmm_action_listener",
+        ":jvmti_capabilities",
+    ],
+)
+
+cc_library(
+    name = "jvmti_callbacks",
+    srcs = ["jvmti_callbacks.cc"],
+    hdrs = ["jvmti_callbacks.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "jvmti_capabilities",
+    srcs = ["jvmti_capabilities.cc"],
+    hdrs = ["jvmti_capabilities.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)

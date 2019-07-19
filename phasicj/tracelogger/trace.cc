@@ -5,9 +5,9 @@
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/core/trace.h"
+#include "phasicj/tracelogger/trace.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
 using ::boost::numeric_cast;
 
@@ -70,4 +70,4 @@ void Trace::VectorClockTick() {
   vector_clock_.Tick(thread_id_);
 }
 
-}  // namespace phasicj::tracelogger::core
+}  // namespace phasicj::tracelogger

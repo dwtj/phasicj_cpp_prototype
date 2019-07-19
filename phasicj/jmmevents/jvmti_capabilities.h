@@ -1,17 +1,17 @@
 // Copyright 2019 David Johnston
 
-#ifndef PHASICJ_TRACELOGGER_JVMTICONF_CAPABILITIES_H_
-#define PHASICJ_TRACELOGGER_JVMTICONF_CAPABILITIES_H_
+#ifndef PHASICJ_JMMEVENTS_JVMTI_CAPABILITIES_H_
+#define PHASICJ_JMMEVENTS_JVMTI_CAPABILITIES_H_
 
 #include "jni.h"
 #include "jvmti.h"
 
-namespace phasicj::tracelogger::jvmticonfig {
+namespace phasicj::jmmevents {
 
 bool ProvidesRequiredCapabilities(jvmtiEnv& jvmti_env);
 
-// Warning(dwtj): If `INITIAL_REQUIRED_CAPABILITIES` is changed, so should the
-// checks in `ProvidesRequiredCapabilities()`.
+/// @warning If `INITIAL_REQUIRED_CAPABILITIES` is changed, so should the
+/// checks in `ProvidesRequiredCapabilities()`.
 // TODO(dwtj): How can we avoid this field name repetition?
 inline constexpr jvmtiCapabilities INITIAL_REQUIRED_CAPABILITIES = {
     .can_tag_objects = 1,
@@ -60,6 +60,6 @@ inline constexpr jvmtiCapabilities INITIAL_REQUIRED_CAPABILITIES = {
     .can_generate_sampled_object_alloc_events = 0,
 };
 
-}  // namespace phasicj::tracelogger::jvmticonfig
+}  // namespace phasicj::jmmevents
 
-#endif  // PHASICJ_TRACELOGGER_JVMTICONFIG_CAPABILITIES_H_
+#endif  // PHASICJ_JMMEVENTS_JVMTI_CAPABILITIES_H_

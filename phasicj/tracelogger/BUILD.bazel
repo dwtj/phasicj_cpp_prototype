@@ -1,0 +1,90 @@
+package(
+    default_visibility = ["//phasicj/tracelogger:__subpackages__"],
+)
+
+cc_library(
+    name = "instance_manager",
+    srcs = ["instance_manager.cc"],
+    hdrs = ["instance_manager.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "trace",
+    srcs = ["trace.cc"],
+    hdrs = ["trace.h"],
+    deps = [
+        ":trace_log",
+        ":vector_clock",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+        "@boost//:numeric_conversion",
+    ],
+)
+
+cc_library(
+    name = "trace_log",
+    srcs = ["trace_log.cc"],
+    hdrs = ["trace_log.h"],
+    deps = [
+        "//phasicj/jvmexec:memory_event_cc_proto",
+    ],
+)
+
+cc_library(
+    name = "trace_logger",
+    srcs = ["trace_logger.cc"],
+    hdrs = ["trace_logger.h"],
+    deps = [
+        ":instance_manager",
+        ":trace_manager",
+        ":vector_clock_manager",
+        "//phasicj/jmmevents:jmm_action_listener",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "trace_logger_manager",
+    srcs = ["trace_logger_manager.cc"],
+    hdrs = ["trace_logger_manager.h"],
+    deps = [
+        ":trace_logger",
+    ],
+)
+
+cc_library(
+    name = "vector_clock",
+    srcs = ["vector_clock.cc"],
+    hdrs = ["vector_clock.h"],
+)
+
+cc_library(
+    name = "vector_clock_manager",
+    srcs = ["vector_clock_manager.cc"],
+    hdrs = ["vector_clock_manager.h"],
+    deps = [":vector_clock"],
+)
+
+cc_library(
+    name = "trace_manager",
+    srcs = ["trace_manager.cc"],
+    hdrs = ["trace_manager.h"],
+    deps = [
+        ":trace",
+        ":vector_clock",
+        "//phasicj/jmmevents:jmm_action_listener",
+        "//phasicj/util/jvmti:threads",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+        "@boost//:config",
+        "@boost//:detail",
+        "@boost//:log",
+        "@boost//:numeric",
+        "@boost//:type",
+    ],
+)

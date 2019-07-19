@@ -18,11 +18,11 @@
 #include "jvmti.h"
 
 #include "phasicj/util/jvmti/threads.h"
-#include "phasicj/tracelogger/core/trace.h"
-#include "phasicj/tracelogger/core/trace_log.h"
-#include "phasicj/tracelogger/core/trace_manager.h"
+#include "phasicj/tracelogger/trace.h"
+#include "phasicj/tracelogger/trace_log.h"
+#include "phasicj/tracelogger/trace_manager.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
 using ::std::filesystem::path;
 using ::std::move;
@@ -125,4 +125,4 @@ path TraceManager::TraceLogPathFor(long thread_id) {
   return {(trace_log_dir_ / "thread_").concat(to_string(thread_id))};
 }
 
-}  // namespace phasicj::tracelogger::core
+}  // namespace phasicj::tracelogger

@@ -6,9 +6,9 @@
 #include "google/protobuf/util/delimited_message_util.h"
 
 #include "phasicj/jvmexec/memory_event.pb.h"
-#include "phasicj/tracelogger/core/trace_log.h"
+#include "phasicj/tracelogger/trace_log.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
 using ::google::protobuf::util::SerializeDelimitedToOstream;
 using ::std::runtime_error;
@@ -26,4 +26,4 @@ const TraceLog& TraceLog::operator<<(const phasicj::jvmexec::MemoryEvent& ev) {
   return *this;
 }
 
-}  // namespace phasicj::tracelogger::core
+}  // namespace phasicj::tracelogger

@@ -3,14 +3,14 @@
 // The `TraceManager` controls creation, storage, retrieval, and deletion of
 // `Trace` instances, one per live JVM thread.
 
-#ifndef PHASICJ_TRACELOGGER_CORE_TRACE_MANAGER_H
-#define PHASICJ_TRACELOGGER_CORE_TRACE_MANAGER_H
+#ifndef PHASICJ_TRACELOGGER_TRACE_MANAGER_H
+#define PHASICJ_TRACELOGGER_TRACE_MANAGER_H
 
 #include <filesystem>
 
-#include "phasicj/tracelogger/core/trace.h"
+#include "phasicj/tracelogger/trace.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
 using ::std::filesystem::path;
 
@@ -34,6 +34,6 @@ class TraceManager {
   path TraceLogPathFor(long thread_id);
 };
 
-}  // namespace phasicj::tracelogger::core
+}  // namespace phasicj::tracelogger
 
-#endif //PHASICJ_TRACE_MANAGER_H
+#endif  // PHASICJ_TRACELOGGER_TRACE_MANAGER_H_

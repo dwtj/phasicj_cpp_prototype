@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <ostream>
 
-#include "phasicj/tracelogger/core/vector_clock.h"
+#include "phasicj/tracelogger/vector_clock.h"
 
 namespace phasicj::tracelogger {
 

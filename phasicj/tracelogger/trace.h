@@ -1,18 +1,18 @@
 // Copyright 2019 David Johnston
 
-#ifndef PHASICJ_TRACELOGGER_CORE_TRACE_H_
-#define PHASICJ_TRACELOGGER_CORE_TRACE_H_
+#ifndef PHASICJ_TRACELOGGER_TRACE_H_
+#define PHASICJ_TRACELOGGER_TRACE_H_
 
 #include "jni.h"
 #include "jvmti.h"
 
-#include "phasicj/tracelogger/core/trace_log.h"
-#include "phasicj/tracelogger/core/vector_clock.h"
+#include "phasicj/tracelogger/trace_log.h"
+#include "phasicj/tracelogger/vector_clock.h"
 
-namespace phasicj::tracelogger::core {
+namespace phasicj::tracelogger {
 
 using ::std::filesystem::path;
-using ::phasicj::tracelogger::core::TraceLog;
+using ::phasicj::tracelogger::TraceLog;
 
 class Trace {
  public:
@@ -70,6 +70,6 @@ class Trace {
   VectorClock vector_clock_;
 };
 
-}  // namespace phasicj::tracelogger::core
+}  // namespace phasicj::tracelogger
 
-#endif  // PHASICJ_TRACELOGGER_CORE_TRACE_H_
+#endif  // PHASICJ_TRACELOGGER_TRACE_H_

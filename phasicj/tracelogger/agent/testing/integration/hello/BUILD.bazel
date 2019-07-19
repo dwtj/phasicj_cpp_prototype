@@ -6,6 +6,6 @@ simple_integration_test_matrix(
         "@gtest",
     ],
     cc_test_srcs = ["smoke_test.cc"],
-    java_package = "hello",
-    name_prefix = "hello_smoke_test",
+    java_package = "helloworld",
+    name_prefix = "smoke_test",
 )
