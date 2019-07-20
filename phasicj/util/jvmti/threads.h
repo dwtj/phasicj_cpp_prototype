@@ -8,9 +8,11 @@
 #include "jni.h"
 #include "jvmti.h"
 
+#include "phasicj/util/jvm/threads.h"
+
 namespace phasicj::util::jvmti {
 
-std::optional<jlong> GetThreadId(JNIEnv& jni_env, jthread thread);
+std::optional<JvmThreadId> GetThreadId(JNIEnv& jni_env, jthread thread);
 
 }  // namespace phasicj::util::jvmti
 

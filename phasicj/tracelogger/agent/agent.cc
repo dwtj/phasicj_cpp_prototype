@@ -14,29 +14,27 @@ namespace phasicj::tracelogger::agent {
 
 using ::phasicj::tracelogger::TraceLoggerManager;
 using ::std::runtime_error;
-using ::std::unique_ptr;
-using ::std::make_unique;
+using ::std::optional;
 
 namespace {
-TraceLoggerManager trace_logger_{};
+// TODO(dwtj): During construction, this may throw an exception, and because it
+//  is performed during static storage initialization (i.e. before main()) it
+//  cannot be caught.
+TraceLoggerManager trace_logger_manager_{};
 }
 
-/// @warning This code is NOT thread safe. It may not behave correctly when
-/// the agent is used by multiple JVM instances within a single process.
-/// Theoretically, a single process can contain multiple JVMs. This can be done,
-/// for example, via the JNI Invocation API. If within one process, more than
-/// one JVM is configured to use the PhasicJ TraceLogger agent, then this
-/// callback will be called more than one time, and one call can interfere with
-/// the others.
-// TODO(dwtj): Does C++ have a way to use something like Java's static monitors?
+/// @warning The JVMTI OnLoad/OnAttach/OnUnload callbacks need to be thread
+/// safe because, theoretically, a single process can contain multiple JVMs.
+/// This may be rare, but it can be done (e.g. using the JNI Invocation API).
+/// If within one process, more than one JVM is configured to use the PhasicJ
+/// TraceLogger Agent, then this callback will be called more than once,
+/// possibly with concurrent interference.
 // TODO(dwtj): Consider using the `options` string.
-jint OnLoad(JavaVM& jvm, char* options) {
+jint OnLoad(JavaVM& jvm, const char* options) {
+  trace_logger_manager_.Install(jvm, {});
 
-  BOOST_LOG_TRIVIAL(info) << "Verifying Google Protobuf Version for PhasicJ...";
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
   try {
     // TODO(dwtj)
-    trace_logger_ = make_unique<TraceLogger>();
     return JNI_OK;
   } catch (runtime_error& ex) {
     BOOST_LOG_TRIVIAL(error) << ex.what();
@@ -52,7 +50,6 @@ jint OnAttach(JavaVM& jvm, char* options) {
 void OnUnload(JavaVM& jvm) {
   BOOST_LOG_TRIVIAL(info) << "Unloading PhasicJ Trace Logger from JVM...";
 
-  google::protobuf::ShutdownProtobufLibrary();
 }
 
 }  // namespace phasicj::tracelogger::agent

@@ -2,6 +2,8 @@
 #include <optional>
 
 #include "boost/log/trivial.hpp"
+#include "boost/numeric/conversion/cast.hpp"
+
 #include "jni.h"
 #include "jvmti.h"
 
@@ -9,7 +11,9 @@
 
 namespace phasicj::util::jvmti {
 
-std::optional<jlong> GetThreadId(JNIEnv& jni_env, const jthread thread) {
+using ::boost::numeric_cast;
+
+std::optional<JvmThreadId> GetThreadId(JNIEnv& jni_env, const jthread thread) {
   if (thread == nullptr) {
     BOOST_LOG_TRIVIAL(warning) << "GetThreadId() was passed a null thread.";
     return {};
@@ -43,7 +47,7 @@ std::optional<jlong> GetThreadId(JNIEnv& jni_env, const jthread thread) {
     return {};
   }
 
-  return {thread_id};
+  return {numeric_cast<int64_t>(thread_id)};
 }
 
 }  // namespace phasicj::util::jvmti

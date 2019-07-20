@@ -37,8 +37,13 @@ cc_library(
     srcs = ["threads.cc"],
     hdrs = ["threads.h"],
     deps = [
+        "//phasicj/util/jvm:threads",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
+        "@boost//:config",
+        "@boost//:detail",
         "@boost//:log",
+        "@boost//:numeric",
+        "@boost//:type",
     ],
 )

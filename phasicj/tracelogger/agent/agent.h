@@ -5,8 +5,8 @@
 
 namespace phasicj::tracelogger::agent {
 
-jint OnLoad(JavaVM&, char* options);
-jint OnAttach(JavaVM&, char* options);
+jint OnLoad(JavaVM&, const char* options);
+jint OnAttach(JavaVM&, const char* options);
 void OnUnload(JavaVM&);
 
 }  // namespace phasicj::tracelogger::agent

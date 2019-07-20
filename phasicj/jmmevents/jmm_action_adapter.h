@@ -3,7 +3,6 @@
 #ifndef PHASICJ_JMMEVENTS_EVENT_ADAPTER_H_
 #define PHASICJ_JMMEVENTS_EVENT_ADAPTER_H_
 
-#include <memory>
 #include "jni.h"
 #include "jvmti.h"
 
@@ -11,17 +10,14 @@
 
 namespace phasicj::jmmevents {
 
-using std::unique_ptr;
-using std::runtime_error;
-
 /// Attaches to a Java Virtual Machine instance via the Java Virtual Machine
-/// Tooling Interface (JVMTI) in order to send events to a JmmActionListener
-/// instance.
-class JvmtiEventAdapter {
+/// Tooling Interface (JVMTI) in order to send events to a appropriate
+/// JmmActionListener instances.
+class JmmActionAdapter {
 
  public:
-  JvmtiEventAdapter(JavaVM &jvm, JmmActionListener* listener);
-  ~JvmtiEventAdapter();
+  JmmActionAdapter(JavaVM &jvm, JmmActionListener* listener);
+  ~JmmActionAdapter();
 
   static constexpr auto MINIMUM_REQUIRED_JVMTI_VERSION = JVMTI_VERSION_1_2;
 

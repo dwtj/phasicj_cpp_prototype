@@ -1,8 +1,12 @@
 workspace(name = "PhasicJ")  # phasicj.org
 
-# CHECK BAZEL VERSION ########################################################
+# Standard Load Statements ###################################################
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:maven_rules.bzl", "maven_dependency_plugin", "maven_jar")
+
+# CHECK BAZEL VERSION ########################################################
 
 http_archive(
     name = "bazel_skylib",
@@ -16,13 +20,7 @@ bazel_skylib_workspace()
 load("@bazel_skylib//:lib.bzl", "versions")
 versions.check(minimum_bazel_version = "0.22.0")
 
-# STANDARD LOAD STATEMENTS ###################################################
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-load("@bazel_tools//tools/build_defs/repo:maven_rules.bzl", "maven_dependency_plugin", "maven_jar")
-
-# CONFIGURE GOOGLETEST #######################################################
+# Configure googletest #######################################################
 
 GOOGLETEST_COMMIT = "2fe3bd994b3189899d93f1d5a881e725e046fdc2"  # v1.8.1
 
@@ -32,7 +30,7 @@ git_repository(
     remote = "https://github.com/google/googletest",
 )
 
-# CONFIGURE JUNIT 5 ###########################################################
+# Configure JUnit 5 ###########################################################
 # Adapted from https://github.com/junit-team/junit5-samples/blob/d0cc2270838dc5e45813f48d3bba11d6be61ce2d/junit5-jupiter-starter-bazel/WORKSPACE
 # TODO: Remove this once JUnit 5 is natively supported by Bazel. See https://github.com/bazelbuild/bazel/issues/6681
 
@@ -54,7 +52,7 @@ junit_platform_java_repositories(
     version = JUNIT_PLATFORM_VERSION,
 )
 
-# CONFIGURE PROTOBUF ##########################################################
+# Configure Protobuf ##########################################################
 
 http_archive(
     name = "com_google_protobuf",
@@ -65,7 +63,7 @@ http_archive(
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
-# CONFIGURE Boost Libraries ###################################################
+# Configure Boost Libraries ###################################################
 
 git_repository(
     name = "com_github_nelhage_rules_boost",
@@ -76,7 +74,18 @@ git_repository(
 load("@com_github_nelhage_rules_boost//:boost/boost.bzl", "boost_deps")
 boost_deps()
 
-# DOWNLOAD Remote Testing JDKs ################################################
+
+# Configure C++ Guidelines Support Library ####################################
+
+http_archive(
+    name = "gsl",
+    sha256 = "837f35a9f00b2543bada8ae680e5c56af84709d36d48cdc3ed8db69df043f5b2",
+    strip_prefix = "GSL-2.0.0",
+    urls = ["https://github.com/microsoft/GSL/archive/v2.0.0.zip"],
+    build_file = "//:bazel/gsl.BUILD",
+)
+
+# Download Remote Testing JDKs ################################################
 
 # JDK 8 Builds
 
@@ -154,3 +163,4 @@ http_archive(
     urls = ["https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.1%2B13/OpenJDK11U-jdk_x64_linux_openj9_jdk-11.0.1_13_openj9-0.11.0_11.0.1_13.tar.gz"],
     build_file = "//:bazel/adoptopenjdk.BUILD",
 )
+

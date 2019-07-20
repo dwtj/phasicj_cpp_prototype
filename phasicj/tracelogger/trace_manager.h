@@ -1,36 +1,29 @@
 // Copyright 2019 David Johnston
 
-// The `TraceManager` controls creation, storage, retrieval, and deletion of
-// `Trace` instances, one per live JVM thread.
+// The `TraceManager` controls the creation and deletion of `Trace` instances,
+// one per live JVM thread.
 
-#ifndef PHASICJ_TRACELOGGER_TRACE_MANAGER_H
-#define PHASICJ_TRACELOGGER_TRACE_MANAGER_H
+#ifndef PHASICJ_TRACELOGGER_TRACE_MANAGER_H_
+#define PHASICJ_TRACELOGGER_TRACE_MANAGER_H_
 
 #include <filesystem>
+
+#include "phasicj/jmmevents/jmm_action_listener.h"
+#include "phasicj/jmmevents/jmm_action_listener_manager.h"
 
 #include "phasicj/tracelogger/trace.h"
 
 namespace phasicj::tracelogger {
 
-using ::std::filesystem::path;
-
-class TraceManager {
+class TraceManager : ::phasicj::jmmevents::JmmActionListenerManager {
  public:
-  TraceManager(jvmtiEnv* jvmti_env, std::filesystem::path trace_log_dir);
-  void AllocateTrace(jvmtiEnv& jvmti_env, JNIEnv& jni_env, jthread thread);
-  void FreeTrace();
-  Trace& GetTrace() const;
-  bool TraceExists() const;
+  explicit TraceManager(::std::filesystem::path log_dir);
+
+  virtual ::phasicj::jmmevents::JmmActionListener* New(JvmThreadId id) override;
+  virtual void Free(JvmThreadId thread_id) override;
 
  private:
-  static constexpr jthread CURRENT_THREAD = static_cast<jthread>(NULL);
-
-  jvmtiEnv* jvmti_env_;
-  std::filesystem::path trace_log_dir_;
-
-  Trace* GetTracePtr() const;
-  void SetTracePtr(Trace* trace);
-
+  std::filesystem::path log_dir_;
   path TraceLogPathFor(long thread_id);
 };
 

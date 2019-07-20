@@ -8,55 +8,31 @@
 
 #include "phasicj/tracelogger/trace_log.h"
 #include "phasicj/tracelogger/vector_clock.h"
+#include "phasicj/jmmevents/jmm_action_listener.h"
 
 namespace phasicj::tracelogger {
 
 using ::std::filesystem::path;
 using ::phasicj::tracelogger::TraceLog;
+using ::phasicj::jmmevents::JmmActionListener;
 
-class Trace {
+class Trace : JmmActionListener {
  public:
-  Trace(jlong thread_id, path&& log_path);
+  Trace(JvmThreadId thread_id, path&& log_path);
 
-  void NonVolatileRead(jvmtiEnv *jvmti_env,
-                     JNIEnv *jni_env,
-                     jthread thread,
-                     jmethodID method,
-                     jlocation location,
-                     jclass field_klass,
-                     jobject object,
-                     jfieldID field);
+  void Read(JvmThreadId thread_id) override;
+  void VolatileRead(JvmThreadId thread_id) override;
 
-  void NonVolatileWrite(jvmtiEnv *jvmti_env,
-                         JNIEnv *jni_env,
-                         jthread thread,
-                         jmethodID method,
-                         jlocation location,
-                         jclass field_klass,
-                         jobject object,
-                         jfieldID field,
-                         char signature_type,
-                         jvalue new_value);
+  void Write(JvmThreadId thread_id) override;
+  void VolatileWrite(JvmThreadId thread_id) override;
 
-  void VolatileRead(jvmtiEnv *jvmti_env,
-                     JNIEnv *jni_env,
-                     jthread thread,
-                     jmethodID method,
-                     jlocation location,
-                     jclass field_klass,
-                     jobject object,
-                     jfieldID field);
+  void Lock(JvmThreadId thread_id) override;
+  void Unlock(JvmThreadId thread_id) override;
 
-  void VolatileWrite(jvmtiEnv *jvmti_env,
-                         JNIEnv *jni_env,
-                         jthread thread,
-                         jmethodID method,
-                         jlocation location,
-                         jclass field_klass,
-                         jobject object,
-                         jfieldID field,
-                         char signature_type,
-                         jvalue new_value);
+  void ThreadStart(JvmThreadId thread_id) override;
+  void ThreadStop(JvmThreadId thread_id) override;
+
+  void External(JvmThreadId thread_id) override;
 
   void VectorClockTick();
 

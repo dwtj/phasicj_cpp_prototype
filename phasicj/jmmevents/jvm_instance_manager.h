@@ -5,16 +5,14 @@
 
 #include "jvmti.h"
 
-namespace phasicj::tracelogger {
+#include "phasicj/jmmevents/jvm_instance_manager.h"
 
-class InstanceManager {
- public:
-  explicit InstanceManager(jvmtiEnv* jvmti_env);
+namespace phasicj::jmmevents {
 
- private:
-  jvmtiEnv* jvmti_env_;
+class JvmInstanceManager {
+  // TODO(dwtj): Everything!
 };
 
-}  // namespace phasicj::tracelogger
+}  // namespace phasicj::jmmevents
 
 #endif  // PHASICJ_TRACELOGGER_INSTANCE_MANAGER_H_

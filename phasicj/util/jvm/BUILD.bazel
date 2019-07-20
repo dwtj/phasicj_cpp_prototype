@@ -1,0 +1,5 @@
+cc_library(
+    name = "threads",
+    hdrs = ["threads.h"],
+    visibility = ["//visibility:public"],
+)

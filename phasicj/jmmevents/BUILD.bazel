@@ -3,15 +3,23 @@ cc_library(
     hdrs = ["jmm_action_listener.h"],
     visibility = ["//visibility:public"],
     deps = [
+        "//phasicj/util/jvm:threads",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
     ],
 )
 
 cc_library(
-    name = "jvmti_event_adapter",
-    srcs = ["jvmti_event_adapter.cc"],
-    hdrs = ["jvmti_event_adapter.h"],
+    name = "jmm_action_listener_manager",
+    hdrs = ["jmm_action_listener_manager.h"],
+    visibility = ["//visibility:public"],
+    deps = [":jmm_action_listener"],
+)
+
+cc_library(
+    name = "jmm_action_adapter",
+    srcs = ["jmm_action_adapter.cc"],
+    hdrs = ["jmm_action_adapter.h"],
     visibility = ["//visibility:public"],
     deps = [
         ":jmm_action_listener",
@@ -33,6 +41,16 @@ cc_library(
     name = "jvmti_capabilities",
     srcs = ["jvmti_capabilities.cc"],
     hdrs = ["jvmti_capabilities.h"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "jvm_instance_manager",
+    srcs = ["jvm_instance_manager.cc"],
+    hdrs = ["jvm_instance_manager.h"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",

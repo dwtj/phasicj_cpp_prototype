@@ -1,7 +1,5 @@
 // Copyright 2019 David Johnston
 
-#include "boost/numeric/conversion/cast.hpp"
-
 #include "jni.h"
 #include "jvmti.h"
 
@@ -9,61 +7,47 @@
 
 namespace phasicj::tracelogger {
 
-using ::boost::numeric_cast;
-
-Trace::Trace(jlong thread_id, path&& log_path)
+Trace::Trace(JvmThreadId thread_id, path&& log_path)
     : trace_log_{log_path},
-      thread_id_{numeric_cast<int64_t>(thread_id)},
+      thread_id_{thread_id},
       counter_{0},
       counters_{},
       vector_clock_{} {}
 
-void Trace::NonVolatileRead(jvmtiEnv *jvmti_env,
-                     JNIEnv *jni_env,
-                     jthread thread,
-                     jmethodID method,
-                     jlocation location,
-                     jclass field_klass,
-                     jobject object,
-                     jfieldID field) {
-  // TODO(dwtj)
+void Trace::Read(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
 }
 
-void Trace::NonVolatileWrite(jvmtiEnv *jvmti_env,
-                         JNIEnv *jni_env,
-                         jthread thread,
-                         jmethodID method,
-                         jlocation location,
-                         jclass field_klass,
-                         jobject object,
-                         jfieldID field,
-                         char signature_type,
-                         jvalue new_value) {
-  // TODO(dwtj)
+void Trace::VolatileRead(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
 }
 
-void Trace::VolatileRead(jvmtiEnv *jvmti_env,
-                     JNIEnv *jni_env,
-                     jthread thread,
-                     jmethodID method,
-                     jlocation location,
-                     jclass field_klass,
-                     jobject object,
-                     jfieldID field) {
-  // TODO(dwtj)
+void Trace::Write(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
 }
 
-void Trace::VolatileWrite(jvmtiEnv *jvmti_env,
-                         JNIEnv *jni_env,
-                         jthread thread,
-                         jmethodID method,
-                         jlocation location,
-                         jclass field_klass,
-                         jobject object,
-                         jfieldID field,
-                         char signature_type,
-                         jvalue new_value) {
-  // TODO(dwtj)
+void Trace::VolatileWrite(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
+}
+
+void Trace::Lock(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
+}
+
+void Trace::Unlock(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
+}
+
+void Trace::ThreadStart(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
+}
+
+void Trace::ThreadStop(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
+}
+
+void Trace::External(JvmThreadId thread_id) {
+  // TODO(dwtj): Everything!
 }
 
 void Trace::VectorClockTick() {

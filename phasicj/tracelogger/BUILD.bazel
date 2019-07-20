@@ -3,22 +3,13 @@ package(
 )
 
 cc_library(
-    name = "instance_manager",
-    srcs = ["instance_manager.cc"],
-    hdrs = ["instance_manager.h"],
-    deps = [
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-    ],
-)
-
-cc_library(
     name = "trace",
     srcs = ["trace.cc"],
     hdrs = ["trace.h"],
     deps = [
         ":trace_log",
         ":vector_clock",
+        "//phasicj/jmmevents:jmm_action_listener",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
         "@boost//:numeric_conversion",
@@ -39,10 +30,10 @@ cc_library(
     srcs = ["trace_logger.cc"],
     hdrs = ["trace_logger.h"],
     deps = [
-        ":instance_manager",
         ":trace_manager",
         ":vector_clock_manager",
         "//phasicj/jmmevents:jmm_action_listener",
+        "//phasicj/util/jvm:threads",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
     ],
@@ -78,13 +69,11 @@ cc_library(
         ":trace",
         ":vector_clock",
         "//phasicj/jmmevents:jmm_action_listener",
+        "//phasicj/jmmevents:jmm_action_listener_manager",
         "//phasicj/util/jvmti:threads",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
-        "@boost//:config",
-        "@boost//:detail",
         "@boost//:log",
-        "@boost//:numeric",
-        "@boost//:type",
+        "@gsl",
     ],
 )
