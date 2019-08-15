@@ -42,7 +42,7 @@ jint OnLoad(JavaVM& jvm, const char* options) {
   }
 }
 
-jint OnAttach(JavaVM& jvm, char* options) {
+jint OnAttach(JavaVM& jvm, const char* options) {
   BOOST_LOG_TRIVIAL(error) << "Initialization with `OnAttach()` not supported.";
   return JNI_ERR;
 }

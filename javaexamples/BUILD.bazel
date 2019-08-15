@@ -1,0 +1,27 @@
+package(
+    default_visibility = ["//phasicj:__subpackages__"],
+)
+
+java_binary(
+    name = "hello_world",
+    srcs = ["hello_world/Main.java"],
+    main_class = "hello_world.Main",
+)
+
+java_binary(
+    name = "sleep",
+    srcs = ["sleep/Main.java"],
+    main_class = "sleep.Main",
+)
+
+java_binary(
+    name = "threads",
+    srcs = ["threads/Main.java"],
+    main_class = "threads.Main",
+)
+
+java_binary(
+    name = "volatile_variable",
+    srcs = ["volatile_variable/Main.java"],
+    main_class = "volatile_variable.Main",
+)

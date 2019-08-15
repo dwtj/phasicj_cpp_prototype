@@ -19,6 +19,7 @@ alias(
 
 cc_binary(
     name = "libpjtracelogger.dylib",
+    copts = ["-std=c++17"],
     linkshared = True,
     linkstatic = True,
     visibility = ["//visibility:public"],
@@ -27,6 +28,7 @@ cc_binary(
 
 cc_binary(
     name = "libpjtracelogger.so",
+    copts = ["-std=c++17"],
     linkshared = True,
     linkstatic = True,
     visibility = ["//visibility:public"],
@@ -37,6 +39,7 @@ cc_library(
     name = "agent",
     srcs = ["agent.cc"],
     hdrs = ["agent.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//phasicj/tracelogger:trace_logger_manager",
         "//third_party/jdk:jni_headers",
@@ -50,6 +53,7 @@ cc_library(
     name = "dynamic_agent",
     srcs = ["dynamic_agent.cc"],
     hdrs = ["dynamic_agent.h"],
+    copts = ["-std=c++17"],
     deps = [
         ":agent",
         "@boost//:log",
@@ -63,6 +67,7 @@ cc_library(
     name = "static_agent",
     srcs = ["static_agent.cc"],
     hdrs = ["static_agent.h"],
+    copts = ["-std=c++17"],
     linkstatic = True,
     visibility = ["//visibility:public"],
     deps = [

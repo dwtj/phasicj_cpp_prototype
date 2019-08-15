@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "phasicj/tracelogger/agent/testing/integration/jvm_invoker.h"
 
@@ -50,6 +51,17 @@ JvmInvoker::JvmInvoker(const string& cp, const class_descriptor& main_cls)
     : invoker_{main_cls,
                JvmOptions(vector<string>{"-Djava.class.path=" + cp})} {}
 
-void JvmInvoker::invoke() { invoker_.invoke(); }
+void RecursivelyPrintContentsOfCurrentWorkingDirectory() {
+  using ::std::filesystem::recursive_directory_iterator;
+  std::cout << "recursively iterating over contents of cwd" << std::endl;
+  for (auto& entry : recursive_directory_iterator(".")) {
+    std::cout << entry.path() << std::endl;
+  }
+}
+
+void JvmInvoker::invoke() {
+  RecursivelyPrintContentsOfCurrentWorkingDirectory();
+  invoker_.invoke();
+}
 
 }  // namespace phasicj::tracelogger::testing::integration

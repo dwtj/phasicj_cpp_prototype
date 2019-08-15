@@ -6,8 +6,40 @@ cc_library(
     name = "jvm_invoker",
     srcs = ["jvm_invoker.cc"],
     hdrs = ["jvm_invoker.h"],
+    copts = ["-std=c++17"],
+    linkopts = ["-lstdc++fs"],
     visibility = ["__subpackages__"],
     deps = [
         "//phasicj/util/jni:jvm_invoker",
     ],
+)
+
+load(":integration_testing.bzl", "integration_smoke_test_matrix")
+
+integration_smoke_test_matrix(
+    name_prefix = "hello_world_smoke_test",
+    test_java_binary_jar = "javaexamples/hello_world.jar",
+    test_java_binary_target = "//javaexamples:hello_world",
+    test_java_main_class = "hello_world/Main",
+)
+
+integration_smoke_test_matrix(
+    name_prefix = "sleep_smoke_test",
+    test_java_binary_jar = "javaexamples/sleep.jar",
+    test_java_binary_target = "//javaexamples:sleep",
+    test_java_main_class = "sleep/Main",
+)
+
+integration_smoke_test_matrix(
+    name_prefix = "threads_smoke_test",
+    test_java_binary_jar = "javaexamples/threads.jar",
+    test_java_binary_target = "//javaexamples:threads",
+    test_java_main_class = "threads/Main",
+)
+
+integration_smoke_test_matrix(
+    name_prefix = "volatile_variable_smoke_test",
+    test_java_binary_jar = "javaexamples/volatile_variable.jar",
+    test_java_binary_target = "//javaexamples:volatile_variable",
+    test_java_main_class = "volatile_variable/Main",
 )

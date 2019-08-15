@@ -4,6 +4,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 #include "boost/numeric/conversion/cast.hpp"
 
@@ -56,19 +57,17 @@ void JvmInvoker::invoke() {
   JavaVM *jvm = nullptr;
   JNIEnv *env = nullptr;
 
+  // TODO(dwtj): Rewrite this using (more informative) exceptions.
   err = JNI_CreateJavaVM(&jvm, reinterpret_cast<void **>(&env), &jvm_args_);
+  assert(err == 0);
   assert(env != nullptr);
   assert(env->ExceptionCheck() == JNI_FALSE);
-  assert(err == 0);
 
   jclass cls = env->FindClass(main_cls_.c_str());
   assert(env->ExceptionCheck() == JNI_FALSE);
   assert(cls != nullptr);
 
   jmethodID mid = env->GetStaticMethodID(cls, "main", "([Ljava/lang/String;)V");
-  if (env->ExceptionCheck() == JNI_FALSE) {
-    env->ExceptionDescribe();
-  }
   assert(env->ExceptionCheck() == JNI_FALSE);
   assert(mid != nullptr);
 

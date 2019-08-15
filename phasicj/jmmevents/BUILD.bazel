@@ -1,6 +1,7 @@
 cc_library(
     name = "jmm_action_listener",
     hdrs = ["jmm_action_listener.h"],
+    copts = ["-std=c++17"],
     visibility = ["//visibility:public"],
     deps = [
         "//phasicj/util/jvm:threads",
@@ -12,6 +13,7 @@ cc_library(
 cc_library(
     name = "jmm_action_listener_manager",
     hdrs = ["jmm_action_listener_manager.h"],
+    copts = ["-std=c++17"],
     visibility = ["//visibility:public"],
     deps = [":jmm_action_listener"],
 )
@@ -20,6 +22,7 @@ cc_library(
     name = "jmm_action_adapter",
     srcs = ["jmm_action_adapter.cc"],
     hdrs = ["jmm_action_adapter.h"],
+    copts = ["-std=c++17"],
     visibility = ["//visibility:public"],
     deps = [
         ":jmm_action_listener",
@@ -31,6 +34,7 @@ cc_library(
     name = "jvmti_callbacks",
     srcs = ["jvmti_callbacks.cc"],
     hdrs = ["jvmti_callbacks.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
@@ -41,6 +45,7 @@ cc_library(
     name = "jvmti_capabilities",
     srcs = ["jvmti_capabilities.cc"],
     hdrs = ["jvmti_capabilities.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
@@ -51,6 +56,7 @@ cc_library(
     name = "jvm_instance_manager",
     srcs = ["jvm_instance_manager.cc"],
     hdrs = ["jvm_instance_manager.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",

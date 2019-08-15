@@ -4,6 +4,7 @@ cc_library(
     hdrs = [
         "jvm_invoker.h",
     ],
+    copts = ["-std=c++17"],
     visibility = ["//visibility:public"],
     deps = [
         ":jni_descriptors",
@@ -22,4 +23,5 @@ cc_library(
     name = "jni_descriptors",
     srcs = ["descriptors.cc"],
     hdrs = ["descriptors.h"],
+    copts = ["-std=c++17"],
 )

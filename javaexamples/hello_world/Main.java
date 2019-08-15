@@ -1,6 +1,6 @@
 // Copyright 2019 David Johnston
 
-package helloworld;
+package hello_world;
 
 public class Main {
     public static void main(String[] args) {

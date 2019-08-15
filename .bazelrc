@@ -1,4 +1,0 @@
-build  --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
-test   --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
-run    --cxxopt='-std=c++17' --linkopt='-lstdc++fs' --compilation_mode='dbg'
-

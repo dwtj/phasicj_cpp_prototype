@@ -6,6 +6,7 @@ cc_library(
     name = "thread_local_storage",
     srcs = ["thread_local_storage.cc"],
     hdrs = ["thread_local_storage.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
@@ -16,6 +17,7 @@ cc_library(
     name = "environment_local_storage",
     srcs = ["environment_local_storage.cc"],
     hdrs = ["environment_local_storage.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
@@ -26,6 +28,7 @@ cc_library(
     name = "fields",
     srcs = ["fields.cc"],
     hdrs = ["fields.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
@@ -36,6 +39,7 @@ cc_library(
     name = "threads",
     srcs = ["threads.cc"],
     hdrs = ["threads.h"],
+    copts = ["-std=c++17"],
     deps = [
         "//phasicj/util/jvm:threads",
         "//third_party/jdk:jni_headers",
