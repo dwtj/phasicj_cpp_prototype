@@ -18,7 +18,7 @@ load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
 
 load("@bazel_skylib//:lib.bzl", "versions")
-versions.check(minimum_bazel_version = "0.22.0")
+versions.check(minimum_bazel_version = "0.28.1")
 
 # Configure googletest #######################################################
 

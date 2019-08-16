@@ -29,5 +29,8 @@ install:
   - ${CXX} --version
 
 script:
-  - bazel build //...
+  - bazel build --noshow_progress --noshow_loading_process //...
   - bazel test //...
+
+after_failure:
+  - cat bazel-testlog/phasicj/tracelogger/agent/testing/integration/*/test.log

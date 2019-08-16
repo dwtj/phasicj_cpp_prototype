@@ -60,7 +60,7 @@ void RecursivelyPrintContentsOfCurrentWorkingDirectory() {
 }
 
 void JvmInvoker::invoke() {
-  RecursivelyPrintContentsOfCurrentWorkingDirectory();
+  //RecursivelyPrintContentsOfCurrentWorkingDirectory();
   invoker_.invoke();
 }
 
