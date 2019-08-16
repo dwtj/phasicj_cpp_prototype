@@ -22,12 +22,14 @@ using std::string;
 using std::strncpy;
 using std::vector;
 
+using boost::numeric_cast;
+
 JvmInvoker::JvmInvoker(const class_descriptor &main_cls,
                        const vector<string> &opts)
     : main_cls_{main_cls} {
   jvm_args_.version = JNI_VERSION;
   jvm_args_.ignoreUnrecognized = JNI_FALSE;
-  jvm_args_.nOptions = boost::numeric_cast<jint>(opts.size());
+  jvm_args_.nOptions = numeric_cast<jint>(opts.size());
   jvm_args_.options = new JavaVMOption[jvm_args_.nOptions];
   for (int i = 0; i < jvm_args_.nOptions; ++i) {
     auto src{opts[i].c_str()};
@@ -43,9 +45,9 @@ JvmInvoker::JvmInvoker(const class_descriptor &main_cls,
 
 JvmInvoker::~JvmInvoker() {
   for (int i = 0; i < jvm_args_.nOptions; ++i) {
-    delete (jvm_args_.options[i].optionString);
+    delete[] (jvm_args_.options[i].optionString);
   }
-  delete jvm_args_.options;
+  delete[] jvm_args_.options;
 }
 
 // One reference for how to use the JNI Invocation API to start a JVM instance
