@@ -20,6 +20,7 @@ addons:
       - ubuntu-toolchain-r-test  # Source for gcc
     packages:
       - bazel
+      # TODO(dwtj): Don't bother with clang if compiler is gcc (and vice-versa).
       - clang-7
       - g++-8
       - gcc-8
@@ -33,4 +34,4 @@ script:
   - bazel test //...
 
 after_failure:
-  - cat bazel-testlog/phasicj/tracelogger/agent/testing/integration/*/test.log
+  - cat bazel-testlogs/phasicj/tracelogger/agent/testing/integration/*/test.log
