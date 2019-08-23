@@ -31,6 +31,7 @@ TraceLoggerManager trace_logger_manager_{};
 // TODO(dwtj): Consider using the `options` string (e.g. to set log method/path)
 jint OnLoad(JavaVM& jvm, const char* options) {
   try {
+    BOOST_LOG_TRIVIAL(info) << "Installing PhasicJ Trace Logger into JVM...";
     trace_logger_manager_.Install(jvm, {});
     return JNI_OK;
   } catch (runtime_error& ex) {
@@ -55,7 +56,7 @@ jint OnAttach(JavaVM& jvm, const char* options) {
 /// 4. While shutting down, the agent calls `ShutdownProtobufLibrary()`
 /// 5. The process attempts to use protobuf, but fails unexpectedly.
 void OnUnload(JavaVM& jvm) {
-  BOOST_LOG_TRIVIAL(info) << "Unloading PhasicJ Trace Logger from JVM...";
+  BOOST_LOG_TRIVIAL(info) << "Uninstalling PhasicJ Trace Logger from JVM...";
   trace_logger_manager_.Uninstall(jvm);
 }
 
