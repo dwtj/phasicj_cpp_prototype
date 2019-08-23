@@ -17,24 +17,21 @@ using ::std::runtime_error;
 using ::std::optional;
 
 namespace {
-// TODO(dwtj): During construction, this may throw an exception, and because it
-//  is performed during static storage initialization (i.e. before main()) it
-//  cannot be caught.
 TraceLoggerManager trace_logger_manager_{};
 }
 
 /// @warning The JVMTI OnLoad/OnAttach/OnUnload callbacks need to be thread
-/// safe because, theoretically, a single process can contain multiple JVMs.
-/// This may be rare, but it can be done (e.g. using the JNI Invocation API).
-/// If within one process, more than one JVM is configured to use the PhasicJ
-/// TraceLogger Agent, then this callback will be called more than once,
-/// possibly with concurrent interference.
-// TODO(dwtj): Consider using the `options` string.
+/// safe because, theoretically, a single process can contain multiple JVM
+/// instances. If within one process, more than one JVM is configured to use the
+/// PhasicJ TraceLogger Agent, then this callback will be called more than once,
+/// possibly with concurrent interference. This might not currently be doable in
+/// practice (Hotspot's JNI Invocation API does not support it as of
+/// 2019-08-18), but it could be done in principle.
+///
+// TODO(dwtj): Consider using the `options` string (e.g. to set log method/path)
 jint OnLoad(JavaVM& jvm, const char* options) {
-  trace_logger_manager_.Install(jvm, {});
-
   try {
-    // TODO(dwtj)
+    trace_logger_manager_.Install(jvm, {});
     return JNI_OK;
   } catch (runtime_error& ex) {
     BOOST_LOG_TRIVIAL(error) << ex.what();
@@ -43,13 +40,23 @@ jint OnLoad(JavaVM& jvm, const char* options) {
 }
 
 jint OnAttach(JavaVM& jvm, const char* options) {
-  BOOST_LOG_TRIVIAL(error) << "Initialization with `OnAttach()` not supported.";
+  BOOST_LOG_TRIVIAL(error)
+    << "PhasicJ TraceLogger initialization via `OnAttach()` is not supported.";
   return JNI_ERR;
 }
 
+/// @warning `google::protobuf::ShutdownProtobufLibrary()` is not called
+/// anywhere during cleanup. Currently, I think that `ShutdownProtobufLibrary()`
+/// only adds risk and gives little benefit, so I haven't included it. Here's
+/// one hypothetical situation demonstrating why it maybe shouldn't be called.
+/// 1. A process creates a JVM instance
+/// 2. The agent is run alongside/within this JVM
+/// 3. The JVM shuts down
+/// 4. While shutting down, the agent calls `ShutdownProtobufLibrary()`
+/// 5. The process attempts to use protobuf, but fails unexpectedly.
 void OnUnload(JavaVM& jvm) {
   BOOST_LOG_TRIVIAL(info) << "Unloading PhasicJ Trace Logger from JVM...";
-
+  trace_logger_manager_.Uninstall(jvm);
 }
 
 }  // namespace phasicj::tracelogger::agent

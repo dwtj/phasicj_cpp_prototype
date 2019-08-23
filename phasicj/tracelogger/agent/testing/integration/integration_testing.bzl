@@ -9,6 +9,13 @@ def get_libjvm_dep(jdk, jvm):
         LINUX: ["@net_adoptopenjdk_" + jdk + "_linux_" + jvm + "//:libjvm"],
     })
 
+# Declares a collection of `cc_test` instances, where each `cc_test` runs the
+# given Java program on one of the test JVMs (e.g. JDK8 hotspot, JDK11 hotspot).
+#
+# `smoke_test.cc` is compiled with some C preprocessor definitions pointing at
+# the Java program and linked against one of the JVMs. It is called a "smoke
+# test" because the test is just running some code to see if anything crashes
+# ("catches fire"). No other correctness checks are performed.
 # TODO(dwtj): Refactor this to remove the jar argument to eliminate repetition.
 def integration_smoke_test_matrix(
         name_prefix,

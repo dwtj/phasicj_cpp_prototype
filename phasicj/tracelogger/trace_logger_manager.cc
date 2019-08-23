@@ -14,27 +14,20 @@ using ::std::filesystem::path;
 using ::std::optional;
 using ::std::move;
 
-using ::google::protobuf::ShutdownProtobufLibrary;
-
-// TODO(dwtj): This is not actually noexcept.
-TraceLoggerManager::TraceLoggerManager() noexcept {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-}
-
-// TODO(dwtj): This may not actually be noexcept
-TraceLoggerManager::~TraceLoggerManager() noexcept {
-  ShutdownProtobufLibrary();
-}
-
-void TraceLoggerManager::Install(const JavaVM &jvm, optional<path> log_dir) {
+void TraceLoggerManager::Install(const JavaVM& jvm, const optional<path>& log_dir) {
   scoped_lock monitor {monitor_};
+  PreCheckEnvironment();
   log_dir.value_or(DefaultTraceLogDir());
-  // TODO(dwtj: Everything!
+  // TODO(dwtj): Everything!
 }
 
-void TraceLoggerManager::Uninstall(const JavaVM &jvm) {
+void TraceLoggerManager::Uninstall(const JavaVM& jvm) {
   scoped_lock monitor {monitor_};
   // TODO(dwtj): Everything!
+}
+
+void TraceLoggerManager::PreCheckEnvironment() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
 }
 
 const path TraceLoggerManager::DefaultTraceLogDir() {
