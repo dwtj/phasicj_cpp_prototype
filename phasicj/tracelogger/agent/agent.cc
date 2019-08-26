@@ -48,13 +48,10 @@ jint OnAttach(JavaVM& jvm, const char* options) {
 
 /// @warning `google::protobuf::ShutdownProtobufLibrary()` is not called
 /// anywhere during cleanup. Currently, I think that `ShutdownProtobufLibrary()`
-/// only adds risk and gives little benefit, so I haven't included it. Here's
-/// one hypothetical situation demonstrating why it maybe shouldn't be called.
-/// 1. A process creates a JVM instance
-/// 2. The agent is run alongside/within this JVM
-/// 3. The JVM shuts down
-/// 4. While shutting down, the agent calls `ShutdownProtobufLibrary()`
-/// 5. The process attempts to use protobuf, but fails unexpectedly.
+/// only adds risk and gives little benefit, so I haven't included it. If
+/// `ShutdownProtobufLibrary()` is called during `OnUnload()`, any subsequent
+/// attempts to use the Protobuf library will fail (e.g. if another JVM
+/// with TraceLogger is started, or if code after JVM shutdown uses Protobuf).
 void OnUnload(JavaVM& jvm) {
   BOOST_LOG_TRIVIAL(info) << "Uninstalling PhasicJ Trace Logger from JVM...";
   trace_logger_manager_.Uninstall(jvm);
