@@ -3,14 +3,14 @@ package(
 )
 
 cc_library(
-    name = "jvm_invoker",
-    srcs = ["jvm_invoker.cc"],
-    hdrs = ["jvm_invoker.h"],
+    name = "JvmInvoker",
+    srcs = ["JvmInvoker.cc"],
+    hdrs = ["JvmInvoker.h"],
     copts = ["-std=c++17"],
     linkopts = ["-lstdc++fs"],
     visibility = ["__subpackages__"],
     deps = [
-        "//phasicj/util/jni:jvm_invoker",
+        "//phasicj/util/jni:JvmInvoker",
     ],
 )
 

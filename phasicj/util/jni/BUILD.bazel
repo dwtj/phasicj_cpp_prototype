@@ -1,13 +1,13 @@
 cc_library(
-    name = "jvm_invoker",
-    srcs = ["jvm_invoker.cc"],
+    name = "JvmInvoker",
+    srcs = ["JvmInvoker.cc"],
     hdrs = [
-        "jvm_invoker.h",
+        "JvmInvoker.h",
     ],
     copts = ["-std=c++17"],
     visibility = ["//visibility:public"],
     deps = [
-        ":jni_descriptors",
+        ":JniDescriptors",
         "//third_party/jdk:jni_headers",
         "@boost//:config",
         "@boost//:cstdint",
@@ -20,8 +20,8 @@ cc_library(
 )
 
 cc_library(
-    name = "jni_descriptors",
-    srcs = ["descriptors.cc"],
-    hdrs = ["descriptors.h"],
+    name = "JniDescriptors",
+    srcs = ["JniDescriptors.cc"],
+    hdrs = ["JniDescriptors.h"],
     copts = ["-std=c++17"],
 )

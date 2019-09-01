@@ -1,0 +1,60 @@
+# Copyright 2019 David Johnston
+
+package(
+    default_visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "MemoryEvent_proto",
+    srcs = ["MemoryEvent.proto"],
+    deps = [
+        ":MemoryLocation_proto",
+        ":Monitor_proto",
+        ":VectorClock_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "MemoryEvent_cc_proto",
+    deps = [":MemoryEvent_proto"],
+)
+
+proto_library(
+    name = "MemoryLocation_proto",
+    srcs = ["MemoryLocation.proto"],
+)
+
+cc_proto_library(
+    name = "MemoryLocation_cc_proto",
+    deps = [":MemoryLocation_proto"],
+)
+
+proto_library(
+    name = "Monitor_proto",
+    srcs = ["Monitor.proto"],
+)
+
+cc_proto_library(
+    name = "Monitor_cc_proto",
+    deps = [":Monitor_proto"],
+)
+
+proto_library(
+    name = "VectorClock_proto",
+    srcs = ["VectorClock.proto"],
+)
+
+cc_proto_library(
+    name = "VectorClock_cc_proto",
+    deps = [":VectorClock_proto"],
+)
+
+proto_library(
+    name = "TraceHeader_proto",
+    srcs = ["TraceHeader.proto"],
+)
+
+cc_proto_library(
+    name = "TraceHeader_cc_proto",
+    deps = [":TraceHeader_proto"],
+)

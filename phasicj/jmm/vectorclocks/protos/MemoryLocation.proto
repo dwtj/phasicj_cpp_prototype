@@ -1,0 +1,20 @@
+// Copyright 2019 David Johnston
+
+syntax = "proto3";
+
+package phasicj.jmm.vectorclocks.protos;
+
+option java_package = "org.phasicj.jmm.vectorclocks.protos";
+
+message MemoryLocation {
+    message StaticVariable {
+        string classloader = 1;
+        string class = 2;
+        string name = 3;
+    }
+    message InstanceVariable {
+        string classloader = 1;
+        string instance = 2;
+        string name = 3;
+    }
+}

@@ -1,0 +1,17 @@
+# Copyright 2019 David Johnston
+
+package(
+    default_visibility = ["//phasicj/tracelogger:__subpackages__"],
+)
+
+cc_library(
+    name = "TraceLog",
+    hdrs = ["TraceLog.h"],
+    copts = ["-std=c++17"],
+)
+
+cc_library(
+    name = "TraceLogManager",
+    hdrs = ["TraceLogManager.h"],
+    copts = ["-std=c++17"],
+)

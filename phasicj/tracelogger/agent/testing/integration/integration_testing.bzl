@@ -24,11 +24,11 @@ def integration_smoke_test_matrix(
         test_java_main_class):
     integration_test_matrix(
         name_prefix = name_prefix,
-        srcs = ["smoke_test.cc"],
+        srcs = ["SmokeTest.cc"],
         test_java_binary = test_java_binary_target,
         deps = [
             "@gtest",
-            ":jvm_invoker",
+            ":JvmInvoker",
         ],
         # TODO(dwtj): Use `local_defines` instead once it becomes available.
         defines = [

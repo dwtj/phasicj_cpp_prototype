@@ -1,0 +1,46 @@
+// Copyright 2019 David Johnston
+
+syntax = "proto3";
+
+import "phasicj/jmm/vectorclocks/protos/MemoryLocation.proto";
+import "phasicj/jmm/vectorclocks/protos/Monitor.proto";
+import "phasicj/jmm/vectorclocks/protos/VectorClock.proto";
+
+package phasicj.jmm.vectorclocks.protos;
+
+option java_package = "org.phasicj.jmm.vectorclocks.protos";
+
+message MemoryEvent {
+
+    message Read {
+        MemoryLocation location = 1;
+    }
+    message Write {
+        MemoryLocation location = 1;
+    }
+    message VolatileRead {
+        MemoryLocation location = 1;
+    }
+    message VolatileWrite {
+        MemoryLocation location = 1;
+    }
+    message MonitorAcquire {
+        Monitor monitor = 1;
+    }
+    message MonitorRelease {
+        Monitor monitor = 1;
+    }
+
+    VectorClock timestamp = 1;
+
+    oneof event {
+        Read read = 2;
+        Write write = 3;
+        VolatileRead volatile_read = 4;
+        VolatileWrite volatile_write = 5;
+        MonitorAcquire monitor_acquire = 6;
+        MonitorRelease monitor_release = 7;
+    }
+}
+
+

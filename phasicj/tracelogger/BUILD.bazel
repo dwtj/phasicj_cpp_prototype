@@ -3,41 +3,13 @@ package(
 )
 
 cc_library(
-    name = "trace",
-    srcs = ["trace.cc"],
-    hdrs = ["trace.h"],
-    copts = ["-std=c++17"],
-    linkopts = ["-lstdc++fs"],
-    deps = [
-        ":trace_log",
-        ":vector_clock",
-        "//phasicj/jmmevents:jmm_action_listener",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-        "@boost//:numeric_conversion",
-    ],
-)
-
-cc_library(
-    name = "trace_log",
-    srcs = ["trace_log.cc"],
-    hdrs = ["trace_log.h"],
-    copts = ["-std=c++17"],
-    linkopts = ["-lstdc++fs"],
-    deps = [
-        "//phasicj/jvmexec:memory_event_cc_proto",
-    ],
-)
-
-cc_library(
-    name = "trace_logger",
-    srcs = ["trace_logger.cc"],
-    hdrs = ["trace_logger.h"],
+    name = "TraceLogger",
+    srcs = ["TraceLogger.cc"],
+    hdrs = ["TraceLogger.h"],
     copts = ["-std=c++17"],
     deps = [
-        ":trace_manager",
-        ":vector_clock_manager",
-        "//phasicj/jmmevents:jmm_action_listener",
+        "//phasicj/jmm:JvmtiToJmmAdapter",
+        "//phasicj/jmm/vectorclocks:VcJmmTraceManager",
         "//phasicj/util/jvm:threads",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
@@ -45,44 +17,11 @@ cc_library(
 )
 
 cc_library(
-    name = "trace_logger_manager",
-    srcs = ["trace_logger_manager.cc"],
-    hdrs = ["trace_logger_manager.h"],
+    name = "TraceLoggerManager",
+    srcs = ["TraceLogManager.cc"],
+    hdrs = ["TraceLogManager.h"],
     copts = ["-std=c++17"],
     deps = [
-        ":trace_logger",
-    ],
-)
-
-cc_library(
-    name = "vector_clock",
-    srcs = ["vector_clock.cc"],
-    hdrs = ["vector_clock.h"],
-    copts = ["-std=c++17"],
-)
-
-cc_library(
-    name = "vector_clock_manager",
-    srcs = ["vector_clock_manager.cc"],
-    hdrs = ["vector_clock_manager.h"],
-    copts = ["-std=c++17"],
-    deps = [":vector_clock"],
-)
-
-cc_library(
-    name = "trace_manager",
-    srcs = ["trace_manager.cc"],
-    hdrs = ["trace_manager.h"],
-    copts = ["-std=c++17"],
-    deps = [
-        ":trace",
-        ":vector_clock",
-        "//phasicj/jmmevents:jmm_action_listener",
-        "//phasicj/jmmevents:jmm_action_listener_manager",
-        "//phasicj/util/jvmti:threads",
-        "//third_party/jdk:jni_headers",
-        "//third_party/jdk:jvmti_headers",
-        "@boost//:log",
-        "@gsl",
+        ":TraceLogger",
     ],
 )

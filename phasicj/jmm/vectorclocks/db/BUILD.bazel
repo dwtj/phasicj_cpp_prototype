@@ -1,0 +1,15 @@
+# Copyright 2019 David Johnston
+
+cc_library(
+    name = "MapBackedVectorClock",
+    srcs = ["MapBackedVectorClock.cc"],
+    hdrs = ["MapBackedVectorClock.h"],
+    copts = ["-std=c++17"],
+)
+
+cc_library(
+    name = "VectorClockDb",
+    srcs = ["VectorClockDb.cc"],
+    hdrs = ["VectorClockDb.h"],
+    copts = ["-std=c++17"],
+)

@@ -23,7 +23,7 @@ cc_binary(
     linkshared = True,
     linkstatic = True,
     visibility = ["//visibility:public"],
-    deps = [":dynamic_agent"],
+    deps = [":DynamicAgent"],
 )
 
 cc_binary(
@@ -32,16 +32,16 @@ cc_binary(
     linkshared = True,
     linkstatic = True,
     visibility = ["//visibility:public"],
-    deps = [":dynamic_agent"],
+    deps = [":DynamicAgent"],
 )
 
 cc_library(
-    name = "agent",
-    srcs = ["agent.cc"],
-    hdrs = ["agent.h"],
+    name = "Agent",
+    srcs = ["Agent.cc"],
+    hdrs = ["Agent.h"],
     copts = ["-std=c++17"],
     deps = [
-        "//phasicj/tracelogger:trace_logger_manager",
+        "//phasicj/tracelogger:TraceLoggerManager",
         "//third_party/jdk:jni_headers",
         "//third_party/jdk:jvmti_headers",
         "@boost//:log",
@@ -50,12 +50,12 @@ cc_library(
 )
 
 cc_library(
-    name = "dynamic_agent",
-    srcs = ["dynamic_agent.cc"],
-    hdrs = ["dynamic_agent.h"],
+    name = "DynamicAgent",
+    srcs = ["DynamicAgent.cc"],
+    hdrs = ["DynamicAgent.h"],
     copts = ["-std=c++17"],
     deps = [
-        ":agent",
+        ":Agent",
         "@boost//:log",
     ],
     alwayslink = True,
@@ -64,14 +64,14 @@ cc_library(
 # This is meant to be used to statically link the agent into a binary with the
 # JVM itself.
 cc_library(
-    name = "static_agent",
-    srcs = ["static_agent.cc"],
-    hdrs = ["static_agent.h"],
+    name = "StaticAgent",
+    srcs = ["StaticAgent.cc"],
+    hdrs = ["StaticAgent.h"],
     copts = ["-std=c++17"],
     linkstatic = True,
     visibility = ["//visibility:public"],
     deps = [
-        ":agent",
+        ":Agent",
         "@boost//:log",
     ],
 )

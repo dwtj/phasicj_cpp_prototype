@@ -1,0 +1,55 @@
+# Copyright 2019 David Johnston
+
+cc_library(
+    name = "VectorClock",
+    hdrs = ["VectorClock.h"],
+    copts = ["-std=c++17"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "VcJmmTrace",
+    srcs = ["VcJmmTrace.cc"],
+    hdrs = ["VcJmmTrace.h"],
+    copts = ["-std=c++17"],
+    linkopts = ["-lstdc++fs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":VectorClock",
+        "//phasicj/jmm:JmmTrace",
+        "//phasicj/util/jvm:threads",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+        "@boost//:numeric_conversion",
+    ],
+)
+
+cc_library(
+    name = "TraceEnhancerManager",
+    srcs = ["TraceEnhancerManager.cc"],
+    hdrs = ["TraceEnhancerManager.h"],
+    copts = ["-std=c++17"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":VcJmmTrace",
+        ":VectorClock",
+        "//phasicj/jmm:JmmTrace",
+        "//phasicj/jmm:JmmTraceManager",
+        "//phasicj/util/jvmti:Threads",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+        "@boost//:log",
+        "@gsl",
+    ],
+)
+
+cc_library(
+    name = "TraceEnhancer",
+    srcs = ["TraceEnhancer.cc"],
+    hdrs = ["TraceEnhancer.h"],
+    copts = ["-std=c++17"],
+    deps = [
+        ":VcJmmTrace",
+        "//phasicj/jmm:JmmTrace",
+    ],
+)

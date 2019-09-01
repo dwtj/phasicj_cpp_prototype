@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package phasicj.jmm.vectorclocks.protos;
+
+option java_package = "org.phasicj.jmm.vectorclocks.protos";
+
+message TraceHeader {
+    // Warning(dwtj): The Java specification does not seem to prohibit the
+    // possibility that within a single JVM instance, thread IDs may be reused.
+    // Thus, this is not necessarily a unique ID.
+    // TODO(dwtj): Revise thread ID encoding to admit the possibility of reuse.
+    uint64 thread_id = 1;
+}

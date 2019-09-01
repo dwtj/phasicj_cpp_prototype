@@ -1,0 +1,41 @@
+cc_library(
+    name = "JmmTrace",
+    hdrs = ["JmmTrace.h"],
+    copts = ["-std=c++17"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//phasicj/util/jvm:threads",
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)
+
+cc_library(
+    name = "JmmTraceManager",
+    hdrs = ["JmmTraceManager.h"],
+    copts = ["-std=c++17"],
+    visibility = ["//visibility:public"],
+    deps = [":JmmTrace"],
+)
+
+cc_library(
+    name = "JvmtiToJmmAdapter",
+    srcs = ["JvmtiToJmmAdapter.cc"],
+    hdrs = ["JvmtiToJmmAdapter.h"],
+    copts = ["-std=c++17"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":JmmTrace",
+    ],
+)
+
+cc_library(
+    name = "JmmInstanceManager",
+    srcs = ["JvmInstanceManager.cc"],
+    hdrs = ["JvmInstanceManager.h"],
+    copts = ["-std=c++17"],
+    deps = [
+        "//third_party/jdk:jni_headers",
+        "//third_party/jdk:jvmti_headers",
+    ],
+)

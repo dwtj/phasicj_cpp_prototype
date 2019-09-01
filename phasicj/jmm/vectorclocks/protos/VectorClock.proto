@@ -1,0 +1,11 @@
+// Copyright 2019 David Johnston
+
+syntax = "proto3";
+
+package phasicj.jmm.vectorclocks.protos;
+
+option java_package = "org.phasicj.jmm.vectorclocks";
+
+message VectorClock {
+    map<uint64,uint64> counters = 1;
+}

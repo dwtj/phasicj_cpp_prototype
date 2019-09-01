@@ -3,9 +3,9 @@ package(
 )
 
 cc_library(
-    name = "thread_local_storage",
-    srcs = ["thread_local_storage.cc"],
-    hdrs = ["thread_local_storage.h"],
+    name = "ThreadLocalStorage",
+    srcs = ["ThreadLocalStorage.cc"],
+    hdrs = ["ThreadLocalStorage.h"],
     copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
@@ -14,9 +14,9 @@ cc_library(
 )
 
 cc_library(
-    name = "environment_local_storage",
-    srcs = ["environment_local_storage.cc"],
-    hdrs = ["environment_local_storage.h"],
+    name = "EnvironmentLocalStorage",
+    srcs = ["EnvironmentLocalStorage.cc"],
+    hdrs = ["EnvironmentLocalStorage.h"],
     copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
@@ -25,9 +25,9 @@ cc_library(
 )
 
 cc_library(
-    name = "fields",
-    srcs = ["fields.cc"],
-    hdrs = ["fields.h"],
+    name = "Fields",
+    srcs = ["Fields.cc"],
+    hdrs = ["Fields.h"],
     copts = ["-std=c++17"],
     deps = [
         "//third_party/jdk:jni_headers",
@@ -36,9 +36,9 @@ cc_library(
 )
 
 cc_library(
-    name = "threads",
-    srcs = ["threads.cc"],
-    hdrs = ["threads.h"],
+    name = "Threads",
+    srcs = ["Threads.cc"],
+    hdrs = ["Threads.h"],
     copts = ["-std=c++17"],
     deps = [
         "//phasicj/util/jvm:threads",

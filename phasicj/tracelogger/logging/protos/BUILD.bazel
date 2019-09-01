@@ -1,0 +1,19 @@
+# Copyright 2019 David Johnston
+
+cc_library(
+    name = "ProtoFileTraceLog",
+    srcs = ["ProtoFileTraceLog.cc"],
+    hdrs = ["ProtoFileTraceLog.h"],
+    deps = [
+        "//phasicj/jmm/vectorclocks:VcJmmTrace",
+    ],
+)
+
+cc_library(
+    name = "ProtoFileTraceLogManager",
+    srcs = ["ProtoFileTraceLogManager.cc"],
+    hdrs = ["ProtoFileTraceLogManager.h"],
+    deps = [
+        "//phasicj/jmm/vectorclocks:VcJmmTraceManager",
+    ],
+)
