@@ -17,8 +17,11 @@ http_archive(
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
 
-load("@bazel_skylib//:lib.bzl", "versions")
-versions.check(minimum_bazel_version = "0.28.1")
+load("@bazel_skylib//lib:versions.bzl", "versions")
+versions.check(
+    minimum_bazel_version = "0.28.1",
+    maximum_bazel_version = "0.28.1",
+)
 
 # Configure googletest #######################################################
 
